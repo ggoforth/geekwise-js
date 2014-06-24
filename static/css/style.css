@@ -36,20 +36,41 @@ body.theme.day .point {
   font-weight: 100;
   margin-bottom: 15px;
 }
+body.theme.day .point pre {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+body.theme.day .point pre code {
+  font-size: .75em;
+}
+body.theme.day .point .exampleLeadin {
+  font-weight: 300;
+  margin-bottom: 15px;
+  color: #0073ea;
+  margin-top: 40px;
+}
+body.theme.day .point ul.list {
+  list-style-type: disc;
+  margin-left: 50px;
+  font-size: .8em;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
 body.theme.day h3 {
   font-size: 2em;
   color: #0073ea;
   margin-bottom: 30px;
-  margin-top: 30px;
+  margin-top: 50px;
 }
 body.theme.day .refresh {
   margin-top: 20px;
+  margin-bottom: 30px;
   font-size: 1.2em;
   background-color: #f2f2f2;
   padding: 10px;
   border: 2px dashed #bfbfbf;
   border-radius: 5px;
-  color: #b3b3b3;
+  color: #999999;
 }
 body.links {
   font-weight: 100;

@@ -28,7 +28,6 @@
                         <li>What is Javascript?</li>
                         <li>ECMA What???</li>
                         <li>Building Blocks of a web page</li>
-                        <li>So where do I put my codez???</li>
                     </ul>
                 </div>
             </div>
@@ -39,8 +38,9 @@
                     <div class="point">Develop a solid foundation of Javascript Fundamentals</div>
                     <div class="point">Discover how javascript can be used to manipulate the DOM</div>
                     <div class="point">Best practices for javascript developement</div>
+                    <div class="point">Javascript libraries and Frameworks</div>
                     <div class="point">Ajax!</div>
-                    <div class="point">Source Control for your files</div>
+                    <div class="point">Build something!</div>
                 </div>
             </div>
 
@@ -76,16 +76,121 @@
     </code>
  </pre>
                     <div class="refresh">
-                        * Remember, classes can be reused in our markup, id's can not!
+                        Remember, classes can be reused in our markup, id's can not!
                     </div>
-                    <h3>So, where should I put my code?</h3>
+                    <h3>HTML & CSS Refresher</h3>
+                    <div class="point">HTML, Tag Soup</div>
+                    <div class="point">HTML, Attriutes (class, id, style, data)</div>
+                    <div class="point">CSS, Selectors</div>
+
+                    <h3>Tools of the Trade</h3>
+                    <div class="point">Browser, Chrome, Firefox</div>
+                    <div class="point">Developer console, Firebug</div>
+                    <div class="point"><code>console.log(something)</code></div>
+                    <div class="point">Editor, Sublime, Webstorm</div>
+                    <div class="point"><a target="_blank"
+                                          href="http://jsfiddle.net">jsfiddle</a></div>
+
+                    <h3>Great, so where do I put my code already...</h3>
+                    <div class="point">Script tags vs inline</div>
+
+                    <h3>Variables & Datatypes & Comments</h3>
+                    <div class="point">Comments, notes to your future self</div>
+                    <div class="point">Variables, storage for your data (var)</div>
+                    <div class="point">Strings</div>
+                    <div class="point">Numbers</div>
+                    <div class="point">Boolean, Bool, true, false vs truthy, falsy</div>
                     <div class="point">
-                        We have options on where we put our javascript code.  You can put your code <strong>inline</strong> or
-                        in <strong>external</strong> scripts.
+                        <div class="exampleLeadin">Some Examples</div>
+ <pre>
+     <code class="language-javascript">
+//this is a comment
+
+/* This is a multi line comment
+   that can span several lines.
+*/
+
+//lets store my name in a variable called...name
+var name = "Greg";
+
+//lets store a number in a variable called...num
+var num = 1;
+
+//floats?
+var float = 3.14;
+
+//boolean, is **something** true or false
+var isBoy = true;
+var isGirl = false;
+     </code>
+ </pre>
                     </div>
-                    <div class="point">Inline as attribute, Inline as script tag, External as script tag</div>
-                    <div class="point">Placement in the page is important, head vs bottom of the page</div>
-                    <div class="point"></div>
+                    <div class="point">
+                        Certain values in javascript, when evaluated, are considered "falsy" or "truthy"
+                    </div>
+                    <div class="point">
+                        The following values are always falsy:
+
+                        <ul class="list">
+                            <li>false</li>
+                            <li>0 (literal number zero)</li>
+                            <li>"" empty string</li>
+                            <li>null</li>
+                            <li>undefined</li>
+                            <li>NaN (Not a number, more on this later)</li>
+                        </ul>
+
+                        All other values are truthy, including "0" (zero in quotes), "false" (false in quotes), empty functions, empty arrays, and empty objects.
+                    </div>
+
+
+                    <h3>Alert / Confirm / Prompt</h3>
+                    <div class="refresh">
+                        We will get much deeper into functions in the following class sessions, but for now, understand
+                        a function is something is nothing more than some grouped javascript behavior that performs a
+                        specific actions.  You <code>call</code> a function.  It <code>return</code>s a value.
+                    </div>
+                    <div class="point"><code>alert()</code> and <code>confirm()</code> and <code>prompt()</code> can all be used to convey / solicit information from a user</div>
+                    <div class="point"><code>alert()</code> is a read only type of deal</div>
+                    <div class="point"><code>confirm()</code> will return bool depending on the button the user clicked.</div>
+                    <div class="point"><code>prompt()</code> will allow you to ask the user for input, and then use it in your script.</div>
+                    <div class="point">All three functions stop the execution of the javascript until some action takes place.</div>
+                    <div class="point">
+                        <div class="exampleLeadin">Some Examples</div>
+ <pre>
+     <code class="language-javascript">
+//tell the user something
+alert("Ah, hi there, I'll wait here till you close me");
+
+//confirm a users action
+confirm("Sure you want to do that...?");
+
+//ask the user for input
+prompt("What is your name?");
+     </code>
+ </pre>
+                    </div>
+                    <div class="point">
+                        <h3>Practice</h3>
+                        <div>
+                            Now that we've gotten acquainted with our console, why don't we practice a bit of what we
+                            learned today.  Create a fiddle that will:
+
+                            <ul class="list">
+                                <li>create a name variable</li>
+                                <li>create a number variable</li>
+                                <li>log the name to the console</li>
+                                <li>alert the number</li>
+                                <li>show a confirm box with the message, "Are you sure?"</li>
+                            </ul>
+
+                            Bonus points for:
+
+                            <ul class="list">
+                                <li>ask the user for their age, and then alert that value</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
 

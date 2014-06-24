@@ -59,23 +59,49 @@ body {
                 font-size: 1.8em;
                 font-weight: 100;
                 margin-bottom: 15px;
+
+                pre {
+                    padding-top: 0;
+                    padding-bottom: 0;
+
+                    code {
+                        font-size: .75em;
+                    }
+
+                }
+
+                .exampleLeadin {
+                    font-weight: 300;
+                    margin-bottom: 15px;
+                    color: @blue;
+                    margin-top: 40px;
+                }
+
+                ul.list {
+                    list-style-type: disc;
+                    margin-left: 50px;
+                    font-size: .8em;
+                    margin-top: 30px;
+                    margin-bottom: 30px;
+                }
             }
 
             h3 {
                 font-size: 2em;
                 color: @blue;
                 margin-bottom: 30px;
-                margin-top: 30px;
+                margin-top: 50px;
             }
 
             .refresh {
                 margin-top: 20px;
+                margin-bottom: 30px;
                 font-size: 1.2em;
                 background-color: lighten(@grey, 15%);
                 padding: 10px;
                 border: 2px dashed darken(@grey, 5%);
                 border-radius: 5px;
-                color: darken(@grey, 10%);
+                color: darken(@grey, 20%);
             }
         }
 
