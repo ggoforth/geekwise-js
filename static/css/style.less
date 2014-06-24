@@ -1,0 +1,59 @@
+@blue: #0073EA;
+@pink: #ff0084;
+@white: #ffffff;
+@grey: #cccccc;
+@black: #000000;
+@yellow: #ffee88;
+@gunmetal: #3e3f47;
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: @gunmetal;
+
+    &.theme {
+
+        .content {
+
+            h1 {
+                color: @blue;
+                font-size: 2em;
+                font-weight: 100;
+
+                &.hdr {
+                    font-size: 3em;
+                    margin-bottom: 60px;
+                    margin-top: 60px;
+                }
+            }
+
+            h2 {
+                color: @gunmetal;
+                font-size: 1.8em;
+                font-weight: 100;
+            }
+        }
+
+    }
+
+    &.links {
+
+        .link-list {
+
+            ul {
+                font-size: 1.7em;
+
+                li {
+                    margin-bottom: 20px;
+
+                    a {
+                        color: @blue;
+
+                        &:hover {
+                            color: @pink;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
