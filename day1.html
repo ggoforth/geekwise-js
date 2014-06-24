@@ -5,46 +5,95 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Geekwise Javascript 1</title>
         <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,700' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="./static/css/prism.css" />
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./static/css/prism.css" />
         <link rel="stylesheet" href="./static/css/reset.css">
         <link rel="stylesheet" href="./static/css/style.css">
     </head>
-    <body class="theme links">
+    <body class="theme day">
         <header id="nav">
         </header>
 
         <div class="container content">
             <h1 class="row text-center hdr">
-                Useful Links
+               Day 1
             </h1>
             <div class="row">
                 <div class="col-md-3">
-                    <h2 class="text-right">Links</h2>
+                    <h2 class="text-right">Concepts</h2>
                 </div>
-                <div class="col-md-9 link-list">
+                <div class="col-md-9 concepts">
                     <ul>
-                        <li>Mozilla Developer Network - <a href="https://developer.mozilla.org/en-US/">https://developer.mozilla.org/en-US/</a>
-                        </li>
-                        <li>JSFiddle  <a href="http://jsfiddle.net">http://jsfiddle.net/</a></li>
-                        <li>GitHub  <a href="http://github.com">http://github.com</a></li>
-                        <li>Bitbucket  <a href="http://bitbucket.org">http://bitbucket.org</a></li>
-                        <li>jQuery  <a href="http://jquery.com">http://jquery.com</a></li>
-                        <li>Submile Text  <a href="http://www.sublimetext.com">http://www.sublimetext.com/</a></li>
-                        <li>JetBRAINS
-                            <a href="http://www.jetbrains.com/webstorm/">http://www.jetbrains.com/webstorm/</a></li>
-                        <li>StackOverflow  <a href="http://stackoverflow.com">http://stackoverflow.com/</a></li>
-                        <li>Angular JS  <a href="https://angularjs.org">https://angularjs.org/</a></li>
-                        <li>Codecademy  <a href="http://www.codecademy.com/tracks/javascript">http://www.codecademy.com/tracks/javascript</a>
-                        </li>
+                        <li>Class Goals</li>
+                        <li>What is Javascript?</li>
+                        <li>ECMA What???</li>
+                        <li>Building Blocks of a web page</li>
+                        <li>So where do I put my codez???</li>
                     </ul>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="col-md-3"><h2 class="text-right">Class Goals</h2></div>
+                <div class="col-md-9">
+                    <div class="point">Develop a solid foundation of Javascript Fundamentals</div>
+                    <div class="point">Discover how javascript can be used to manipulate the DOM</div>
+                    <div class="point">Best practices for javascript developement</div>
+                    <div class="point">Ajax!</div>
+                    <div class="point">Source Control for your files</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3"><h2 class="text-right">What is Javascript?</h2></div>
+                <div class="col-md-9">
+                    <div class="point">Created around '95 by Brendan Eich.</div>
+                    <div class="point">Mocha -> Livescript -> Javascript -> ECMAScript</div>
+                    <div class="point">Programming language that powers the web</div>
+                    <div class="point">Comes with a toolkit for not only running "programs" but also manipulating the
+                                       document object model.
+                    </div>
+                    <div class="point">Ecma International is a non profit with the goal of developing standards for the
+                                       web. It's because of these guys that you can write (mostly) the same javascript
+                                       and every browser will understand what you want it to do.
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3"><h2 class="text-right">Building Blocks of a webpage</h2></div>
+                <div class="col-md-9">
+ <pre class="language-markup">
+     <code class="language-markup">
+ &lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;My page&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;span class="someclass" id="someid"&gt;Content!&lt;/span&gt;
+    &lt;/body&gt;
+ &lt;/html&gt;
+    </code>
+ </pre>
+                    <div class="refresh">
+                        * Remember, classes can be reused in our markup, id's can not!
+                    </div>
+                    <h3>So, where should I put my code?</h3>
+                    <div class="point">
+                        We have options on where we put our javascript code.  You can put your code <strong>inline</strong> or
+                        in <strong>external</strong> scripts.
+                    </div>
+                    <div class="point">Inline as attribute, Inline as script tag, External as script tag</div>
+                    <div class="point">Placement in the page is important, head vs bottom of the page</div>
+                    <div class="point"></div>
+                </div>
+            </div>
+
         </div>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
         <script type="text/javascript" src="./static/js/prism.js"></script>
         <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="./static/js/nav.js"></script>
-    </body>
+</body>
 </html>

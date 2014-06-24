@@ -9,6 +9,11 @@
 body {
     font-family: 'Open Sans', sans-serif;
     color: @gunmetal;
+    margin-bottom: 100px;
+
+    strong {
+        font-weight: 800;
+    }
 
     &.theme {
 
@@ -31,8 +36,47 @@ body {
         }
 
         .content {
+            .row {
+                margin-bottom: 50px;
+            }
+        }
 
+        &.day {
 
+            .concepts {
+                font-size: 1.8em;
+                font-weight: 100;
+
+                ul {
+
+                    li {
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+
+            .point {
+                font-size: 1.8em;
+                font-weight: 100;
+                margin-bottom: 15px;
+            }
+
+            h3 {
+                font-size: 2em;
+                color: @blue;
+                margin-bottom: 30px;
+                margin-top: 30px;
+            }
+
+            .refresh {
+                margin-top: 20px;
+                font-size: 1.2em;
+                background-color: lighten(@grey, 15%);
+                padding: 10px;
+                border: 2px dashed darken(@grey, 5%);
+                border-radius: 5px;
+                color: darken(@grey, 10%);
+            }
         }
 
     }
@@ -44,7 +88,6 @@ body {
 
             ul {
                 font-size: 1.7em;
-                margin-bottom: 100px;
 
                 li {
                     margin-bottom: 30px;

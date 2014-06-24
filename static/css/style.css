@@ -1,6 +1,10 @@
 body {
   font-family: 'Open Sans', sans-serif;
   color: #3e3f47;
+  margin-bottom: 100px;
+}
+body strong {
+  font-weight: 800;
 }
 body.theme h1 {
   color: #0073ea;
@@ -17,12 +21,41 @@ body.theme h2 {
   font-size: 1.8em;
   font-weight: 400;
 }
+body.theme .content .row {
+  margin-bottom: 50px;
+}
+body.theme.day .concepts {
+  font-size: 1.8em;
+  font-weight: 100;
+}
+body.theme.day .concepts ul li {
+  margin-bottom: 10px;
+}
+body.theme.day .point {
+  font-size: 1.8em;
+  font-weight: 100;
+  margin-bottom: 15px;
+}
+body.theme.day h3 {
+  font-size: 2em;
+  color: #0073ea;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+body.theme.day .refresh {
+  margin-top: 20px;
+  font-size: 1.2em;
+  background-color: #f2f2f2;
+  padding: 10px;
+  border: 2px dashed #bfbfbf;
+  border-radius: 5px;
+  color: #b3b3b3;
+}
 body.links {
   font-weight: 100;
 }
 body.links .link-list ul {
   font-size: 1.7em;
-  margin-bottom: 100px;
 }
 body.links .link-list ul li {
   margin-bottom: 30px;
