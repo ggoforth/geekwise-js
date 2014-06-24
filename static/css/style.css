@@ -2,29 +2,35 @@ body {
   font-family: 'Open Sans', sans-serif;
   color: #3e3f47;
 }
-body.theme .content h1 {
+body.theme h1 {
   color: #0073ea;
   font-size: 2em;
-  font-weight: 100;
+  font-weight: 300;
 }
-body.theme .content h1.hdr {
+body.theme h1.hdr {
   font-size: 3em;
   margin-bottom: 60px;
   margin-top: 60px;
 }
-body.theme .content h2 {
-  color: #3e3f47;
+body.theme h2 {
+  color: #ff0084;
   font-size: 1.8em;
+  font-weight: 400;
+}
+body.links {
   font-weight: 100;
 }
 body.links .link-list ul {
   font-size: 1.7em;
+  margin-bottom: 100px;
 }
 body.links .link-list ul li {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 body.links .link-list ul li a {
   color: #0073ea;
+  display: block;
+  margin-top: 5px;
 }
 body.links .link-list ul li a:hover {
   color: #ff0084;

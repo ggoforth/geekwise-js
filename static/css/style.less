@@ -12,41 +12,47 @@ body {
 
     &.theme {
 
+        h1 {
+            color: @blue;
+            font-size: 2em;
+            font-weight: 300;
+
+            &.hdr {
+                font-size: 3em;
+                margin-bottom: 60px;
+                margin-top: 60px;
+            }
+        }
+
+        h2 {
+            color: @pink;
+            font-size: 1.8em;
+            font-weight: 400;
+        }
+
         .content {
 
-            h1 {
-                color: @blue;
-                font-size: 2em;
-                font-weight: 100;
 
-                &.hdr {
-                    font-size: 3em;
-                    margin-bottom: 60px;
-                    margin-top: 60px;
-                }
-            }
-
-            h2 {
-                color: @gunmetal;
-                font-size: 1.8em;
-                font-weight: 100;
-            }
         }
 
     }
 
     &.links {
+        font-weight: 100;
 
         .link-list {
 
             ul {
                 font-size: 1.7em;
+                margin-bottom: 100px;
 
                 li {
-                    margin-bottom: 20px;
+                    margin-bottom: 30px;
 
                     a {
                         color: @blue;
+                        display: block;
+                        margin-top: 5px;
 
                         &:hover {
                             color: @pink;
