@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Geekwise Javascript 1</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/css/prism.css" />
+    <link rel="stylesheet" href="./static/css/reset.css">
+    <link rel="stylesheet" href="./static/css/style.css">
+</head>
+<body class="theme day">
+    <header id="nav">
+    </header>
+
+    <div class="container content">
+        <h1 class="row text-center hdr">
+            Day 2
+        </h1>
+        <div class="row">
+            <div class="col-md-3">
+                <h2 class="text-right">Concepts</h2>
+            </div>
+            <div class="col-md-9 concepts">
+                <ul>
+                    <li>Recap Variables, Strings, Numbers</li>
+                    <li>Symantics in the syntax</li>
+                    <li>Operators</li>
+                    <li>Control Flow</li>
+                    <li></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"><h2 class="text-right">Recap</h2></div>
+            <div class="col-md-9">
+                <div class="point">
+                    <ul>
+                        <li>Create a new script called <code>app.js</code></li>
+                        <li>Write a script that will:
+                            <ul class="list">
+                                <li>Ask for your first name</li>
+                                <li>Ask for your last name</li>
+                                <li>Log your first name to the console</li>
+                                <li>Alert your last name</li>
+                                <li>Confirm (anything) and alert the result of the confirm</li>
+                                <li>Include your <code>app.js</code> file in a blank empty html page</li>
+                                <li>Execute your script</li>
+                                <li>confirm that your script functions the way it's expected too</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <h2 class="text-right">Symantics in the syntax</h2>
+            </div>
+            <div class="col-md-9">
+                <div class="point">Readability matters</div>
+                <div class="point">camelCasing</div>
+                <div class="point">CaSe SeNsItIvItY</div>
+                <div class="point">whitespace</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"><h2 class="text-right">Operators</h2></div>
+            <div class="col-md-9">
+                <div class="point">
+                    We spent a lot of <a href="day1.html">last class</a> discussing data types, but didn't really talk
+                    about what we can do with those data types.  Lets talk about <code>operators</code>.
+                </div>
+                <div class="point">
+                    Some operators you will see often include:
+                    <ul class="list">
+                        <li>Mathmatical
+                            <ul class="list">
+                                <li><code>=</code> (equals, assignment)</li>
+                                <li><code>+</code> (addition)</li>
+                                <li><code>-</code> (subtraction)</li>
+                                <li><code>*</code> (multiplication)</li>
+                                <li><code>/</code> (division)</li>
+                                <li><code>%</code> (modulus)</li>
+                                <li><code>+=</code></li>
+                                <li><code>-=</code></li>
+                                <li><code>*=</code></li>
+                                <li><code>/=</code></li>
+                            </ul>
+                        </li>
+                        <li>Comparison
+                            <ul class="list">
+                                <li><code>==</code> (loose comparison)</li>
+                                <li><code>===</code> (strict comparison)</li>
+                                <li><code>!=</code> (loose not equal comparison)</li>
+                                <li><code>!==</code> (strict not equal comparison)</li>
+                                <li><code><</code> (less than)</li>
+                                <li><code>></code> (greater than)</li>
+                                <li><code><=</code> (less than or equal to</li>
+                                <li><code>>=</code> (greater than or equal to</li>
+                            </ul>
+                        </li>
+                        <li>Logical
+                            <ul class="list">
+                                <li><code>&&</code> (and)</li>
+                                <li><code>||</code> (or)</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <h2 class="text-right">Control Flow</h2>
+            </div>
+            <div class="col-md-9">
+                <div class="point">Control flow simply means controlling what code actually gets executed in your program.</div>
+                <div class="point">The most basic form of control flow are <code>if</code> / <code>else</code> statements.</div>
+<pre>
+    <code class="language-javascript">
+//simple if statement
+if (true) {
+
+    console.log("yup");
+
+}
+
+//if / else, if the first condition is true, run the first
+//block, else run the second block
+if (false) {
+
+    alert("it's true");
+
+} else {
+
+    alert("it's false");
+
+}
+
+//if else if statments, the last else is our "fallback"
+if (condition1) {
+
+
+} else if (condition2) {
+
+
+} else {
+
+
+}
+    </code>
+</pre>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3"><h2 class="text-right">Operators & Conditions in Practice</h2></div>
+            <div class="col-md-9">
+                <div class="point">
+                    <h4>Who's practiced more?</h4>
+                    <div class="problem">
+                        Jack has been writing javascript for 4 years.  He spends 4 hours every day writing javascript.
+                        June has been writing javascript for 6 years, but only spends about 2.5 hours a day coding.  Who
+                        has had more time at the keyboard?
+                    </div>
+                </div>
+<pre>
+    <code class="language-javascript">
+var daysInYear = 365;
+
+var jackYears = 4;
+var juneYears = 6;
+
+var jackHoursPerDay = 4;
+var juneHoursPerDay = 2.5;
+
+var jackTotalHours = (jackHoursPerDay * daysInYear) * jackYears;
+var juneTotalHours = (juneHoursPerDay * daysInYear) * juneYears;
+
+if (jackTotalHours > juneTotalHours) {
+    console.log("jack has more time at keyboard");
+} else {
+    console.log("june has more time at keyboard");
+}
+
+//BONUS POINTS: can you spot any logic errors with the condition above?
+    </code>
+</pre>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./static/js/prism.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./static/js/nav.js"></script>
+</body>
+</html>

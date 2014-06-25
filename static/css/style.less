@@ -15,6 +15,47 @@ body {
         font-weight: 800;
     }
 
+    .point {
+        font-size: 1.8em;
+        font-weight: 100;
+        margin-bottom: 15px;
+
+        pre {
+            padding-top: 0;
+            padding-bottom: 0;
+
+            code {
+                font-size: .75em;
+            }
+
+        }
+
+        h4 {
+            color: @blue;
+            margin-bottom: 20px;
+        }
+
+        .exampleLeadin {
+            font-weight: 300;
+            margin-bottom: 15px;
+            color: @blue;
+            margin-top: 40px;
+        }
+
+        ul.list {
+            list-style-type: disc;
+            margin-left: 50px;
+            font-size: .8em;
+            margin-top: 30px;
+            margin-bottom: 30px;
+
+            li {
+                padding-top: 5px;
+                padding-bottom: 5px;
+            }
+        }
+    }
+
     &.theme {
 
         h1 {
@@ -55,36 +96,6 @@ body {
                 }
             }
 
-            .point {
-                font-size: 1.8em;
-                font-weight: 100;
-                margin-bottom: 15px;
-
-                pre {
-                    padding-top: 0;
-                    padding-bottom: 0;
-
-                    code {
-                        font-size: .75em;
-                    }
-
-                }
-
-                .exampleLeadin {
-                    font-weight: 300;
-                    margin-bottom: 15px;
-                    color: @blue;
-                    margin-top: 40px;
-                }
-
-                ul.list {
-                    list-style-type: disc;
-                    margin-left: 50px;
-                    font-size: .8em;
-                    margin-top: 30px;
-                    margin-bottom: 30px;
-                }
-            }
 
             h3 {
                 font-size: 2em;
@@ -105,6 +116,18 @@ body {
             }
         }
 
+        &.home {
+            font-weight: 100;
+
+            .dates {
+                font-size: 1.8em;
+                margin-bottom: 40px;
+            }
+
+            .location {
+                font-size: 1.8em;
+            }
+        }
     }
 
     &.links {

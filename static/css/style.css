@@ -6,6 +6,39 @@ body {
 body strong {
   font-weight: 800;
 }
+body .point {
+  font-size: 1.8em;
+  font-weight: 100;
+  margin-bottom: 15px;
+}
+body .point pre {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+body .point pre code {
+  font-size: .75em;
+}
+body .point h4 {
+  color: #0073ea;
+  margin-bottom: 20px;
+}
+body .point .exampleLeadin {
+  font-weight: 300;
+  margin-bottom: 15px;
+  color: #0073ea;
+  margin-top: 40px;
+}
+body .point ul.list {
+  list-style-type: disc;
+  margin-left: 50px;
+  font-size: .8em;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+body .point ul.list li {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
 body.theme h1 {
   color: #0073ea;
   font-size: 2em;
@@ -31,31 +64,6 @@ body.theme.day .concepts {
 body.theme.day .concepts ul li {
   margin-bottom: 10px;
 }
-body.theme.day .point {
-  font-size: 1.8em;
-  font-weight: 100;
-  margin-bottom: 15px;
-}
-body.theme.day .point pre {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-body.theme.day .point pre code {
-  font-size: .75em;
-}
-body.theme.day .point .exampleLeadin {
-  font-weight: 300;
-  margin-bottom: 15px;
-  color: #0073ea;
-  margin-top: 40px;
-}
-body.theme.day .point ul.list {
-  list-style-type: disc;
-  margin-left: 50px;
-  font-size: .8em;
-  margin-top: 30px;
-  margin-bottom: 30px;
-}
 body.theme.day h3 {
   font-size: 2em;
   color: #0073ea;
@@ -71,6 +79,16 @@ body.theme.day .refresh {
   border: 2px dashed #bfbfbf;
   border-radius: 5px;
   color: #999999;
+}
+body.theme.home {
+  font-weight: 100;
+}
+body.theme.home .dates {
+  font-size: 1.8em;
+  margin-bottom: 40px;
+}
+body.theme.home .location {
+  font-size: 1.8em;
 }
 body.links {
   font-weight: 100;
