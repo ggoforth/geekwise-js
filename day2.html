@@ -27,6 +27,7 @@
                     <li>Recap Variables, Strings, Numbers</li>
                     <li>Symantics in the syntax</li>
                     <li>Operators</li>
+                    <li>Math</li>
                     <li>Control Flow</li>
                     <li></li>
                 </ul>
@@ -72,9 +73,10 @@
             <div class="col-md-3"><h2 class="text-right">Operators</h2></div>
             <div class="col-md-9">
                 <div class="point">
-                    We spent a lot of <a href="day1.html">last class</a> discussing data types, but didn't really talk
-                    about what we can do with those data types.  Lets talk about <code>operators</code>.
+                    We talked a bit about number data types in the <a href="day1.html">last class</a>, but not much about
+                    what we can do with them.
                 </div>
+                <div class="point">Operators allow us to take action and do something with the </div>
                 <div class="point">
                     Some operators you will see often include:
                     <ul class="list">
@@ -117,10 +119,173 @@
 
         <div class="row">
             <div class="col-md-3">
+                <h2 class="text-right">Math</h2>
+            </div>
+            <div class="col-md-9">
+                <div class="point">You can perform mathmatical calculations using operators as discussed above.
+                    <div class="excercise">
+                        Try it: open your console and run a few calculations like <code>2 + 2</code>, etc...
+                    </div>
+                </div>
+
+                <div class="point">
+                    The "value" of the expression can be stored for later use.
+                    <div class="excercise">
+                        Try it: create a variable called <code>result</code>.  Add two numbers together, and store the
+                        value in your result variable using the <code>=</code> operator.  Log that value to the console.
+                    </div>
+                </div>
+
+                <div class="point">
+                    Shorthand notation exists for quickly operating on an existing variable.
+                    <ul class="list">
+                        <li><code>+=</code></li>
+                        <li><code>-=</code></li>
+                        <li><code>*=</code></li>
+                        <li><code>/=</code></li>
+                    </ul>
+                    With these shortcut helpers, you can turn this:
+                </div>
+                <pre><code class="language-javascript">
+var a = 0;
+a = a + 5; //5
+
+var b = 10;
+b = b / 5; //2
+                </code></pre>
+                <div class="point">
+                    into this:
+                </div>
+<pre>
+    <code class="language-javascript">
+var a = 0;
+
+a += 5;
+
+console.log(a);
+
+
+var b = 10;
+
+b /= 5;
+
+console.log(b);
+    </code>
+</pre>
+
+                <div class="point">
+                    Operator Precedence, works like it did when you were in sixth grade.
+                    <ol class="list">
+                        <li>Parentheses</li>
+                        <li>Multiplication / Division</li>
+                        <li>Addition / Subtraction</li>
+                    </ol>
+                </div>
+
+                <pre><code class="language-javascript">
+//what's the answer?
+var a = 5 + 5 * 10;
+console.log(a);
+                </code></pre>
+
+                <div class="point">
+                    If you wanted to have the <code>5 + 5</code> evaluate first, you would need to use
+                    paren's to group the parts you want to take precedence.
+                </div>
+                <pre><code class="language-javascript">
+//what's the answer?
+var a = (5 + 5) * 10;
+console.log(a);
+                </code></pre>
+
+                <div class="point">
+                    The modulus <code>%</code> is a usful operator to know how to leverage.
+                </div>
+                <div class="point">You can use modulus to determine if something is even or odd, a typical use is if
+                you are generating content like rows in a table, and you want to put an "even" class on even rows
+                and and "odd" class on odd rows.</div>
+                <pre><code class="language-javascript">
+var a = 5;
+console.log(a % 2); // 1
+
+
+var b = 6;
+console.log(b % 3); // 0
+                </code></pre>
+
+                <div class="point">It's also very easy to increment / decrement a number by one using javascript.</div>
+                <div class="point">Use the <code>++</code> or <code>--</code> operators, Note: these do not require
+                re-assigning the value to a variable, the work on existing variables.</div>
+
+                <pre><code class="language-javascript">
+var a = 5;
+a++;
+console.log(a);
+
+
+var b = 6;
+b--;
+console.log(b);
+                </code></pre>
+
+                <div class="point"><code>parseInt(number)</code> can be used for converting a float to an int, or for turning a string
+                into an int.</div>
+
+                <pre><code class="language-javascript">
+var a = 1.6;
+var b = parseInt(a); // number data type 1
+
+var c = "5";
+var d = parseInt(c); // number data type 5
+                </code></pre>
+
+                <div class="point">If you try and parse a value that can't be turned into a number, you will get NaN (
+                not a number)</div>
+
+                <pre><code class="language-javascript">
+var a = "foo";
+var b = parseInt(a); // NaN
+                </code></pre>
+
+                <div class="point">
+                    You can check if a value is NaN by using the isNaN function.
+                </div>
+
+                <pre><code class="language-javascript">
+var a = "foo";
+var b = parseInt(a); //NaN
+console.log(isNaN(b)); //true
+                </code></pre>
+
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-3">
                 <h2 class="text-right">Control Flow</h2>
             </div>
             <div class="col-md-9">
                 <div class="point">Control flow simply means controlling what code actually gets executed in your program.</div>
+                <div class="point">
+                    It's very common that your application will want to behave differently based on available data.  One
+                    common scenario is a login / authentication strategy.  If you build an application where you want to
+                    require the users logs in, you'll want to show a login screen if they aren't logged in, or redirect
+                    them to their home page if they are.
+                </div>
+                <div class="point">The kinds of control flow we are going to look at today:
+                    <ul class="list">
+                        <li><code>if</code></li>
+                        <li><code>if / else</code></li>
+                        <li><code>if / elseif</code></li>
+                        <li><code>if / elseif / else</code></li>
+                        <li><code>switch</code></li>
+                        <li>ternary</li>
+                    </ul>
+                    In almost all cases, the control flow will evaluate some condition, and react accordingly.  This
+                    enables us to run some code, while skipping other parts.
+                </div>
                 <div class="point">The most basic form of control flow are <code>if</code> / <code>else</code> statements.</div>
 <pre>
     <code class="language-javascript">
@@ -156,6 +321,101 @@ if (condition1) {
 }
     </code>
 </pre>
+                <div class="point">
+                    With <code>if</code> statements, it's possible to evaluate multiple conditions, and we use logical
+                    operators to do so.  This lets us say "If this <code>AND</code> that is true, then run this code.
+                    <ul class="list">
+                        <li><code>&&</code> the and operator</li>
+                        <li><code>||</code> the or operator</li>
+                    </ul>
+                </div>
+
+                <pre><code class="language-javascript">
+var a = true;
+var b = false;
+
+//if both a AND b are true...
+if (a && b) {
+    console.log("both a and b are truthy");
+} else {
+    console.log("one of a or b are false");
+}
+
+//if a OR b is true
+if (a || b) {
+    console.log("one of a or b are true");
+}
+                </code></pre>
+
+                <div class="point">
+                    Another common control flow element is the <code>switch</code> statement.  Switch will evaluate the
+                    condition and then perform a given block of code based on that value.  It looks like:
+                </div>
+
+<pre><code class="language-javascript">
+var condition = "foo";
+
+switch (condition) {
+case "foo":
+    alert("foo");
+    break;
+case "bar":
+    alert("bar");
+    break;
+default:
+    alert("wasn't foo or bar");
+}
+</code></pre>
+
+                <div class="point">
+                    Careful with Switch statements however, they can lead to some unwanted results if you forget the
+                    <code>break</code> keyword called "fall-through" or "pass-through". What happens when you run the
+                    switch statement and omit the break in the "foo" case?
+                </div>
+
+<pre><code class="language-javascript">
+var condition = "foo";
+
+switch (condition) {
+case "foo":
+    alert("foo");
+case "bar":
+    alert("bar");
+    break;
+default:
+    alert("wasn't foo or bar");
+}
+</code></pre>
+
+                <div class="point">
+                    Ternary operators are a short hand if / else type of control flow.
+                </div>
+                <div class="point">
+                    They use the <code>?</code> and the <code>:</code> as the syntax.
+                </div>
+                <div class="point">
+                    It looks like: <code class="language-javascript">condition ? trueValue : falseValue;</code>
+                </div>
+                <pre><code class="language-javascript">
+var loggedIn = true;
+var needsLogin = loggedIn ? false : true;
+
+var age = 31;
+var logout = age < 13 ? true : false;
+                </code></pre>
+
+                <div class="point">Ternary operators are great for simply quick conditions where the evaluates are simple</div>
+                <div class="point">Avoid nested ternary</div>
+                <pre><code class="language-javascript">
+var dogs = false
+var cats = false;
+var fish = true;
+var hasPets = dogs ? true : cats ? true : fish ? true : false; //wat?
+                </code></pre>
+
+                <div class="point">Just because you can do something, doesn't mean you should.  Just because you have
+                a hammer, not everything is a nail.</div>
+
             </div>
         </div>
 
@@ -165,33 +425,31 @@ if (condition1) {
                 <div class="point">
                     <h4>Who's practiced more?</h4>
                     <div class="problem">
-                        Jack has been writing javascript for 4 years.  He spends 4 hours every day writing javascript.
-                        June has been writing javascript for 6 years, but only spends about 2.5 hours a day coding.  Who
+                        Jules has been writing javascript for 4 years.  He spends 4 hours every day writing javascript.
+                        Hallie has been writing javascript for 6 years, but only spends about 2.5 hours a day coding.  Who
                         has had more time at the keyboard?
                     </div>
                 </div>
-<pre>
-    <code class="language-javascript">
-var daysInYear = 365;
+            </div>
+        </div>
 
-var jackYears = 4;
-var juneYears = 6;
-
-var jackHoursPerDay = 4;
-var juneHoursPerDay = 2.5;
-
-var jackTotalHours = (jackHoursPerDay * daysInYear) * jackYears;
-var juneTotalHours = (juneHoursPerDay * daysInYear) * juneYears;
-
-if (jackTotalHours > juneTotalHours) {
-    console.log("jack has more time at keyboard");
-} else {
-    console.log("june has more time at keyboard");
-}
-
-//BONUS POINTS: can you spot any logic errors with the condition above?
-    </code>
-</pre>
+        <div class="row">
+            <div class="col-md-3">
+                <h2 class="text-right">Take Home Assignment</h2>
+            </div>
+            <div class="col-md-9">
+                <div class="point">
+                    Write a script, and accompanying html file that will:
+                    <ol class="list">
+                        <li>Prompt for a number value (provide a default of 10)</li>
+                        <li>Prompt for another number value (provide a default of 10)</li>
+                        <li>Convert the promped values into integers.</li>
+                        <li>Make sure that the input from steps 1 and 2 are numbers.</li>
+                        <li>If they are numbers, add the numbers together and log the value to the console.</li>
+                        <li>If either of the prompted values are not numbers, alert someting to the user that they
+                            must input nubmers only.</li>
+                    </ol>
+                </div>
             </div>
         </div>
 

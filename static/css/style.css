@@ -10,6 +10,7 @@ body .point {
   font-size: 1.8em;
   font-weight: 100;
   margin-bottom: 15px;
+  line-height: 1.2;
 }
 body .point pre {
   padding-top: 0;
@@ -28,6 +29,14 @@ body .point .exampleLeadin {
   color: #0073ea;
   margin-top: 40px;
 }
+body .point .excercise {
+  font-size: .8em;
+  border: 2px dashed #f8af3d;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+body .point ol.list,
 body .point ul.list {
   list-style-type: disc;
   margin-left: 50px;
@@ -35,9 +44,13 @@ body .point ul.list {
   margin-top: 30px;
   margin-bottom: 30px;
 }
+body .point ol.list li,
 body .point ul.list li {
   padding-top: 5px;
   padding-bottom: 5px;
+}
+body .point ol.list {
+  list-style-type: decimal;
 }
 body.theme h1 {
   color: #0073ea;
