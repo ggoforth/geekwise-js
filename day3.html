@@ -1,0 +1,256 @@
+<!--.row>(.col-md-3>h2.text-right)+.col-md-9-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Geekwise Javascript 1</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/css/prism.css" />
+    <link rel="stylesheet" href="./static/css/reset.css">
+    <link rel="stylesheet" href="./static/css/style.css">
+</head>
+<body class="theme day">
+    <header id="nav">
+    </header>
+
+    <div class="container content">
+        <h1 class="row text-center hdr">
+            Day 3
+        </h1>
+        <div class="row">
+            <div class="col-md-3">
+                <h2 class="text-right">Concepts</h2>
+            </div>
+            <div class="col-md-9 concepts">
+                <ul>
+                    <li>Review Take Home Assignment</li>
+                    <li>Opening files locally file://</li>
+                    <li>String Concatenation</li>
+                    <li>Arrays</li>
+                    <li>Array Functions</li>
+                    <li>Control Flow - Looping</li>
+                    <li>Take Home Assignment</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <h2 class="text-right">Opening files locally</h2>
+            </div>
+            <div class="col-md-9">
+                <div class="point">
+                    A few of us have had issues opening files that include external scripts in our browser.  We have a few
+                    options.  Several involve the command line.
+                </div>
+                <div class="point">
+                    Open Chrome with the <code>--allow-file-access-from-files</code> flag.  First, Change directory into
+                    the folder that contains the chrome executable.  <code>cd C:\Program Files (x86)\Google\Chrome\Application</code>.
+                    Then launch Chrome with the following command:
+                </div>
+
+<pre><code class="language-css">
+chrome --allow-file-access-from-files
+</code></pre>
+
+                <div class="point">
+                    The <code>--all-file-access-from-files</code> **should** allow access to include the external scripts
+                    in your html file.
+                </div>
+
+                <div class="point">Second option, run a local webserver.  We can discuss options here, but you can use:
+                    <ul class="list">
+                        <li>WAMP</li>
+                        <li>MAMP</li>
+                        <li>XAMPP</li>
+                        <li>Python SimplyHTTPServer</li>
+                    </ul>
+                </div>
+
+                <div class="point">
+                    Third option, just include your scripts at the bottom of your html file, instead of an external script.
+                    This limitation is a product of the browser not including the file due to limitations of the file://
+                    protocol, so if the scripts are inline in the bottom of the page, this should work for now.
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <h2 class="text-right">String Concatenation</h2>
+            </div>
+            <div class="col-md-9">
+                <div class="point">
+                    The act of joining two things together is called "concatenation".
+                </div>
+                <div class="point">
+                    In javascript, we can concat two strings using the <code>+</code> operator.  Yes, the same one we
+                    use for math.
+                </div>
+<pre>
+    <code class="language-javascript">
+var salt = "abc123";
+var pass = "secret";
+var saltedPassword = salt + pass;
+
+console.log(saltedPassword);
+    </code>
+</pre>
+
+                <div class="point">
+                    However, watch out when trying to concat a string and a number, javascript will attempt to be "helpful"
+                    and convert the number into a string.
+                </div>
+
+<pre>
+    <code class="language-javascript">
+var num = 1;
+var str = "foo";
+
+console.log(num + str); //1foo
+    </code>
+</pre>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <h2 class="text-right">Arrays</h2>
+            </div>
+            <div class="col-md-9">
+                <div class="point">
+                    Arrays are very useful for keeping an <strong>ordered list</strong> of "things".
+                </div>
+
+                <div class="point">
+                    Array's don't really care what you put into them, they accept all the data types we've talked about
+                    to date, including a few we haven't.
+                </div>
+
+                <div class="point">
+                    Array's have their own functions that allow us to work with array's more easily.
+                </div>
+<pre>
+    <code class="language-javascript">
+//lets create an array
+var fruits = ["apple", "banana", "cherry", "strawberry"];
+
+console.log(fruits);
+    </code>
+</pre>
+                <div class="point">
+                    Array's have built in ways of determining how many items they are holding, the <code>length</code>
+                    property.
+                </div>
+
+<pre>
+    <code class="language-javascript">
+//how many items are in the array?
+console.log(fruits.length);
+    </code>
+</pre>
+
+                <div class="point">
+                    Ok, so we've got some data in our arrays, how do we get it back out?
+                </div>
+                <div class="point">
+                    Array's are index based, so you can use a numbered index to retrieve a specific value.
+                </div>
+                <div class="point">
+                    Array's are also "zero" index based, which means the first element in an array is at index 0, then 1,
+                    then 2, etc...
+                </div>
+                <div class="point">
+                    We use the <code>[N]</code> (bracket) syntax, where <code>N</code> is the index number for the value
+                    you would like to retrieve.
+                </div>
+
+<pre>
+    <code class="language-javascript">
+var firstFruit = fruits[0];
+console.log(firstFruit); //log the first value in the array
+    </code>
+</pre>
+
+                <div class="point">Awesome, I can get my data back out of an array once I put it in, how do I add more
+                things to it?</div>
+
+                <div class="point">
+                    Javascript Array's provide a function called <code>push</code> that allows for adding items to the
+                    <strong>end</strong> of an array.
+                </div>
+<pre>
+    <code class="language-javascript">
+//add an item to the end of an array
+fruits.push("blackberry");
+    </code>
+</pre>
+                <div class="point">
+                    More often than not, you're probably going to be inserting items onto the end of a list, but it's
+                    also possible to add an item to the beginning of an array.  You use the <code>unshift</code> array
+                    function.
+                </div>
+
+<pre>
+    <code class="language-javascript">
+//add an item to the end of an array
+fruits.unshift("orange");
+    </code>
+</pre>
+
+                <div class="point">
+                    Array's can also contain other arrays.
+                </div>
+
+
+<pre>
+    <code class="language-javascript">
+//create an array to hold multiple arrays
+var fruitColors = [];
+var cherry = ["cherry", "red"];
+var banana = ["banana", "yellow"];
+var orange = ["orange", "orange"];
+
+//add all the fruit vars into the fruitColors array
+fruitColors.push(cherry);
+fruitColors.push(banana);
+fruitColors.push(orange);
+
+console.log(fruitColors);
+    </code>
+</pre>
+                <div class="point">
+                    Now lets attempt to pull out the color's only for each of the three fruits in our <code>fruitColors</code>
+                     array.
+
+                    <div class="excercise">
+                        Try it: create a snippet that will create an array to hold multiple arrays (defined above).
+                        Then write three console logs that log <strong>only</strong> the colors of the fruits.
+                    </div>
+                </div>
+
+<pre>
+    <code class="language-javascript">
+//we can access our array's based on index
+console.log(fruitColors[0][1]);
+console.log(fruitColors[1][1]);
+console.log(fruitColors[2][1]);
+    </code>
+</pre>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./static/js/prism.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="./static/js/nav.js"></script>
+</body>
+</html>
