@@ -279,7 +279,7 @@ console.log(fruits);
 </pre>
 
                 <div class="point">
-                    One last array method we'll talk about is the <code>slice</code> function.  It works on arrays a little
+                    Another handy array function we'll talk about is the <code>slice</code> function.  It works on arrays a little
                     differently.
                 </div>
 
@@ -309,6 +309,60 @@ console.log(fruits.slice(1, 3));
 console.log(fruits); //note, it's the same as the original array.
     </code>
 </pre>
+
+                <div class="point">
+                    One point to remember about the <code>slice</code> functions is that is <strong>does not</strong>
+                    modify the original array.  But what if we actually did want to modify the original?
+                </div>
+
+                <div class="point">
+                    <code>splice</code> to the rescue!  The splice function works in a similar way to the slice function,
+                    however it allows you to modify the original array.
+                </div>
+
+                <div class="point">
+                    The <strong>signature</strong> of the splice function looks like:
+                </div>
+
+<pre>
+    <code class="language-javascript">
+fruits.splice(begin, howManyToRemove, [additional items to add])
+    </code>
+</pre>
+
+                <div class="point">
+                    So <code>begin</code> is our starting index, <code>howManyToRemove</code> is how many items to remove
+                    from the starting index, and additional items to add are more elements that you want to add to the
+                    array (comma separated values).
+
+                    <div class="excercise">
+                        Try it: Create an array with 4 elements in it.  Then remove the third element.  Log the array
+                        to the console.
+                    </div>
+                </div>
+
+<pre>
+    <code class="language-javascript">
+var fruits = ["cherry", "apple", "banana", "plum"];
+fruits.splice(2, 1);
+console.log(fruits);
+    </code>
+</pre>
+
+                <div class="point">
+                    <div class="excercise">
+                        Using the same array, remove the second element and add a new second element.
+                    </div>
+                </div>
+
+
+<pre>
+    <code class="language-javascript">
+fruits.splice(1, 1, "pluot");
+console.log(fruits);
+    </code>
+</pre>
+
                 <div class="point">
                     We can do a lot more with array's, just look at all it's available functions
                     <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array"
@@ -406,6 +460,63 @@ for (var i = 0; i < 10; i++) {
     </code>
 </pre>
 
+                <div class="point">
+                    Fantastic, so now I can loop, but, what if I want a loop to stop early?
+                </div>
+
+                <div class="point">
+                    Javascript provides two ways of controlling the flow of a loop, the <code>continue</code> and <code>
+                    break</code> keywords.
+                </div>
+
+                <div class="point">
+                    <code>continue</code> will immediately reset the loop to the next iteration, and continue on with the
+                    loop.  It's basically just saying, disregard the rest of this loop and go to the next loop.
+
+                    <div class="excercise">
+                        Try it: Create a loop (for or while) that will loop 10 times, and skip the 5th and 7th loop.
+                        All other loops should log the loop number to the console.
+                    </div>
+                </div>
+
+<pre>
+    <code class="language-javascript">
+var i = 0;
+
+while (i < 10) {
+    if (i === 5 || i === 7) {
+        i++;
+        continue;
+    }
+
+    console.log(i);
+    i++;
+}
+    </code>
+</pre>
+
+                <div class="point">
+                    The <code>break</code> keyword will, when encountered, immediately stop the loop AND all subsequent
+                    loops.
+
+                    <div class="excercise">
+                        Create a <code>for</code> loop that will loop ten times, each time logging the current loop number,
+                        but terminate the loop on the seventh loop.
+                    </div>
+                </div>
+
+<pre>
+    <code class="language-javascript">
+for (var i = 0; i < 10; i++) {
+    console.log(i);
+
+    if (i === 6) {
+        break;
+    }
+}
+    </code>
+</pre>
+
                 <h3>Looping &amp; Arrays, a perfect match</h3>
 
                 <div class="point">
@@ -419,9 +530,60 @@ for (var i = 0; i < 10; i++) {
 
                     <div class="excercise">
                         Try it: How would you create a for loop and log all the items in our fruit array to the console?
+                        Hint...you may find the <code>length</code> property of an array useful here.
                     </div>
                 </div>
 
+<pre>
+    <code class="language-javascript">
+        var fruits = ["cherry", "apple", "peach", "plum"];
+
+        for (var i = 0; i < fruits.length; i++) {
+            console.log(fruits[i]);
+        }
+    </code>
+</pre>
+
+
+
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-3">
+                <h2 class="text-right">Take Home Assignment</h2>
+            </div>
+            <div class="col-md-9">
+                <div class="point">
+                    Create a program that will:
+
+                    <ul class="list">
+                        <li>
+                            Prompt the user for a starting number
+                        </li>
+                        <li>
+                            Prompt the user for an ending number
+                        </li>
+                        <li>
+                            These numbers will become the start and end points for our loop.  If either number is not a
+                            number, alert to the user that only numbers can be entered.  (no further action should take
+                            place, if / else will be handy here)
+                        </li>
+                        <li>Parse the start and stop points into numbers and store them in variables you can use later</li>
+                        <li>
+                            Ensure that the start number is smaller than the stop number, otherwise stop execution (if / else)
+                        </li>
+                        <li>
+                            Create a loop (for or while, you choose) that will loop starting at the starting number,
+                            and end on the ending number.
+                        </li>
+                        <li>
+                            For each loop, log to the console if the number is even or odd (remember our % operator :)
+                        </li>
+
+                    </ul>
+                </div>
             </div>
         </div>
 
