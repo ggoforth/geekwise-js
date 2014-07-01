@@ -56,7 +56,7 @@ chrome --allow-file-access-from-files
 </code></pre>
 
                 <div class="point">
-                    The <code>--all-file-access-from-files</code> **should** allow access to include the external scripts
+                    The <code>--allow-file-access-from-files</code> *should* allow access to include the external scripts
                     in your html file.
                 </div>
 
@@ -65,7 +65,7 @@ chrome --allow-file-access-from-files
                         <li>WAMP</li>
                         <li>MAMP</li>
                         <li>XAMPP</li>
-                        <li>Python SimplyHTTPServer</li>
+                        <li>Python SimpleHTTPServer</li>
                     </ul>
                 </div>
 
@@ -132,8 +132,20 @@ console.log(num + str); //1foo
                 </div>
 
                 <div class="point">
-                    Array's have their own functions that allow us to work with array's more easily.
+                    You create a new array using the <code>[...]</code> syntax
+
+                    <div class="excercise">
+                        Try it: in your console create a new array and store the value in a variable.  Then log the
+                        variable.
+                    </div>
                 </div>
+
+                <div class="point">
+                    Items in an array are separated with a <code>,</code> (comma)
+                </div>
+
+                <div class="point">Lets try creating an array to hold a list of your favorite fruits.</div>
+
 <pre>
     <code class="language-javascript">
 //lets create an array
@@ -142,9 +154,14 @@ var fruits = ["apple", "banana", "cherry", "strawberry"];
 console.log(fruits);
     </code>
 </pre>
+
                 <div class="point">
                     Array's have built in ways of determining how many items they are holding, the <code>length</code>
                     property.
+
+                    <div class="excercise">
+                        Try it: log to the console the length of the fruits array you created previously.
+                    </div>
                 </div>
 
 <pre>
@@ -155,14 +172,15 @@ console.log(fruits.length);
 </pre>
 
                 <div class="point">
-                    Ok, so we've got some data in our arrays, how do we get it back out?
+                    Ok, so we've got some data in our arrays, and we know how many items are in the array, now how do we
+                    get it back out?
                 </div>
                 <div class="point">
                     Array's are index based, so you can use a numbered index to retrieve a specific value.
                 </div>
                 <div class="point">
-                    Array's are also "zero" index based, which means the first element in an array is at index 0, then 1,
-                    then 2, etc...
+                    Array's are also "zero" index based, which means the first element in an array is at index 0, then
+                    1, then 2, etc...
                 </div>
                 <div class="point">
                     We use the <code>[N]</code> (bracket) syntax, where <code>N</code> is the index number for the value
@@ -173,15 +191,28 @@ console.log(fruits.length);
     <code class="language-javascript">
 var firstFruit = fruits[0];
 console.log(firstFruit); //log the first value in the array
+
+var secondFruits = fruits[1];
+console.log(secondFruits);
+
+//etc...
+
+console.log(fruits[4]); //what does a unknown index return?
     </code>
 </pre>
 
-                <div class="point">Awesome, I can get my data back out of an array once I put it in, how do I add more
-                things to it?</div>
+                <div class="point">
+                    Awesome, I can get my data back out of an array once I put it in, how do I add more things to it?
+                </div>
 
                 <div class="point">
                     Javascript Array's provide a function called <code>push</code> that allows for adding items to the
                     <strong>end</strong> of an array.
+
+                    <div class="excercise">
+                        Try it: Add a new fruit to the end of your fruits array using the <code>fruits.push(...)</code>
+                        function.
+                    </div>
                 </div>
 <pre>
     <code class="language-javascript">
@@ -189,23 +220,10 @@ console.log(firstFruit); //log the first value in the array
 fruits.push("blackberry");
     </code>
 </pre>
-                <div class="point">
-                    More often than not, you're probably going to be inserting items onto the end of a list, but it's
-                    also possible to add an item to the beginning of an array.  You use the <code>unshift</code> array
-                    function.
-                </div>
-
-<pre>
-    <code class="language-javascript">
-//add an item to the end of an array
-fruits.unshift("orange");
-    </code>
-</pre>
 
                 <div class="point">
                     Array's can also contain other arrays.
                 </div>
-
 
 <pre>
     <code class="language-javascript">
@@ -225,7 +243,7 @@ console.log(fruitColors);
 </pre>
                 <div class="point">
                     Now lets attempt to pull out the color's only for each of the three fruits in our <code>fruitColors</code>
-                     array.
+                    array.
 
                     <div class="excercise">
                         Try it: create a snippet that will create an array to hold multiple arrays (defined above).
@@ -242,9 +260,170 @@ console.log(fruitColors[2][1]);
     </code>
 </pre>
 
+                <div class="point">
+                    So now we can create Arrays, access array properties, and add items to arrays, how about removing
+                    items?
+                </div>
+
+                <div class="point">
+                    Items can be removed one at a time <strong>from the end</strong> of the array, using the <code>pop</code>
+                    function. NOTE: This modifies the original array
+                </div>
+
+<pre>
+    <code class="language-javascript">
+var lastFruit = fruits.pop();
+console.log(lastFruit);
+console.log(fruits);
+    </code>
+</pre>
+
+                <div class="point">
+                    One last array method we'll talk about is the <code>slice</code> function.  It works on arrays a little
+                    differently.
+                </div>
+
+                <div class="point">
+                    The <code>slice</code> function will make a copy of the specified indexes and return them in a new
+                    array.
+                </div>
+
+                <div class="point">
+                    The <strong>signature</strong> of the slice function looks like:
+                    <code class="language-javascript">fruits.slice(begin, [end])</code>
+                </div>
+
+                <div class="point">
+                    The <code>begin</code> is the zero based starting index, and the <code>end</code> is the index to
+                    stop at.  NOTE: The extraction does not include the end index!
+
+                    <div class="excercise">
+                        Try it: Create an array with 4 strings, then slice the middle two.
+                    </div>
+                </div>
+
+<pre>
+    <code class="language-javascript">
+var fruits = ["apple", "cherry", "plum", "apricot"];
+console.log(fruits.slice(1, 3));
+console.log(fruits); //note, it's the same as the original array.
+    </code>
+</pre>
+                <div class="point">
+                    We can do a lot more with array's, just look at all it's available functions
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array"
+                       target="_blank">on the MDN</a>.
+                </div>
+
             </div>
         </div>
 
+        <div class="row">
+            <div class="col-md-3">
+                <h2 class="text-right">Control Flow - Looping</h2>
+            </div>
+            <div class="col-md-9">
+                <div class="point">
+                    Looping is the act of repeating a block of code based on a given condition.  When the conditions
+                    ceases to be truthy, the loop stops.
+                </div>
+
+                <div class="point">
+                    We'll talk about 2 kinds of loops tonight.
+
+                    <ol class="list">
+                        <li><code>while</code> loops</li>
+                        <li><code>do / while</code> loops</li>
+                        <li><code>for loops</code></li>
+                    </ol>
+                </div>
+
+                <div class="point">
+                    First, we'll cover <code>while</code> loops.  <code>while</code> loops work by evaluating a condition,
+                    if the condition is true, the loop "fires", executing all code it contains, once the condition becomes
+                    false, the loop stops.
+                </div>
+
+                <div class="point">
+                    One important concept with while loops is that you must write the code that will make the condition
+                    false, otherwise you get an infinite loop.
+
+                    <div class="excercise">
+                        Try it: Create a loop that will log the numbers 1 - 10 to the console.
+                    </div>
+                </div>
+
+<pre>
+    <code class="language-javascript">
+var a = 0;
+while (a < 10) {
+    console.log(a);
+    a++;
+}
+    </code>
+</pre>
+
+                <div class="point">
+                    The <code>do / while</code> loop is less commonly used, however it's a useful tool to have once you
+                    understand how it's used.
+                </div>
+
+                <div class="point">
+                    The <code>do / while</code> loop will <strong>always</strong> run at least once, <strong>then</strong>
+                    it evaluates it's condition.  If the condition is still true, it will continue the loop.
+                </div>
+
+<pre>
+    <code class="language-javascript">
+var i = 1;
+
+do {
+    console.log(i);
+    i++;
+} while (i < 10);
+    </code>
+</pre>
+
+                <div class="point">
+                    Finally, we reach the <code>for</code> loop, maybe the most common loop we'll use in class.
+                </div>
+
+                <div class="point">
+                    With <code>for</code> loops we need to set up 3 things, our starting point, our condition, and our
+                    incrementer.
+                </div>
+
+                <div class="point">
+                    This type of loop is nice because you do not need to manage the incrementer in your normal code
+                    excecution, because it's built into the loop structure.
+                </div>
+
+<pre>
+    <code class="language-javascript">
+for (var i = 0; i < 10; i++) {
+    console.log(i);
+}
+    </code>
+</pre>
+
+                <h3>Looping &amp; Arrays, a perfect match</h3>
+
+                <div class="point">
+                    So all our work with arrays up to this point has been retrieving array indexes one at a time using
+                    a numbered bracket notation, IE <code>fruits[3]</code>.  This is useful, but what if your application
+                    requirements were such that you needed to do something to every element in the array?
+                </div>
+
+                <div class="point">
+                    LOOP ALL THE THINGS! A for loop is a perfect mechanism for iterating over each element in an array.
+
+                    <div class="excercise">
+                        Try it: How would you create a for loop and log all the items in our fruit array to the console?
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
     </div>
 
