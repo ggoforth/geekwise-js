@@ -26,6 +26,7 @@
             <div class="col-md-9 concepts">
                 <ul>
                     <li>Review Take Home Assignment</li>
+                    <li>Skill Builder</li>
                     <li>Opening files locally file://</li>
                     <li>String Concatenation</li>
                     <li>Arrays</li>
@@ -33,6 +34,25 @@
                     <li>Control Flow - Looping</li>
                     <li>Take Home Assignment</li>
                 </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-3">
+                <h2 class="text-right">Skill Builder</h2>
+            </div>
+            <div class="col-md-9">
+                <div class="point">
+                    Write a small js program that will (chrome snippet is fine):
+
+                    <ul class="list">
+                        <li>Prompt for three numbers</li>
+                        <li>Store them into variables</li>
+                        <li>Parse the values into numbers (parseInt)</li>
+                        <li>If any value is found to not be a number, log "not a number"</li>
+                        <li>Otherwise, log to the console if the value is even or odd (% modulus will help here)</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -102,7 +122,12 @@ console.log(saltedPassword);
 
                 <div class="point">
                     However, watch out when trying to concat a string and a number, javascript will attempt to be "helpful"
-                    and convert the number into a string.
+                    and convert the number into a string.  This is called <strong>type casting</strong>.
+                </div>
+
+                <div class="point">
+                    It's essentially saying "Hey, you're trying to concat values of different types, so I'm going to
+                    convert one of them for you so the concat will work.
                 </div>
 
 <pre>
@@ -110,7 +135,11 @@ console.log(saltedPassword);
 var num = 1;
 var str = "foo";
 
+//cast a number to a string
 console.log(num + str); //1foo
+
+//cast a number to a string
+console.log(1 + "");
     </code>
 </pre>
 
@@ -133,18 +162,20 @@ console.log(num + str); //1foo
 
                 <div class="point">
                     You create a new array using the <code>[...]</code> syntax
-
-                    <div class="excercise">
-                        Try it: in your console create a new array and store the value in a variable.  Then log the
-                        variable.
-                    </div>
                 </div>
 
                 <div class="point">
                     Items in an array are separated with a <code>,</code> (comma)
                 </div>
 
-                <div class="point">Lets try creating an array to hold a list of your favorite fruits.</div>
+                <div class="point">
+                    Lets try creating an array to hold a list of your favorite fruits.
+
+                    <div class="excercise">
+                        Try it: in your console create a new array and store the value in a variable.  Then log the
+                        variable.
+                    </div>
+                </div>
 
 <pre>
     <code class="language-javascript">
@@ -175,16 +206,40 @@ console.log(fruits.length);
                     Ok, so we've got some data in our arrays, and we know how many items are in the array, now how do we
                     get it back out?
                 </div>
+
+                <h3>Accessing Array Contents</h3>
+
                 <div class="point">
-                    Array's are index based, so you can use a numbered index to retrieve a specific value.
+                    Array's are index based, so you can use a numbered index to retrieve a specific value, using the brackets
+                    to define which index you want.
                 </div>
+
+<pre>
+    <code class="language-javascript">
+var a = [1, 2, 3];
+
+console.log(a[N]); //where N would be a numbered index you want to retrieve
+
+//this works too
+console.log([1, 2, 3, 4][N]);
+    </code>
+</pre>
                 <div class="point">
-                    Array's are also "zero" index based, which means the first element in an array is at index 0, then
-                    1, then 2, etc...
+                    You might have noticed something odd using the example above.  Try this:
                 </div>
+
+<pre>
+    <code class="language-javascript">
+var a = [1, 2, 3];
+var index = 2;
+
+console.log(a[index]); //what does this yield?
+    </code>
+</pre>
+
                 <div class="point">
-                    We use the <code>[N]</code> (bracket) syntax, where <code>N</code> is the index number for the value
-                    you would like to retrieve.
+                    Array indexes (as well as other indexes we'll discuss later) all start with 0.  So in the example above,
+                    index zero would have the value 1, index 1 has the value 2, index 2 has the value 3, etc...
                 </div>
 
 <pre>
@@ -200,6 +255,8 @@ console.log(secondFruits);
 console.log(fruits[4]); //what does a unknown index return?
     </code>
 </pre>
+
+                <h3>Adding items to an array</h3>
 
                 <div class="point">
                     Awesome, I can get my data back out of an array once I put it in, how do I add more things to it?
@@ -218,6 +275,20 @@ console.log(fruits[4]); //what does a unknown index return?
     <code class="language-javascript">
 //add an item to the end of an array
 fruits.push("blackberry");
+    </code>
+</pre>
+
+                <div class="point">
+                    When you add items to your array, the <code>length</code> property is automatically updated for you.
+                </div>
+
+<pre>
+    <code class="language-javascript">
+var a = [1];
+console.log(a.length);
+
+a.push(2);
+console.log(a.length);
     </code>
 </pre>
 
@@ -259,6 +330,10 @@ console.log(fruitColors[1][1]);
 console.log(fruitColors[2][1]);
     </code>
 </pre>
+
+                <h3>
+                    Removing items from an array
+                </h3>
 
                 <div class="point">
                     So now we can create Arrays, access array properties, and add items to arrays, how about removing
@@ -326,7 +401,7 @@ console.log(fruits); //note, it's the same as the original array.
 
 <pre>
     <code class="language-javascript">
-fruits.splice(begin, howManyToRemove, [additional items to add])
+fruits.splice(begin, howManyToRemove, [additional, items, to, add]);
     </code>
 </pre>
 
