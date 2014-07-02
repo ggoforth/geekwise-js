@@ -9,17 +9,13 @@
 //For each loop, log to the console if the number is even or odd (remember our % operator :)
 
 //collect the start and end numbers for our loop
-var start = prompt("Enter a starting number", 1);
-var end = prompt("Enter an ending number", 100);
+var start = parseInt(prompt("Enter a starting number", 1));
+var end = parseInt(prompt("Enter an ending number", 100));
 
 //if the start and stop aren't numbers, tell the user we only want numbers.
 if (isNaN(start) || isNaN(end)) {
     alert("only enter numbers");
 } else {
-    //store the start and end as actual numbers
-    start = parseInt(start);
-    end = parseInt(end);
-
     //if the start is greater than the end, our loop will never run
     if (start > end) {
         alert("Start must be a smaller number than end");
