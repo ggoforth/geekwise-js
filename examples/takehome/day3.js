@@ -26,5 +26,4 @@ if (isNaN(start) || isNaN(end)) {
             console.log(i, i % 2 === 0 ? "even" : "odd");
         }
     }
-
 }

@@ -1,0 +1,708 @@
+<!--.row>(.col-md-3>h2.text-right)+.col-md-9-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Geekwise Javascript 1</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,700'
+          rel='stylesheet'
+          type='text/css'>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/css/prism.css" />
+    <link rel="stylesheet" href="./static/css/reset.css">
+    <link rel="stylesheet" href="./static/css/style.css">
+</head>
+<body class="theme day">
+<header id="nav">
+</header>
+
+<div class="container content">
+<h1 class="row text-center hdr">
+    Day 4
+</h1>
+
+<div class="row">
+    <div class="col-md-3">
+        <h2 class="text-right">Concepts</h2>
+    </div>
+    <div class="col-md-9 concepts">
+        <ul>
+            <li>Review Take Home Assignment</li>
+            <li>Skill Builder</li>
+            <li>functions</li>
+            <li>creating functions</li>
+            <li>Edge cases</li>
+            <li>the <code>arguments</code> keyword</li>
+            <li>function scope</li>
+            <li>function expressions and other gotchas</li>
+            <li>Take Home Assignment</li>
+        </ul>
+    </div>
+</div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <h2 class="text-right">Skill Builder</h2>
+        </div>
+        <div class="col-md-9">
+            <div class="point">
+                Write a js program that will:
+
+                <ul class="list">
+                    <li>Create an array holding the numbers 1 - 500</li>
+                    <li>Using the array as the basis for a loop, remove one element per loop (pop), with the result
+                    being an empty array.</li>
+                    <li>What is the result?  Anything surprising happen?</li>
+                </ul>
+            </div>
+
+            <div class="point">
+                Lets analyze what happened, and see how we could make this work in a way we expect.
+            </div>
+            <div class="point">
+                When we talked about <code>for</code> loops we saw that the <code>for</code> loop will evaluate the
+                "condition" portion of the loop with every iteration.
+            </div>
+            <div class="point">
+                How did this condition cause an unexpected result?
+            </div>
+            <div class="point">
+                The answer lies in the <code>length</code> property of the array.  If you recall, it's is updated anytime
+                the array is manipulated.  So with every <code>pop</code> the <code>length</code> would decrement by 1.
+                As soon as i reached 250 and the array length reached 250, the loop ceases to run, which left 250 elements
+                in our array.
+            </div>
+
+            <div class="point">So how do we make this work, so we end up with an empty array? Lets revisit our for loop
+            syntax and see how we might be able to change that up.</div>
+
+<pre>
+    <code class="language-javascript">
+var a = [];
+
+//create an array holding 500 items
+for (var i = 1; i <= 500; i++) {
+    a.push(i);
+}
+
+//loop over the array, poping one item off the list
+//with every iteration.  Notice, we are using the length
+//of the array for our condition, which evaluates on
+//every loop.
+for (var j = 0; j < a.length; j++) {
+    a.pop();
+}
+
+console.log(a);
+    </code>
+</pre>
+
+            <div class="point">
+                So what we really want is a variable that isn't going to keep changing with every loop, right?  Check
+                out the alternative syntax.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+for (var i = 0, len = a.length; i < len; i++) {
+    a.pop();
+}
+    </code>
+</pre>
+            <div class="point">Notice the comma and the <code>len</code> variable that's being created
+                <strong>before</strong> we get to the condition. This means that the variable <code>a.length</code> will
+                               only be calculated <strong>once</strong>
+                <div class="excercise">
+                    Try it: Alter your original code using this syntax.  What is the result of your array?
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <h2 class="text-right">functions</h2>
+        </div>
+        <div class="col-md-9">
+            <div class="point">
+                We've talked about functions during our first few classes, but up until now we've not really looked at
+                what they are, how they work, and most importantly, how we can write our own.
+            </div>
+
+            <div class="point">
+                Lets define a javascript function as: <strong>a set of statements that performs a task or calculates a
+                                                              value</strong>
+            </div>
+
+            <div class="point">
+                Functions allow you to perform a series of tasks, and return a value that can be used later.
+            </div>
+
+            <div class="point">
+                If a function does not return a value, it will automatically return <code>undefined</code>.
+            </div>
+
+            <div class="point">
+                All javascript datatypes have different functions that work on them.  For example:
+
+                <ul class="list">
+                    <li>Arrays have <code>push</code>, <code>pop</code>, etc...</li>
+                    <li>Strings have <code>split</code>, <code>charAt</code>, etc...</li>
+                    <li>Objects have <code>hasOwnProperty</code></li>
+                </ul>
+
+                These functions are all built into each datatypes.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+//string method, turns string into an array
+//NOTE TO SELF...YOU MIGHT NEED THIS LATER...JUST SAYIN
+var movie = "The Shawshank Redemption";
+var moviePieces = movie.split(" ");
+console.log(moviePieces);
+
+//array method, turns array into string
+console.log(moviePieces.join(" "));
+    </code>
+</pre>
+
+            <div class="point">
+                Ok, so we know that javascript has built in functions that perform tasks on certain datatypes, but wouldn't
+                it be nice if we could write our own functions?
+            </div>
+
+            <h3>Creating your first function</h3>
+
+            <div class="point">
+                To define a function requires four things:
+
+                <ul class="list">
+                    <li>The <code>function</code> keyword followed by...</li>
+                    <li>The name of the function</li>
+                    <li>A list of arguments to the functions enclosed in parentheses and separated by commas</li>
+                    <li>The statements that define the functions enclosed in curly brackets</li>
+                </ul>
+
+                <div class="excercise">
+                    Try it: Create a function that logs "hello world" to the console.
+                </div>
+            </div>
+
+<pre>
+    <code class="language-javascript">
+function helloWorld() {
+    console.log("hello world");
+}
+    </code>
+</pre>
+
+            <div class="point">
+                Lets pick that apart line by line:
+
+                <ol class="list">
+                    <li><code>function helloWorld() {</code> - the <code>function</code> keyword followed by an arbitrary
+                    function name.  In this case <strong>helloWorld</strong>.  The function does not take any arguments
+                    so we just have an empty set of parentheses.  Then we have an opening curly bracket to start our
+                    javascript statements.</li>
+                    <li><code>console.log("hello world");</code> - the functions body.  In this case, we are simply logging
+                    "hello world" to the console.</li>
+                    <li><code>}</code> - closing curly brace, ends our function definition</li>
+                </ol>
+            </div>
+
+            <div class="point">Great, run that in the console.  What happens?</div>
+
+            <div class="point">Javascript functions need to be "called" or "invoked".  Simply writing the function
+            only makes the javascript interpreter aware that it exists, it does not call it right away.</div>
+
+            <div class="point">You call a function by using it's name, followed by a set of parenthesis.  Recall other
+            functions we've used, the functions are always called with the parentheses.  <code>console.log(...)</code>
+            <code>a.push(...)</code>, etc...</div>
+
+            <div class="point">So, lets call our function
+                <div class="excercise">
+                    Try it: alter your code to call the function
+                </div>
+            </div>
+
+<pre>
+    <code class="language-javascript">
+function helloWorld() {
+    console.log("hello world");
+}
+
+helloWorld();
+    </code>
+</pre>
+
+            <div class="point">Now you should see your console.log appear.  So we called the function, and javascript
+            executed the code found inside it.</div>
+
+            <div class="point">
+                Now, lets create a function that takes 1 argument, and log that to the console instead of the hard coded
+                "hello world" string.  While were at it lets rename it to something more appropriate, like <code>log</code>.
+
+                <div class="excercise">
+                    Try it: Create a function called log that accepts one argument, and logs it to the console.
+                </div>
+            </div>
+
+<pre>
+    <code class="language-javascript">
+function log(stuff) {
+    console.log(stuff);
+}
+
+log("the fox jumps over the lazy dog");
+    </code>
+</pre>
+
+            <div class="point">
+                Notice, we do not use the <code>var</code> keyword when working with our function arguments.  The arguments
+                are scoped to that function (more on this later).
+            </div>
+
+            <div class="point">
+                <div class="excercise">
+                    Try it: Call your <code>log</code> function without passing any arguments, what gets logged to the
+                    console?
+                </div>
+            </div>
+
+            <div class="point">Great, now we're getting somewhere, we can define our own functions that accept arguments
+            and do something with them.  It's also worth pointing out that functions can also call other functions.</div>
+
+            <div class="point">
+                Lets try something a little more complicated, but more useful.  It would be really nice if we had a way
+                to capitalize a string, for proper names, etc...  Maybe js provides a nice way to do this:
+
+                <div class="excercise">
+                    Try it: Lets check and see if js provides a string capitalize function...
+                </div>
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var name = "greg";
+var capped = name.capitalize();
+
+console.log(capped);
+
+>> TypeError: undefined is not a function
+    </code>
+</pre>
+
+            <div class="point">
+                Lets look a little closer at that error... <code>undefined is not a function</code>.  In our example,
+                we are calling two functions, <code>name.capitalize()</code> and <code>console.log()</code>.  Which one
+                is likely giving us the problem?
+            </div>
+
+            <div class="point">
+                Since we know <code>console.log()</code> is a real function, it's likely that javascript is telling us
+                that <code>name.capitalize</code> is undefiend, and thus when we try and call it, it's not a function.
+            </div>
+
+            <div class="point">
+                While js does not provide a way of capitalizing the first letter of a string, it does provide a way to
+                upper case an entire string. It looks like <code>"greg".toUpperCase()</code>.
+
+                <div class="excercise">
+                    Try it: Create a string (variable or directly inline) and use the toUpperCase function on it.  What
+                    is your result?
+                </div>
+            </div>
+
+<pre>
+    <code class="language-javascript">
+console.log("greg".toUpperCase());
+    </code>
+</pre>
+
+            <div class="point">
+                The result should be an entirely uppercase string.  So how can we use this to our advantage if we
+                wanted to write a function that will capitalize just the first letter?
+            </div>
+
+            <div class="point">
+                Also, we want this function to accept a string and capitalize it, we need to be able to get that value
+                back out of the function, this is where the <code>return</code> keyword is used.  <code>return</code> will
+                return the specified value out of the function so you can use it else where.
+
+                <div class="excercise">
+                    Try it: Lets discuss how you might tackle creating a capitalized string using methods we've discussed
+                    in the last few classes.  Hint: <code>toUpperCase</code>, string indexes, and <code>slice</code>.
+                </div>
+
+                <div class="sidenote">
+                    In javascript <strong>strings</strong> are <strong>not mutable</strong>.  This means that when you
+                    take any action on a string, you're actually creating a new string.  So it's important to realize that
+                    since I can't actually change the string "greg" into "Greg", we can fake it by creating another string.
+                </div>
+            </div>
+
+<pre>
+    <code class="language-javascript">
+function capitalize(str) {
+    return str[0].toUpperCase() + str.slice(1);
+}
+    </code>
+</pre>
+
+            <h3>Handling Edge Cases</h3>
+
+            <div class="point">
+                When writing functions (or any js program, really), it's very important to consider edge cases.  As a
+                developer, it's your job to anticipate odd ways your function might be used and make sure it handles
+                those cases.  What happens if you call your capitalize function on an empty string?  How can we fix that?
+                What other edge cases might be useful to consider?
+            </div>
+
+<pre>
+    <code class="language-javascript">
+//this handles our case when no string is passed in (str is "falsy")
+function capitalize(str) {
+    if (!str) {
+        return "";
+    }
+
+    return str[0].toUpperCase() + str.slice(1);
+}
+    </code>
+</pre>
+
+            <div class="point">
+                Notice the function now contains two return points, one for the case where we don't have a string, and
+                one where we do.  It's also important to understand that a function will stop executing any code following
+                a return statement, so if no string is passed in, nothing past <code>return "";</code> will be executed.
+            </div>
+
+            <div class="point">
+                What about making sure that the argument passed into the function is actually a string?
+            </div>
+
+            <div class="point">
+                The <code>typeof</code> operator is helpful here.  <code>typeof</code> operator will evaluate the type
+                of thing we are working with, and return that value as a string.
+
+                <div class="excercise">
+                    Try it: Use the <code>typeof</code> keyword to detect the type of thing we're dealing with.
+                </div>
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var name = "greg";
+console.log(typeof name);
+console.log(typeof 3);
+    </code>
+</pre>
+
+            <div class="point">
+                So, how can we use typeof to ensure the argument is a string?
+                <div class="excercise">
+                    Try it: alter your original capitalize function to ensure that a value is passed in, and that it's
+                    a string.
+                </div>
+            </div>
+
+<pre>
+    <code class="language-javascript">
+function capitalize(str) {
+    if (!str || typeof str !== "string") {
+        return str;
+    }
+
+    return str[0].toUpperCase() + str.slice(1);
+}
+    </code>
+</pre>
+
+            <div class="point">
+                It's often these "edge cases" that will bite you in the long run.  Always begin thinking about odd ways
+                someone might use your code and anticipate how you could handle it!
+            </div>
+
+            <h3>The <code>arguments</code> keyword</h3>
+
+            <div class="point">
+                This is more of an advanced topic, but worth mentioning here.  Inside any javascript function, you will
+                have available to use an array like object called <code>arguments</code>.
+            </div>
+
+            <div class="point">
+                I say array like because it looks like an array, but is actually missing many of the functions arrays
+                have to work with.  However, it does contain a <code>length</code> property.
+            </div>
+
+            <div class="point">
+                Lets take a look at how the <code>arguments</code> variable works.
+
+                <div class="excercise">
+                    Try it: lets create a function that will add up all of the arguments we pass into it.  In all other
+                    cases we've looked at, you must map the arguments being passed into the function, to the function
+                    declaration itself, so the <code>arguments</code> variable will actually let us handle an arbitrary
+                    number of arguments.  This means we don't need to define the arguments in the function <strong>signature</strong>.
+                </div>
+            </div>
+
+<pre>
+    <code class="language-javascript">
+function adder() {
+    console.log(arguments);
+}
+    </code>
+</pre>
+
+            <div class="point">
+                Lets finish this function by making it add up all of the arguments we pass into it.  Anything non numberish
+                should be ignored.  For instance, if I call <code>adder(1, 2, "foo")</code>, the result should be 3.
+            </div>
+
+            <h3>Function Scope</h3>
+
+            <div class="point">Every js program runs with a "scope".  This can be thought of as the things that are
+            currently available to the execution of a program.  The main / base scope is referred to as the "global"
+            scope.</div>
+
+            <div class="point">
+                Creating a function in javascript creates a new scope
+            </div>
+
+            <div class="point">
+                One important thing to understand is that code <strong>outside</strong> of a function can not access any
+                code <code>inside</code> the function.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+function foo() {
+    var a = "inside foo";
+    return a;
+}
+
+console.log(a); //undefined, because "a" is "scoped" to the foo function
+console.log(foo()); //should log "inside foo" because the function was called, and a value returned
+    </code>
+</pre>
+
+            <div class="point">
+                Got it, code outside of a function can't access anything other than what's returned from a function.  So
+                it stands to reason that code inside a function can't access anything outside of the function either?
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var name = "greg";
+
+function capitalize() {
+    return name[0].toUpperCase() + name.slice(1);
+}
+
+var capitalizedName = capitalize();
+console.log(capitalizedName);
+    </code>
+</pre>
+
+        <div class="point">
+            Ah, maybe not what you expected?  Functions do have access to the variables and other functions that exists
+            in outer scopes (which, when you think about it, is why you can console.log(...) something inside of a
+            function.
+        </div>
+
+        <h3>Function Expressions and other Gotchas</h3>
+
+        <div class="point">
+            So now we know how to write a function, but there are other ways to do it as well.  You'll surely encounter
+            them in the wild so it's nice to know what's going on when you see them.
+        </div>
+
+        <div class="point">
+            Functions in javascript are "first class".  This means they can be passed as arguments to other functions,
+            returned from other functions, and assigned to variables (instead of being a named function).
+        </div>
+
+        <div class="point">
+            When a function is assigned to a variable, it's called a <strong>function expression</strong>.
+
+            <div class="excercise">
+                Try it: Create a function expression that assigned a function to a variable.
+            </div>
+        </div>
+
+<pre>
+    <code class="language-javascript">
+var capitalize = function (str) {
+    return str[0].toUpperCase() + str.slice(1);
+};
+    </code>
+</pre>
+
+
+        <div class="point">
+            So what is different here.  Notice, the function declaration does not have a name.  This is what is known as
+            an <code>Anonymous function</code>, or a function with no name.
+        </div>
+
+        <div class="point">
+            If it has no name, how do we call it?  Same way we do with other functions, but we use the variable name
+            instead.  In the case of the capitalize function above, we can call it as <code>capitalize("greg")</code>.
+
+            <div class="excercise">
+                Try it: Create and execute a function expression.
+            </div>
+        </div>
+
+<pre>
+    <code class="language-javascript">
+var capitalize = function (str) {
+    if (!str) {
+        return "";
+    }
+
+    return str[0].toUpperCase() + str.slice(1);
+};
+
+console.log(capitalize("greg"));
+    </code>
+</pre>
+
+        <div class="point">
+            One thing to note about anonymous functions, they don't actually have to be anonymous.  In fact, it's good
+            practice to name all your functions, for the purposes of error reporting.  The function below will work
+            just the same.
+        </div>
+
+<pre>
+    <code class="language-javascript">
+var capitalize = function capitalize(str) {
+    if (!str) {
+        return "";
+    }
+
+    return str[0].toUpperCase() + str.slice(1);
+};
+
+console.log(capitalize("greg"));
+    </code>
+</pre>
+
+        <div class="point">
+            Now, lets try an experiment.  Lets create a new function (not a function expression) called <code>logName</code>.
+            Then, above that code, lets call <code>logName</code>.  What would you expect to happen?
+        </div>
+
+<pre>
+    <code class="language-javascript">
+logName("greg");
+
+function logName(name) {
+    console.log(name);
+}
+    </code>
+</pre>
+
+        <div class="point">
+            This is due to something javascipt is doing called <code>hoisting</code>.
+        </div>
+
+        <div class="point">
+            Even though javascript executes <strong>linearly</strong>, variable and function definitions are actually
+            "hoisted" to the top of the scope.  So even though we call logName before we define it, javascript is actually
+            recognizing the definition of the function, hoisting it to the top of the scope, which makes it available to
+            call before the definition in the code actually happens.
+        </div>
+
+        <div class="point">
+            Is the same true of function expressions?
+
+            <div class="excercise">
+                Try it: Call a function expression before it's defined.  What happens?
+            </div>
+        </div>
+
+<pre>
+    <code class="language-javascript">
+foo("greg");
+
+var foo = function (name) {
+    console.log(name);
+};
+    </code>
+</pre>
+
+        <div class="point">
+            So what happend there?  Why did we get the <code>undefined is not a function</code>?
+        </div>
+
+        <div class="point">
+            The reason for this is that <strong>only</strong> named function definitions and variable declarations are
+            hoisted.  The <strong>values</strong> of the variables are not hoisted.
+        </div>
+
+        <div class="point">
+            Lets look at this a little closer.  What would you expect to happen in the example below?
+        </div>
+
+<pre>
+    <code class="language-javascript">
+var name = "Greg";
+
+function alertName() {
+    alert(name);
+
+    var name = "Jules";
+
+    alert(name);
+}
+
+alertName();
+    </code>
+</pre>
+
+        </div>
+
+
+    </div>
+
+<div class="row">
+    <div class="col-md-3">
+        <h2 class="text-right">Take Home Assignment</h2>
+    </div>
+    <div class="col-md-9">
+        <div class="point">
+            Create a program that will:
+
+            <ul class="list">
+                <li>Start by creating an array of your top 10 favorite movies, the titles should be all lowercase</li>
+                <li>Create a function called capitalize that will accept a string as an argument, capitalize that string,
+                    and return the capitalized value.  Please consider edge cases.</li>
+                <li>Create a loop that will loop over all movies in your movies array.</li>
+                <li>Inside each loop, you should capitalize the movie name and set the value in the array.</li>
+                <li>After the loop has been completed, log the movies to the console.  The result should be that the
+                    first letter of each movie has been capitalized.</li>
+            </ul>
+        </div>
+
+        <h3>Bonus Points</h3>
+
+        <div class="point">
+            Extend your program above to also capitalize ALL words (not uppercase all words, just capitalize each word)
+            in the movie title.
+        </div>
+    </div>
+
+
+</div>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="./static/js/prism.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./static/js/nav.js"></script>
+</body>
+</html>

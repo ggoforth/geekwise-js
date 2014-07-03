@@ -36,6 +36,13 @@ body .point .excercise {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+body .point .sidenote {
+  color: #0073ea;
+  font-size: .6em;
+  padding: 20px;
+  border: 1px solid #1e8dff;
+  background-color: #eaf4ff;
+}
 body .point ol.list,
 body .point ul.list {
   list-style-type: disc;
