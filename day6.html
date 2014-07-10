@@ -1,0 +1,391 @@
+<!--.row>(.col-md-3>h2.text-right)+.col-md-9-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Geekwise Javascript 1</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,700'
+          rel='stylesheet'
+          type='text/css'>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/css/prism.css" />
+    <link rel="stylesheet" href="./static/css/reset.css">
+    <link rel="stylesheet" href="./static/css/style.css">
+</head>
+<body class="theme day">
+<header id="nav">
+</header>
+
+<div class="container content">
+<h1 class="row text-center hdr">
+    Day 5
+</h1>
+
+<div class="row">
+    <div class="col-md-3">
+        <h2 class="text-right">Concepts</h2>
+    </div>
+    <div class="col-md-9 concepts">
+        <ul>
+            <li>Review Take Home Assignment</li>
+            <li>Skill Builder</li>
+            <li>functions cont. - <code>prototype</code></li>
+            <li><code>new</code> keyword</li>
+            <li>Take home assignment</li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-3">
+        <h2 class="text-right">Review Take Home</h2>
+    </div>
+    <div class="col-md-9">
+<pre>
+    <code class="language-javascript">
+//create a function that will take a title, runningTime and year as arguments
+//and return an object of those properties.
+function movieObjCreator(title, runningTime, year) {
+    return {
+        title: title,
+        runningTime: runningTime,
+        year: year
+    };
+}
+
+//Our data structure, an array of arrays
+var movies = [
+    ["bill and teds excellent adventure", 90, 1990],
+    ["rad", 85, 1983],
+    ["goonies", 95, 1985],
+    ["top gun", 90, 1987],
+    ["the shawshank redemption", 120, 2005],
+];
+
+//for holding our new movie objects
+var movieObjs = [];
+
+//initial loop, we'll create our movie objects here
+for (var i = 0; i < movies.length; i++) {
+    var movie = movies[i];
+    movieObjs.push(movieObjCreator.apply({}, movie));
+}
+
+//second loop over the movie objects array.  Does the logging of the
+//individual movie properties
+for (var i = 0; i < movieObjs.length; i++) {
+    var movie = movieObjs[i];
+    console.log(movie.title, movie.runningTime, movie.year);
+}
+    </code>
+</pre>
+
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-3">
+        <h2 class="text-right">Skill Builder</h2>
+    </div>
+    <div class="col-md-9">
+        <div class="point">
+            Refactor the take home project to now do the following:
+            <ul class="list">
+                <li>Prompt the user for a movie title</li>
+                <li>Loop your movie objects and when you find a matching title, alert something like: "Rad was released in
+                    1983 and has a running time of 85 minutes.
+                </li>
+            </ul>
+
+            Now, Further refactor to allow for accepting a year or a title, and if either is matched, alert that movies
+            info.
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <h2 class="text-right"><code>prototype</code></h2>
+    </div>
+    <div class="col-md-9">
+
+        <div class="point">
+            First, before we get into prototype, lets talk about why we would need to use it, what problem does it solve?
+        </div>
+
+        <div class="point">
+            Most programming languages provide a "class" system, that allow for grouping together common functionality.
+        </div>
+
+        <div class="point">
+            You can also <code>extend</code> classes to add additional behavior for something more specific.  This is
+            known as "inheritance".
+        </div>
+
+        <div class="point">
+            For instance, lets say you are building a time scheduling app.  You may break down your code into "objects" like,
+            Person, Worker, Developer.  In this case, a Developer would be the most specific case, and would inherit
+            properties from Worker, and Worker, and Worker inherits properties from Person.
+
+            <ul class="list">
+                <li>
+                    Person
+                    <ul class="list">
+                        <li>Name</li>
+                        <li>Age</li>
+                    </ul>
+                </li>
+                <li>Worker
+                    <ul class="list">
+                        <li>Company</li>
+                        <li>Hours</li>
+                    </ul>
+                </li>
+                <li>
+                    Developer
+                    <ul class="list">
+                        <li>Title</li>
+                        <li>Compensation</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="point">
+            In javascript the prototype is how we can accomplish some structure like the above.
+        </div>
+
+        <div class="point">
+            Javascript is a "classless" language.  Instead it allows for prototypical inheritance.
+        </div>
+
+        <div class="point">
+            This means that you create a "prototype" of your objects properties and functionality and then make new
+            instances of those things.
+        </div>
+
+        <h3><code>prototype</code> syntax</h3>
+
+        <div class="point">
+            Lets look at an example of a prototype in javascript.
+        </div>
+
+<pre>
+    <code class="language-javascript">
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+}
+
+Person.prototype.greet = function () {
+    console.log("Hello, my name is " + this.name);
+}
+    </code>
+</pre>
+
+        <div class="point">
+            So this creates a Person function, and adds to it a greet function to it's prototype.  We're letting javascript
+            understand what a "Person" is.  We haven't done anything with it yet, just simply defining inside our program
+            what is it to be a "Person".
+        </div>
+
+        <div class="point">
+            Notice how we are adding the greet function, what does that look like?  Looks like object syntax, right?  In
+            javascript, everything is an object, including functions.  Each data type, is handled differently by
+            javascript, but they are indeed objects.  That's why <code>"foo".length</code> works or
+            <code>[1, 2, 3].length</code> works.
+        </div>
+
+        <div class="point">
+            So lets try and call our greet function.
+        </div>
+
+<pre>
+    <code class="language-javascript">
+Person.greet();
+    </code>
+</pre>
+
+        <div class="point">Odd, maybe we need to call it on our prototype object...</div>
+
+<pre>
+    <code class="language-javascript">
+Person.prototype.greet();
+    </code>
+</pre>
+
+        <div class="point">
+            Progress!  We are able to get a log to the console, but the <code>this.name</code> property is undefined.
+        </div>
+
+        <div class="point">
+            The problem here is that while we've defined what a person object / function is, we've yet to actually
+            create a new "instance" of one.
+        </div>
+
+        <h3>The <code>new</code> keyword</h3>
+
+        <div class="point">
+            One important concept to understand is that functions can be used in two different ways.
+        </div>
+
+        <div class="point">
+            The first way, is by simply calling the function as we have been.
+        </div>
+
+<pre>
+    <code class="language-javascript">
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+}
+
+Person.prototype.greet = function () {
+    console.log("Hello, my name is " + this.name);
+}
+
+var person = Person("greg", 45);
+console.log(person);
+    </code>
+</pre>
+
+        <div class="point">
+            We are simply invoking the function, there will always be a default return value from this function regardless
+            of if we store that value or not.
+        </div>
+
+        <div class="point">
+            If no <code>return</code> value exists, then the return value is <code>undefined</code>.
+        </div>
+
+        <div class="point">
+            We can also invoke a function using the <code>new</code> keyword.  Lets look at that.
+        </div>
+
+<pre>
+    <code class="language-javascript">
+function Person(name, age) {
+    this.name = name;
+    this.age = age;
+}
+
+Person.prototype.greet = function () {
+    console.log("Hello, my name is " + this.name);
+}
+
+var person = new Person("greg", 35);
+console.log(person);
+    </code>
+</pre>
+
+        <div class="point">
+            More progress!  Now we can see that the <code>person</code> variable we've created is an object, that has a
+            <code>name</code>, <code>age</code>, and <code>greet</code> function.  So what exactly is that new keyword
+            doing for us under the hood?
+
+            <ul class="list">
+                <li>Creates a new empty object.</li>
+                <li>It executes the "constructor" function using the new empty object as the context.</li>
+                <li>Returns the "this" from the constructor, which is now equal to the empty object plus whatever properties
+                    were added during the run of the constructor function.</li>
+            </ul>
+        </div>
+
+        <div class="point">
+            A <strong>constructor</strong> function is simply what we call a function when calling it with the <code>new</code>
+            keyword.
+        </div>
+
+        <div class="point">
+            So now, we can probably get at that greet function...
+        </div>
+
+<pre>
+    <code class="language-javascript">
+person.greet();
+    </code>
+</pre>
+
+        <div class="point">
+            So lets look at why that works.  First we define the person, and all the things that a person can do via it's
+            prototype.  Then we create a new instance of a person.  Visualize this like baking a cake.  The recipe for baking
+            a cake is it's prototype, but it's not until you combine the ingredients and bake it that you have an actual
+            instance of a cake.  So using the <code>new</code> keyword is how we create that instance.
+        </div>
+
+        <div class="point">
+            So, why use a constructor function with a prototype over, simple objects, or stand alone functions...
+        </div>
+
+        <div class="point">
+            Well, when you create a new instance of something, all the properties are wiped clean and reset on that new
+            instance.  So it becomes pretty handy to now reuse this code throughout your application as needed.
+        </div>
+
+        <h3>Movie object function revisited</h3>
+
+        <div class="point">
+            For our takehome assignment, you wrote a function that took some arguments (title, runningtime, year) and it
+            returned a simple object.  Lets refactor that function so that it actually acts as a constructor function
+            and we'll add some nice behavior to it's prototype.
+        </div>
+
+        <div class="point">
+            Lets start by analyzing how constructor functions work again.  If we look at our Person function, it looks like
+            they simply set some properties.  They quite literally "construct" the instance.  So lets set up our movieObjects
+            function that way.
+        </div>
+
+<pre>
+    <code class="language-javascript">
+function Movie(title, runningTime, year) {
+    this.title = title;
+    this.runningTime = runningTime;
+    this.year = year;
+}
+    </code>
+</pre>
+
+    <div class="point">
+        This is sufficient to create a movie constructor.  Now lets say, that we always want to make sure that the movie
+        title name is capitalized.  Lets add a capitalize function to this function prototype that will do just that...
+    </div>
+
+<pre>
+    <code class="language-javascript">
+Movie.prototype.capitalizedTitle = function capitalizedTitle() {
+    return this.title[0].toUpperCase() + this.title.slice(1);
+};
+    </code>
+</pre>
+
+    <div class="point">
+        Finally, lets actually create an instance of a "Movie" object, and use that capitalizedTitle function.
+    </div>
+
+<pre>
+    <code class="language-javascript">
+var movie = new Movie("top gun", 100, 1980);
+console.log(movie.capitalizedTitle());
+    </code>
+</pre>
+
+</div>
+
+    <!-- closing the main container -->
+</div>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="./static/js/prism.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./static/js/nav.js"></script>
+<script type="text/javascript">
+    function geekwiseClass() {
+        console.log("Congrats, you found a global function");
+    }
+</script>
+</body>
+</html>
