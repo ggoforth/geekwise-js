@@ -32,6 +32,7 @@
             <li>Skill Builder</li>
             <li>functions cont. - <code>prototype</code></li>
             <li><code>new</code> keyword</li>
+            <li>Putting it all together</li>
             <li>Take home assignment</li>
         </ul>
     </div>
@@ -192,6 +193,8 @@ Person.prototype.greet = function () {
             what is it to be a "Person".
         </div>
 
+        <h3>It's all objects</h3>
+
         <div class="point">
             Notice how we are adding the greet function, what does that look like?  Looks like object syntax, right?  In
             javascript, everything is an object, including functions.  Each data type, is handled differently by
@@ -349,6 +352,16 @@ function Movie(title, runningTime, year) {
     </code>
 </pre>
 
+        <div class="point">
+            Notice, constructor functions don't return anything.  That's because the <code>new</code> keyword handles
+            that for us.  If you plan on using a function as a constructor, don't return anything.
+        </div>
+
+        <div class="point">
+            Another style convention that is widely recognized is that constructor functions use Capitalized names.
+            <code>Movie</code> in this case.
+        </div>
+
     <div class="point">
         This is sufficient to create a movie constructor.  Now lets say, that we always want to make sure that the movie
         title name is capitalized.  Lets add a capitalize function to this function prototype that will do just that...
@@ -362,6 +375,11 @@ Movie.prototype.capitalizedTitle = function capitalizedTitle() {
     </code>
 </pre>
 
+        <div class="point">
+            Notice, this function, that's part of <code>Movie</code>'s prototype, also has access to all the properties
+            that the constructor created.
+        </div>
+
     <div class="point">
         Finally, lets actually create an instance of a "Movie" object, and use that capitalizedTitle function.
     </div>
@@ -374,6 +392,67 @@ console.log(movie.capitalizedTitle());
 </pre>
 
 </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <h2 class="text-right">Putting it all together</h2>
+        </div>
+        <div class="col-md-9">
+            <div class="point">
+                So now we understand that <strong>everything in javascript is an object</strong>.  We understand how we
+                can create single objects, and how we can use constructor functions to create new instances of the same
+                object.
+            </div>
+
+            <div class="point">
+                Lets practice this a bit.  Create a js program (snippet is fine) that will:
+
+                <ul class="list">
+                    <li>
+                        Start with your movie array of arrays.
+                    </li>
+                    <li>Convert each array in the movie array into a movie object using a constructor function</li>
+                    <li>Add a <code>checkIn</code>, <code>checkOut</code> and <code>status</code> functions to your Movie functions prototype</li>
+                    <li>The <code>checkIn</code> function should set the <code>this.checkedIn</code> property to <code>true</code></li>
+                    <li>The <code>checkOut</code> function should set the <code>this.checkedIn</code> property to <code>false</code></li>
+                    <li>The <code>status</code> function should look to see if that movie is checked in our out, and return a string stating it's status</li>
+                    <li>Create a loop that will run 5 times</li>
+                    <li>Inside the loop prompt the user for a movie title they would like to checkout / checkin. (remember, you
+                        must spell it the same as in your array)
+                    </li>
+                    <li>Find the movie object with that title and call the the appropriate function.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-3">
+            <h2 class="text-right">Take Home Assignment</h2>
+        </div>
+        <div class="col-md-9">
+            <div class="point">
+                Create a javascript program that will:
+
+                <ul class="list">
+                    <li>Create a <code>Bank</code> constructor function</li>
+                    <li>The constructor function should have a <code>balance</code> property equal to <code>100</code></li>
+                    <li>Add a <code>credit</code> function to Banks prototype that will add to <code>balance</code></li>
+                    <li>Add a <code>debit</code> function to the Banks prototype that will subtract from the balance</li>
+                    <li>Create an instance of the bank</li>
+                    <li>Create a loop that will run three times and prompt the user for a number input</li>
+                    <li>Parse the values into numbers</li>
+                    <li>Call the <code>bank.credit(num)</code> function and add that amount to your balance</li>
+                    <li>Create a new loop that will run twice</li>
+                    <li>Inside this loop prompt for a number and parse the number</li>
+                    <li>Run these two numbers with the <code>bank.debit(num)</code> to subtract from the balance</li>
+                    <li>Finally, log the ending balance after the three credits and two debits.  For instance, if you
+                    start with 100, credit 10 three times, we get 130, then debit 10 twice, we get 110.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
 
     <!-- closing the main container -->
 </div>
