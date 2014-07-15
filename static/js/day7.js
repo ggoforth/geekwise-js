@@ -15,19 +15,19 @@ var h1 = document.getElementById("myHdr");
 //h1.removeAttribute("rel");
 
 //create an element
-var a = document.createElement("a");
-a.textContent = "I'm a link to google";
-a.setAttribute("href", "http://www.google.com");
-a.href = "http://www.yahoo.com";
-a.style.backgroundColor = "red";
-a.setAttribute("style", "background-color: red; color: white;");
-document.body.appendChild(a);
-
-//setTimeout
-setTimeout(function () {
-    "use strict";
-    document.body.removeChild(a);
-}, 3000);
+//var a = document.createElement("a");
+//a.textContent = "I'm a link to google";
+//a.setAttribute("href", "http://www.google.com");
+//a.href = "http://www.yahoo.com";
+//a.style.backgroundColor = "red";
+//a.setAttribute("style", "background-color: red; color: white;");
+//document.body.appendChild(a);
+//
+////setTimeout
+//setTimeout(function () {
+//    "use strict";
+//    document.body.removeChild(a);
+//}, 3000);
 
 //query selector
 //var a = document.querySelector("ul li a");
@@ -49,3 +49,9 @@ setTimeout(function () {
 
 //shows that we can move things around in the dom
 //h1.appendChild(anchors.item(1));
+
+//button event handler
+//var button = document.getElementById("alert");
+//button.addEventListener("click", function () {
+//    alert(this.getAttribute("rel"));
+//});

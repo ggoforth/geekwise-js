@@ -49,7 +49,7 @@
     <code class="language-javascript">
 function Bank(balance) {
     balance = parseInt(balance, 10);
-    balance = isNaN(balance) ? 100 : parseInt(balance);
+    balance = isNaN(balance) ? 100 : balance;
     this.balance = balance;
 }
 
@@ -106,12 +106,13 @@ console.log(EECU.balance);
                 <ul class="list">
                     <li>
                         Create a new function called <code>doDebitCredit</code> that has a signature
-                        <code>doDebitCredit(numLoops, action)</code>
+                        <code>doDebitCredit(numLoops, action, desc)</code>
                     </li>
                     <li>
                         The <code>doDebitCredit</code> function should create a loop that will run the specified number
-                        of times, prompt the user for a number, and then run the specified "action" (HINT: remember functions
-                        are first class citizens in javascript, so you can pass them into other functions)
+                        of times <code>numLoops</code>, prompt the user with the given <code>desc</code>for a number,
+                        and then run the specified <code>action"</code> (HINT: remember functions are first class
+                        citizens in javascript, so you can pass them into other functions).
                     </li>
                     <li>
                         Finally, log the final balance and ensure it's the proper amount.
@@ -620,7 +621,11 @@ function e(elementType, text, attributes, styles) {
             newElement.style[style] = styles[style];
         }
     }
+
+    return newElement;
 }
+
+e("a", "link to google", {href: "http://www.google.com"}, {color: "red"});
     </code>
 </pre>
 
@@ -640,11 +645,101 @@ function e(elementType, text, attributes, styles) {
             </div>
 
             <div class="point">
-                The DOM has built in methods that allow for registering "handlers" for a given "event".
+                The DOM has built in methods that allow for registering "handlers" for a given "event", like click or
+                mouseover.
             </div>
 
             <div class="point">
+                Lets create a simple click handler for a button that we'll add to our markup
+            </div>
 
+<pre>
+    <code class="language-markup">
+&lt;button id="alert"&gt;Alert something&lt;/button&gt;
+    </code>
+</pre>
+
+            <div class="point">
+                Now that we have a button we can add a click handler for, lets actually add the listener.  We will use
+                the <code>element.addEventListener(event, handler)</code> where event is a string for a named event, and
+                the handler is a function to call when the event happens.  In this way, the function is referred to as
+                a <code>callback</code>.
+
+                <div class="excercise">
+                    Try it: Add the button markup, and write some js that will select the button, and then use the button
+                    to add an event listener.
+                </div>
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var button = document.getElementById("alert");
+button.addEventListener("click", function () {
+    alert("hello world");
+    console.log(this); //what is the context to our callback function?
+});
+    </code>
+</pre>
+
+            <div class="point">
+                Now, if you've added the button markup, and run that javascript, you should now be able to click on
+                the button and see an alert!  Notice the console.log there?  What is the <code>this</code>?
+            </div>
+
+            <div class="point">
+                In callbacks, it's usually the case that the <code>context</code> will the the node itself.
+            </div>
+
+            <div class="point">
+                Lets make this a little more dynamic.  Add an attribute to your markup called <code>rel="..."</code>
+            </div>
+<pre>
+    <code class="language-markup">
+&lt;button id="alert" rel="This is some text"&gt;Alert something&lt;/button&gt;
+    </code>
+</pre>
+
+            <div class="point">
+                Lets use that new rel attribute as the content of our alert.
+
+                <div class="excercise">
+                    Try it: Use the <code>this</code> inside your callback to get the attribute value and alert that
+                    instead of the hard coded text.
+                </div>
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var button = document.getElementById("alert");
+button.addEventListener("click", function () {
+    alert(this.getAttribute("rel"));
+    console.log(this); //what is the context to our callback function?
+});
+    </code>
+</pre>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-3">
+            <h2 class="text-right">Take Home</h2>
+        </div>
+        <div class="col-md-9">
+            <div class="point">
+                Write a js program that will:
+
+                <ul class="list">
+                    <li>Create a <code>ul</code> element with an id of "movies"</li>
+                    <li>Use your original movie array of objects as the basis for a loop</li>
+                    <li>During each loop, create one <code>li</code> tag</li>
+                    <li>Set the text of the li tag to the movie title.</li>
+                    <li>Append the newly created <code>li</code> tag to the existing <code>ul</code></li>
+                    <li>Append the <code>ul</code> to the <code>document.body</code>.</li>
+                </ul>
+
+                The result should be a dynamically created html list.
             </div>
         </div>
     </div>
