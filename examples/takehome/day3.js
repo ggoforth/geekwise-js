@@ -27,3 +27,15 @@ if (isNaN(start) || isNaN(end)) {
         }
     }
 }
+
+function adder() {
+    var result = 0;
+
+    for (var i = 0; i < arguments.length; i++) {
+        if (!isNaN(arguments[i])) {
+            result += arguments[i];
+        }
+    }
+
+    return result;
+}

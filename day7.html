@@ -1,0 +1,178 @@
+<!--.row>(.col-md-3>h2.text-right)+.col-md-9-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Geekwise Javascript 1</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,700'
+          rel='stylesheet'
+          type='text/css'>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/css/prism.css" />
+    <link rel="stylesheet" href="./static/css/reset.css">
+    <link rel="stylesheet" href="./static/css/style.css">
+</head>
+<body class="theme day">
+<header id="nav">
+</header>
+
+<div class="container content">
+    <h1 class="row text-center hdr">
+        Day 7
+    </h1>
+
+    <div class="row">
+        <div class="col-md-3">
+            <h2 class="text-right">Concepts</h2>
+        </div>
+        <div class="col-md-9 concepts">
+            <ul>
+                <li>Review Take Home Assignment</li>
+                <li>Skill Builder</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <h2 class="text-right">Review Take Home</h2>
+        </div>
+        <div class="col-md-9">
+<pre>
+    <code class="language-javascript">
+function Bank(balance) {
+    balance = parseInt(balance, 10);
+    balance = isNaN(balance) ? 100 : parseInt(balance);
+    this.balance = balance;
+}
+
+Bank.prototype = {
+    credit: function (credit) {
+        credit = parseInt(credit, 10);
+
+        if (isNaN(credit)) {
+            return;
+        }
+
+        this.balance += credit;
+    },
+    debit: function (debit) {
+        debit = parseInt(debit, 10);
+
+        if (isNaN(debit)) {
+            return;
+        }
+
+        this.balance -= debit;
+    }
+};
+
+var EECU = new Bank();
+
+for (var i = 0; i < 3; i++) {
+    var credit = prompt("Enter an amount to credit your account");
+
+    EECU.credit(credit);
+}
+
+for (var i = 0; i < 2; i++) {
+    var debit = prompt("Enter an amount to debit your account");
+
+    EECU.debit(debit);
+}
+
+console.log(EECU.balance);
+    </code>
+</pre>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-3">
+            <h2 class="text-right">Skill Builder</h2>
+        </div>
+        <div class="col-md-9">
+            <div class="point">
+                Refactor the take home so that:
+
+                <ul class="list">
+                    <li>
+                        Create a new function called <code>doDebitCredit</code> that has a signature
+                        <code>doDebitCredit(numLoops, action)</code>
+                    </li>
+                    <li>
+                        The <code>doDebitCredit</code> function should create a loop that will run the specified number
+                        of times, prompt the user for a number, and then run the specified "action" (HINT: remember functions
+                        are first class citizens in javascript, so you can pass them into other functions)
+                    </li>
+                    <li>
+                        Finally, log the final balance and ensure it's the proper amount.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="point">
+                What issues did you run into?  What did the results of the console.log yield?  How can you explain the
+                results?  How can you fix the issues?
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <h2 class="text-right">The DOM</h2>
+        </div>
+        <div class="col-md-9">
+            <div class="point">
+                What is the DOM?
+            </div>
+            <div class="point">
+                The Document Object Model (DOM) is a programming interface for HTML.  It's what allows javascript to
+                manipulate an HTML page after it's been loaded in the browser.
+            </div>
+            <div class="point">
+                The DOM provides a representation of the document as a structured group of nodes and objects that have
+                properties and methods
+            </div>
+
+            <h3>
+                Accessing Page Elements
+            </h3>
+
+            <div class="point">
+                Javascript wouldn't be of much use to us if we couldn't use it to manipulate HTML pages in some way.
+            </div>
+
+            <div class="point">
+                In order to begin manipulating elements on the page, we need to know how to "reference" those items.
+                For example, if we want to change our pages &lt;h1&gt; tag, we need to be able to tell javascript
+                which node on the page we want to change.
+            </div>
+
+            <h3>
+                Selecting Elements on a page
+            </h3>
+
+
+
+            <div class="point">
+
+            </div>
+        </div>
+    </div>
+<!-- closing the main container -->
+</div>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="./static/js/prism.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./static/js/nav.js"></script>
+<script type="text/javascript">
+    function geekwiseClass() {
+        console.log("Congrats, you found a global function");
+    }
+</script>
+</body>
+</html>
