@@ -30,6 +30,12 @@
             <ul>
                 <li>Review Take Home Assignment</li>
                 <li>Skill Builder</li>
+                <li>for / in loop</li>
+                <li>The DOM</li>
+                <li>Selecting Elements on a page</li>
+                <li>Creating Elements</li>
+                <li>Removing Elements</li>
+                <li>Event Listeners</li>
             </ul>
         </div>
     </div>
@@ -122,6 +128,60 @@ console.log(EECU.balance);
 
     <div class="row">
         <div class="col-md-3">
+            <h2 class="text-right">for / in loop</h2>
+        </div>
+        <div class="col-md-9">
+            <div class="point">
+                The <code>for / in</code> loop is a nice way of looping over an objects keys.  It looks like this:
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var obj = {
+    name: "greg",
+    age: 35
+};
+
+for (var key in obj) {
+    console.log(key);
+    console.log(obj[key]);
+}
+    </code>
+</pre>
+
+            <div class="point">
+                One gotcha here...remember we discussed prototype as a way of inheriting properties?  Well, the <code>for / in</code>
+                loop will also loop over those properties if they exist in the object.  For this reason, it's good practice
+                to add a check to make sure that the <code>key</code> we are working with only exists on the actual object
+                and not part of some other prototype.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+
+var obj = {
+    name: "greg",
+    age: 35
+};
+
+for (var key in obj) {
+    if (obj.hasOwnProperty(key)) {
+        console.log(key);
+        console.log(obj[key]);
+    }
+}
+    </code>
+</pre>
+
+            <div class="point">
+                This will now ONLY operate on a key that actually exists in the <code>obj</code>.
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-3">
             <h2 class="text-right">The DOM</h2>
         </div>
         <div class="col-md-9">
@@ -155,7 +215,433 @@ console.log(EECU.balance);
                 Selecting Elements on a page
             </h3>
 
+            <div class="point">
+                So, using the example above, lets setup an HTML page with an h1 tag in it.
+            </div>
 
+<pre>
+    <code class="language-markup">
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+    &lt;head&gt;
+        &lt;meta charset="UTF-8"&gt;
+        &lt;title&gt;Document&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1 id="myHdr"&gt;This is an h1 tag&lt;/h1&gt;
+
+        &lt;script type="text/javascript" src="./static/js/day7.js"&gt;&lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+    </code>
+</pre>
+
+            <div class="point">
+                The DOM gives us some nice ways to select elements on a page for maniuplating.  The first method we'll discuss
+                is called <code>document.getElementById()</code>.
+            </div>
+
+            <div class="point">
+                Lets select the h1 tag using the <code>getElementById</code> function.  It takes as an <code>argument</code>
+                the id of the element you want to select, <code>myHdr</code> in this case.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var h1 = document.getElementById("myHdr");
+console.log(h1);
+    </code>
+</pre>
+
+            <div class="point">
+                <a class="link" href="day7-example.html">Example</a>
+            </div>
+
+            <div class="point">
+                Run that page in your browser, you should see the element logged to your console.
+            </div>
+
+            <div class="point">
+                Now type <code>h1.</code> (notice the period).  The console should now show you all the various properties
+                and functions available as part of that object.
+            </div>
+
+            <h3>Element Attributes</h3>
+
+            <div class="point">
+                You can now see that a "node" or "element" has an underlying javascript object that provides all kinds of
+                methods for you to interact with it.  Lets look at some attributes.  First, modify your <code>h1</code>
+                tag to include a <code>class="hdr"</code> attribute.
+            </div>
+
+<pre>
+    <code class="language-markup">
+&lt;h1 id="myHdr" class="hdr"&gt;This is an h1 tag&lt;/h1&gt;
+    </code>
+</pre>
+
+            <div class="point">
+                Now lets use the <code>h1.hasAttribute()</code> function to see if the given dom node has a specific
+                attribute.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var hasClass = h1.hasAttribute("class");
+console.log("The h1 tag has a class attribute: ", hasClass);
+    </code>
+</pre>
+
+            <div class="point">
+                Run the code above, it returns <code>boolean</code> so if the attribute exists, it will return <code>true</code>
+                otherwise it will return <code>false</code>.
+            </div>
+
+            <div class="point">
+                Cool, so we can see if an element has a specific attribute, what about adding new attributes?  Easily done.
+                Using the same DOM node we can call the <code>h1.setAttribute()</code>.  It takes two arguments in it's
+                signature, the property name to set, and it's value.  Lets add a <code>rel</code> attribute.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+h1.setAttribute("rel", "something");
+console.log(h1);
+    </code>
+</pre>
+
+            <div class="point">
+                Awesome, so now we can add and look at attributes on a dom node, I guess the only thing left is to be
+                able to remove them.  This is done with the <code>removeAttribute</code> function.
+            </div>
+
+            <div class="point">
+                Lets remove the rel attribute now.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+h1.removeAttribute("rel");
+    </code>
+</pre>
+
+            <div class="point">
+                These functions become really handy so practice them!  You can now manipulate ANY webpage you go to that
+                uses id's on their elements using your console!
+            </div>
+
+            <h3>Creating Elements</h3>
+
+            <div class="point">
+                Here is where the real magic of the DOM becomes apparent.  Not only can we inspect the existing DOM, we
+                can add to it!  To create an element we use the <code>document.createElement()</code> function.  It takes
+                as an argument a string with the same name as the tag you want to create.  So if you wanted to create
+                a anchor, you would use <code>document.createElement("a")</code>.  Lets make a new element now...
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var a = document.createElement("a");
+console.log(a);
+    </code>
+</pre>
+
+            <div class="point">
+                Great, so we created an empty anchor tag.  This isn't of to much use yet, lets assign some other properties
+                to the anchor so we can get some actual use out of it.  How about some text (so we have something to
+                click on).  We can set the text content using the <code>textContent</code> property
+            </div>
+
+<pre>
+    <code class="language-javascript">
+a.textContent = "I'm a link to google";
+console.log(a);
+    </code>
+</pre>
+
+            <div class="point">
+                And what good is a link without an <code>href</code>?  Now...how did we set attributes on a link?
+            </div>
+
+<pre>
+    <code class="language-javascript">
+a.setAttribute("href", "http://www.google.com");
+console.log(a);
+    </code>
+</pre>
+
+            <div class="point">
+                It's worth it to note, that there are some properties of an element that you can access without 
+                <code>setAttribute</code>.  <code>href</code> is one of these properties.  If you're ever not sure check 
+                out the MDN for what attributes are available via an elements interface.  Here is the link to the
+                <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement">Anchor interface</a>.
+                Lets set the <code>href</code> of the <code>a</code> tag using this syntax.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+a.href = "http://www.yahoo.com";
+    </code>
+</pre>
+
+            <div class="point">
+                If you're refreshing your page hoping to see your new element ready for use, this may be anticlimactic
+                for you.  So far, we've created an element in memory, but now we need to do something with it.
+            </div>
+
+            <div class="point">
+                Lets add it on the page.  We do this using the <code>appendChild</code> function.  When using the
+                <code>appendChild</code> function, we first need to tell the DOM where exactly to append the child to.
+                In your console, enter <code>document.body</code>.  What does the console show?
+            </div>
+
+            <div class="point">
+                The <code>document.body</code> is a shortcut that to the body tag.  Since we want the new element to
+                show up on the page, at a minimum it needs to be attached to the body tag (since the body tag is what is
+                visible on the page).
+            </div>
+
+<pre>
+    <code class="language-javascript">
+document.body.appendChild(a);
+    </code>
+</pre>
+
+            <div class="point">
+                As you can see above, the <code>document.body</code> is a reference to the &lt;body&gt; tag.  So it's telling
+                javascript to append a child node to the body tag.  This can be done on ANY node you have selected.
+
+                <div class="excercise">
+                    Try it: append an anchor tag to the h1 we selected earlier in the excercise.
+                </div>
+            </div>
+
+<pre>
+    <code class="language-javascript">
+h1.appendChild(a);
+    </code>
+</pre>
+
+            <h3>Removing Elements</h3>
+
+            <div class="point">
+                What good would all of this be if we couldn't remove elements from the page.  This is done with the
+                <code>removeChild</code> called on the parent element of the element you want to remove.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+document.body.removeChild(a);
+    </code>
+</pre>
+
+            <div class="point">
+                Note: the removeChild example isn't to exciting, since we add it, then remove it right away.  Lets delay
+                the removal of the element using <code>setTimeout</code>.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+setTimeout(function () {
+    document.body.removeChild(a);
+}, 2000);
+    </code>
+</pre>
+
+            <div class="point">
+                The <code>setTimeout</code> function takes as an argument a function as the first argument and a number
+                as the second argument.  The setTimeout function will wait the specified amount of time, then call the
+                function you've passed in.  The above will wait 2000 milliseconds, then call the function.
+            </div>
+
+            <h3>Other Ways of Selecting DOM nodes</h3>
+
+            <div class="point">
+                Lets add some markup to our html page.
+            </div>
+
+<pre>
+    <code class="language-markup">
+&lt;ul&gt;
+    &lt;li&gt;&lt;a href="http://google.com"&gt;google&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="http://yahoo.com"&gt;yahoo&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="http://github.com"&gt;github&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+    </code>
+</pre>
+
+            <div class="point">
+                There are alternatives to <code>getElementById</code> for cases where an item might not have an id,
+                or you want to use an alternative syntax.  The first is <code>document.querySelector</code>.
+                Lets try that now...
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var a = document.querySelector("ul li a");
+console.log(a);
+    </code>
+</pre>
+
+            <div class="point">
+                What does that yield?  Is it what you would expect?  It should return the first matched element for the
+                specified selector.
+            </div>
+
+            <div class="point">
+                Lets pick the "selector" apart.  We used <code>ul li a</code>.  What this is really saying is, "Find any
+                <code>a</code> tags that are children of <code>li</code> tags, where the <code>li</code> tag is a child
+                of a <code>ul</code> tag.  Put another way, "Find all anchor tags that are inside an li tag inside a ul".
+            </div>
+
+            <div class="point">
+                The <code>querySelector</code> function always returns a node or null if no node was matched.  If multiple
+                nodes were selected, only the first will be returned.
+            </div>
+
+            <div class="point">
+                So what if I want to select more than one node?  That's where <code>querySelectorAll</code> comes into
+                play.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var anchors = document.querySelectorAll("ul li a");
+console.log(anchors);
+console.log(anchors.length);
+    </code>
+</pre>
+
+            <div class="point">
+                The <code>querySelectorAll</code> function returns a <code>NodeList</code> which looks like an array, but
+                actually isn't.  It's kind of like the <code>arguments</code> property inside a function, it has a length
+                property, but doesn't have other array methods like push, pop, etc...
+            </div>
+
+            <div class="point">
+                A <code>NodeList</code> object provides an <code>item</code> function that you can use to select a specific
+                item at a specified index.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+console.log(anchors.item(2));
+console.log(anchors.item(10));
+    </code>
+</pre>
+
+            <div class="point">
+                Since a <code>NodeList</code> looks a lot like an array, and has a length property, that means it can be
+                used as the basis for a loop, yeah?  Lets loop over each link, and log to the console the <code>href</code>
+                property of each node.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+for (var i = 0; i < anchors.length; i++) {
+    var anchor = anchors.item(i);
+    console.log(anchor.href);
+}
+    </code>
+</pre>
+
+            <h3>Styling Elements</h3>
+
+            <div class="point">
+                Along with selecting, adding and modifying elements in the dom, we can also apply styling.  We do this via the
+                <code>element.style</code> property.
+            </div>
+
+            <div class="point">
+                When we use this property, the style names use no dashes, instead using camelCasing.  For instance, if a
+                css selector looked like:
+            </div>
+
+<pre>
+    <code class="language-css">
+a {
+    background-color: red;
+}
+    </code>
+</pre>
+
+            <div class="point">
+                The javascript style property would be:
+            </div>
+
+<pre>
+    <code class="language-javascript">
+a.style.backgroundColor = "red";
+    </code>
+</pre>
+
+            <div class="point">
+                However, we could alternatively set the style property using the <code>setAttribute</code> function.  When
+                we do it that way, we can use the regular css syntax.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+a.setAttribute("style", "background-color: red; color: white;");
+    </code>
+</pre>
+
+            <h3>Putting it all together</h3>
+
+            <div class="point">
+                So at this point we now know how to select existing elements, create new elements, modify element attributes,
+                and append the elements to other elements already on the page.  Lets create a helper function to make
+                some of this easier.
+
+                <div class="excercise">
+                    Try it: Create a function that will have the following signature: <code>e(elementType, text, attributes, styles)</code>
+                    where <code>elementType</code> is a string of an element type, attributes is an object of attributes to set
+                    on an element, and styles is an object of style properties to set on an object.  Then return the
+                    newly created element.
+                </div>
+            </div>
+
+<pre>
+    <code class="language-javascript">
+function e(elementType, text, attributes, styles) {
+    var newElement = document.createElement(elementType);
+    newElement.textContent = text;
+
+    //set the attributes on the tag
+    for (var attr in attributes) {
+        if (attributes.hasOwnProperty(attr)) {
+            newElement.setAttribute(attr, attributes[attr]);
+        }
+    }
+
+    //set the styles
+    for (var style in styles) {
+        if (styles.hasOwnProperty(style)) {
+            newElement.style[style] = styles[style];
+        }
+    }
+}
+    </code>
+</pre>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-3">
+            <h2 class="text-right">Event Listeners</h2>
+        </div>
+        <div class="col-md-9">
+            <div class="point">
+                In javascript, Event listeners are how we can react to user interaction on the page.  For instance,
+                alert something to a user when they try and delete an element, or run an arbitrary javascript function
+                when a user clicks a button.
+            </div>
+
+            <div class="point">
+                The DOM has built in methods that allow for registering "handlers" for a given "event".
+            </div>
 
             <div class="point">
 
