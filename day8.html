@@ -32,7 +32,8 @@
                         <li>Skill Builder</li>
                         <li>Event Listeners</li>
                         <li>Working with forms</li>
-                        <li></li>
+                        <li>Working with Radio / checkboxes</li>
+                        <li>Event Delegation</li>
                         <li>Take Home Assignment</li>
                     </ul>
                 </div>
@@ -139,7 +140,8 @@ document.body.appendChild(ul);
                     </div>
 
                     <div class="point">
-                        Lets create a simple click handler for a button that we'll add to our markup.
+                        Lets start by creating a simple html page with a with a button.  We'll assign an event handler
+                        to the button.
                     </div>
 
 <pre>
@@ -149,8 +151,8 @@ document.body.appendChild(ul);
 </pre>
 
                     <div class="point">
-                        Now that we have a button we can add a click handler for, lets actually add the listener. We
-                        will use the <code>element.addEventListener(event, handler)</code> where event is a string for a
+                        Now that we have a button we can add a <code>click</code> handler for, lets actually add the listener. We
+                        will use the <code>element.addEventListener(event, handler)</code> function where event is a string for a
                         named event, and the handler is a function to call when the event happens. In this way, the
                         function is referred to as a <code>callback</code>.
 
@@ -173,16 +175,16 @@ button.addEventListener("click", function () {
 
                     <div class="point">
                         Now, if you've added the button markup, and run that javascript, you should now be able to click
-                        on the button and see an alert! Notice the console.log there? What is the <code>this</code>?
+                        on the button and see an alert. Notice the console.log there? What is the <code>this</code> of
+                        the function?
                     </div>
 
                     <div class="point">
-                        In callbacks, it's usually the case that the <code>context</code> will the the node itself.
+                        In callbacks, it's usually the case that the <code>context</code> will the the node element itself.
                     </div>
 
                     <div class="point">
-                        Lets make this a little more dynamic. Add an attribute to your markup called
-                        <code>rel="..."</code>
+                        Lets make this a little more dynamic. Add an attribute to your button called <code>rel="..."</code>
                     </div>
 <pre>
     <code class="language-markup">
@@ -250,8 +252,9 @@ for (var i = 0; i < movieObjs.length; i++) {
 
                     <div class="point">
                         Forms in HTML are a perfect way to collect information from someone interacting with your webpage.
-                        The usages vary widely based on the type of information you're collecting, and which form elements
-                        you decide to work with.
+                        Until now, we've used prompts as a way of collecting data, but prompts are clunky which makes a
+                        form a much more attractive alternative.  Form usages vary widely based on the type of
+                        information you're collecting, and which form elements you decide to work with.
                     </div>
 
                     <div class="point">
@@ -376,7 +379,7 @@ form.addEventListener("submit", function (evt) {
                     </div>
 
                     <h3>
-                        Working with radio buttons
+                        Working with radio / checkboxes
                     </h3>
 
                     <div class="point">
@@ -456,8 +459,116 @@ console.log(genre);
                 </div>
             </div>
 
-            <!--TODO: required, textarea, number inputs, -->
+            <div class="row">
+                <div class="col-md-3">
+                    <h2 class="text-right">Event Delegation</h2>
+                </div>
+                <div class="col-md-9">
 
+                    <div class="point">
+                        As we've seen so far, all of our event handlers are attached directly to the element they work with.
+                        We attached click handlers on our li tags to alert a movie title, etc...  When this happens 1 copy
+                        of the function is created and stored for every event listener.  Imagine if we had an html list with
+                        500 items in it.  If we wanted to register a callback for every one of the li tags, that would
+                        store 500 copies of a callback function in memory!  There is a better way!
+                    </div>
+
+                    <h3>Event Bubbling</h3>
+
+                    <div class="point">
+                        In order to leverage a better way of watching using event listeners, we have to first understand
+                        how events in a browser work.
+                    </div>
+
+                    <div class="point">
+                        The idea of <code>event bubbling</code> simply means that an event bubbles up the dom tree, triggering
+                        the given event <strong>on every node</strong> up the dom tree.
+                    </div>
+
+                    <div class="point">
+                        So if I click on a button, the click event starts at the button, then moves to it's parent, then
+                        to that elements parent and so on, until it reaches the top of the document.
+                    </div>
+
+                    <div class="point">
+                        Lets create an example that uses event bubbling and it should become more clear how we might be
+                        able to use this.  Start with a ul that has 5 li's in it.
+                    </div>
+
+<pre>
+    <code class="language-markup">
+&lt;ul id="myul"&gt;
+    &lt;li&gt;foo&lt;/li&gt;
+    &lt;li&gt;bar&lt;/li&gt;
+    &lt;li&gt;baz&lt;/li&gt;
+    &lt;li&gt;bleep&lt;/li&gt;
+    &lt;li&gt;bloop&lt;/li&gt;
+&lt;/ul&gt;
+    </code>
+</pre>
+
+                    <div class="point">
+                        Now I want to be able to click on any li and alert the text of that node.  But instead of attaching
+                        an event listener to every li, I'll just do it on the ul.  When we click on a li, the event will
+                        bubble up to it's parent (the UL) and the click event handler we'll set up will fire.
+                    </div>
+
+<pre>
+    <code class="language-javascript">
+document.getElementById("myul").addEventListener("click", function (evt) {
+    console.log(this);
+    console.log(evt);
+});
+    </code>
+</pre>
+
+                    <div class="point">
+                        Ok, so what is the <code>this</code> context in our callback?  It's the ul right?  So how can we
+                        know which li was actually clicked on that caused the click event that bubbled to the ul?
+                    </div>
+
+                    <div class="point">
+                        Lets take a closer look at the <code>evt</code> object that the event handler received.
+                    </div>
+
+<pre>
+    <code class="language-javascript">
+document.getElementById("myul").addEventListener("click", function (evt) {
+    console.log(evt);
+});
+    </code>
+</pre>
+
+                    <div class="point">
+                        If we look closely, you'll see there is a property there called <code>target</code>. This
+                        property on the event object will contain the node we actually clicked on.
+                    </div>
+
+                    <div class="point">
+                        So now lets use this new <code>evt.target</code> property to get the <code>textContent</code> of
+                        the li we clicked on and alert that.
+                    </div>
+
+<pre>
+    <code class="language-javascript">
+document.getElementById("myul").addEventListener("click", function (evt) {
+    alert(evt.target.textContent);
+});
+    </code>
+</pre>
+
+                    <div class="point">
+                        So now we only have 1 event handler for click events, which through the <code>evt</code> object
+                        we can determine which thing was actually clicked on, and do something with that.
+                    </div>
+
+                    <div class="point">
+                        Event delegation can single handedly reduce memory consumption of your app by great amounts if
+                        used properly.
+                    </div>
+
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-md-3">
@@ -494,7 +605,7 @@ console.log(genre);
                             </li>
                             <li>
                                 Create a submit event listener on our form that will gather the form values, and create
-                                a new instance of the <code>Movie</code> constructor.
+                                a new instance of the <code>Movie</code> constructor based on the values from our form.
                             </li>
                             <li>
                                 Create a new &lt;li&gt; element (remember our <code>e</code> function?  might be handy
@@ -506,12 +617,22 @@ console.log(genre);
                                 that returns the first 50 characters of the description).
                             </li>
                             <li>
+                                Append the li as a child of the ul we created in the first step.
+                            </li>
+                            <li>
+                                Click on the newly added li and make sure the proper movie description is alerted.
+                            </li>
+                            <li>
                                 Reset all the input values
                             </li>
                         </ul>
+
+                        The goal here is to be able to add any number of movies, and with each addition the movie appears
+                        in the ul, and is clickable to view the preview.
                     </div>
                 </div>
             </div>
+
             <!-- closing the main container -->
         </div>
         </div>
