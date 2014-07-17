@@ -1,0 +1,524 @@
+<!--.row>(.col-md-3>h2.text-right)+.col-md-9-->
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Geekwise Javascript 1</title>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,700'
+              rel='stylesheet'
+              type='text/css'>
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./static/css/prism.css" />
+        <link rel="stylesheet" href="./static/css/reset.css">
+        <link rel="stylesheet" href="./static/css/style.css">
+    </head>
+    <body class="theme day">
+        <header id="nav">
+        </header>
+
+        <div class="container content">
+            <h1 class="row text-center hdr">
+                Day 8
+            </h1>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <h2 class="text-right">Concepts</h2>
+                </div>
+                <div class="col-md-9 concepts">
+                    <ul>
+                        <li>Review Take Home Assignment</li>
+                        <li>Skill Builder</li>
+                        <li>Event Listeners</li>
+                        <li>Working with forms</li>
+                        <li></li>
+                        <li>Take Home Assignment</li>
+                    </ul>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-3">
+                    <h2 class="text-right">Review Take home</h2>
+                </div>
+                <div class="col-md-9">
+
+<pre>
+    <code class="language-javascript">
+//create a function that will take a title, runningTime and year
+//as arguments and return an object of those properties.
+function movieObjCreator(title, runningTime, year) {
+    return {
+        title: title,
+        runningTime: runningTime,
+        year: year
+    };
+}
+
+//Our data structure, an array of arrays
+var movies = [
+    ["bill and teds excellent adventure", 90, 1990],
+    ["rad", 85, 1983],
+    ["goonies", 95, 1985],
+    ["top gun", 90, 1987],
+    ["the shawshank redemption", 120, 2005]
+];
+
+//for holding our new movie objects
+var movieObjs = [];
+
+//initial loop, we'll create our movie objects here
+for (var i = 0; i < movies.length; i++) {
+    var movie = movies[i];
+    movieObjs.push(movieObjCreator.apply({}, movie));
+}
+
+function e(elementType, text, attributes, styles) {
+    attributes = attributes || {};
+    styles = styles || {};
+
+    var newElement = document.createElement(elementType);
+
+    if (text) {
+        newElement.textContent = text;
+    }
+
+    //set the attributes on the tag
+    for (var attr in attributes) {
+        if (attributes.hasOwnProperty(attr)) {
+            newElement.setAttribute(attr, attributes[attr]);
+        }
+    }
+
+    //set the styles
+    for (var style in styles) {
+        if (styles.hasOwnProperty(style)) {
+            newElement.style[style] = styles[style];
+        }
+    }
+
+    return newElement;
+}
+
+//create the main ul
+var ul = e("ul");
+
+//loop our movie array and create one li for each movie,
+//with the title as the text
+for (var i = 0; i < movieObjs.length; i++) {
+    var movie = movieObjs[i];
+    var li = e("li", movie.title, {}, {color: "red"});
+
+    ul.appendChild(li);
+}
+
+document.body.appendChild(ul);
+    </code>
+</pre>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <h2 class="text-right">Event Listeners</h2>
+                </div>
+                <div class="col-md-9">
+                    <div class="point">
+                        In javascript, Event listeners are how we can react to user interaction on the page. For
+                        instance, alert something to a user when they try and delete an element, or run an arbitrary
+                        javascript function when a user clicks a button.
+                    </div>
+
+                    <div class="point">
+                        The DOM has built in methods that allow for registering "handlers" for a given
+                        "<a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/Events">event</a>", like click or
+                        mouseover.
+                    </div>
+
+                    <div class="point">
+                        Lets create a simple click handler for a button that we'll add to our markup.
+                    </div>
+
+<pre>
+    <code class="language-markup">
+&lt;button id="alert"&gt;Alert something&lt;/button&gt;
+    </code>
+</pre>
+
+                    <div class="point">
+                        Now that we have a button we can add a click handler for, lets actually add the listener. We
+                        will use the <code>element.addEventListener(event, handler)</code> where event is a string for a
+                        named event, and the handler is a function to call when the event happens. In this way, the
+                        function is referred to as a <code>callback</code>.
+
+                        <div class="excercise">
+                            Try it: Add the button markup, and write some js that will select the button, and then use
+                            the button to add an event listener.
+                        </div>
+                    </div>
+
+<pre>
+    <code class="language-javascript">
+var button = document.getElementById("alert");
+
+button.addEventListener("click", function () {
+    alert("hello world");
+    console.log(this); //what is the context to our callback function?
+});
+    </code>
+</pre>
+
+                    <div class="point">
+                        Now, if you've added the button markup, and run that javascript, you should now be able to click
+                        on the button and see an alert! Notice the console.log there? What is the <code>this</code>?
+                    </div>
+
+                    <div class="point">
+                        In callbacks, it's usually the case that the <code>context</code> will the the node itself.
+                    </div>
+
+                    <div class="point">
+                        Lets make this a little more dynamic. Add an attribute to your markup called
+                        <code>rel="..."</code>
+                    </div>
+<pre>
+    <code class="language-markup">
+&lt;button id="alert" rel="This is some text"&gt;Alert something&lt;/button&gt;
+    </code>
+</pre>
+
+                    <div class="point">
+                        Lets use that new rel attribute as the content of our alert.  Since we know that the context of
+                        our function is going to be the node itself, we can use all of our node related functions on the
+                        this object.
+
+                        <div class="excercise">
+                            Try it: Use the <code>this</code> inside your callback to get the attribute value and alert
+                            that instead of the hard coded text.
+                        </div>
+                    </div>
+
+<pre>
+    <code class="language-javascript">
+var button = document.getElementById("alert");
+
+button.addEventListener("click", function () {
+    alert(this.getAttribute("rel"));
+});
+    </code>
+</pre>
+
+                    <div class="point">
+                        <div class="excercise">
+                            Alter the takehome assignment to add a "rel" attribute to the <code>&lt;li&gt;</code> nodes.
+                            Then addEventListener for clicks on the <code>&lt;li&gt;</code> tags.  Alert the <code>rel</code>
+                            attributes for each li that is clicked on.
+                        </div>
+                    </div>
+
+<pre>
+    <code class="language-javascript">
+//loop our movie array and create one li for each movie,
+//with the title as the text
+for (var i = 0; i < movieObjs.length; i++) {
+    var movie = movieObjs[i];
+    var li = e("li", movie.title, {rel: movie.title}, {color: "red"});
+    li.addEventListener("click", function () {
+            alert(this.getAttribute("rel"));
+    });
+
+    ul.appendChild(li);
+}
+    </code>
+</pre>
+
+                    <div class="point">
+                        The above modification will add a rel attribute to our li nodes that will track the movie title,
+                        and the new event listener will listen for <code>click</code> events and run the specified callback
+                        which will alert the <code>rel</code> attribute.
+                    </div>
+
+                    <div class="point">
+                        There are many more event types you can have element's listen for, and many that are used specifically
+                        with forms.  We'll talk about those next...
+                    </div>
+
+                    <h3>Working with forms</h3>
+
+                    <div class="point">
+                        Forms in HTML are a perfect way to collect information from someone interacting with your webpage.
+                        The usages vary widely based on the type of information you're collecting, and which form elements
+                        you decide to work with.
+                    </div>
+
+                    <div class="point">
+                        Lets start with a simple text input, that will allow us to input a movie title.
+                    </div>
+
+<pre>
+    <code class="language-javascript">
+&lt;form name="newMovieForm" id="newMovieForm"&gt;
+    &lt;input type="text" name="movieTitle" id="movieTitle" /&gt;
+    &lt;input type="submit" value="Add Movie" /&gt;
+&lt;/form&gt;
+    </code>
+</pre>
+
+                    <div class="point">
+                        Notice, we've added id's to our form and our input.  This is going to make it easy to work the
+                        form fields in javascript.
+                    </div>
+
+                    <div class="point">
+                        Also, notice that our form tag lacks an action or method attribute you may be familiar with. This
+                        is because we aren't actually going to be submitting this form in a traditional way.  We'll be
+                        using javascript to work with the form, meaning there won't be a traditional submit needed.
+                    </div>
+
+                    <h3>The <code>submit</code> event</h3>
+
+                    <div class="point">
+                        So, just like we added a <code>click</code> event to our li tags in the previous exercise, there
+                        are other events we can listen for and react to with javascript.  One of these is the <code>submit</code>
+                        event of an HTML form.
+                    </div>
+
+                    <div class="point">
+                        This works like you would probably expect.  We get a reference to our form, add a submit event
+                        listener, then write a callback function to handle processing our form.
+                    </div>
+
+                    <div class="point">
+                        To start with, our goal will be to <code>alert</code> the movie title entered in the form when we
+                        click the submit button.  To do this, we need to know how to get the <code>value</code> from a
+                        form field.  We use the <code>value</code> property for this.
+                    </div>
+
+<pre>
+    <code class="language-javascript">
+document.getElementById("movieTitle").value;
+    </code>
+</pre>
+
+                    <div class="point">
+                        Enter a value in the field and then run the above code in the console.  The result should be the
+                        value you entered in the field.
+                    </div>
+
+                    <div class="point">
+                        Now that we know how to get the value of a form field, lets add an event handler that will alert
+                        the value of the movieTitle field when the form is submitted.
+                    </div>
+
+<pre>
+    <code class="language-javascript">
+var form = document.getElementById("newMovieForm");
+
+form.addEventListener("submit", function () {
+    var movie = document.getElementById("movieTitle").value;
+    alert(movie);
+});
+    </code>
+</pre>
+
+                    <div class="point">
+                        Now, enter a value in your form field, and click submit.  What happens?  What result did you get?
+                        What happened after you dismissed the alert?
+                    </div>
+
+                    <div class="point">
+                        You should have seen your form was submitted.  Well, that's not very useful, since as soon as the
+                        form is submitted, all the javascript we were executing will be refreshed, and everything starts
+                        over from scratch.  Wouldn't it be great if we could some how stop that page refresh from happening?
+                    </div>
+
+                    <div class="point">
+                        This is where the <code>event</code> object becomes really useful.  The event listener callback
+                        that we've been working with actually receives one argument.  We've not used it thus far, but when
+                        the callback is run, it's passed the <code>event</code> object as an argument.
+                    </div>
+
+                    <div class="point">
+                        The event object contains properties and functions related to the event that occurred, a submit
+                        event in this case.
+                    </div>
+
+                    <div class="point">
+                        It also contains functions that allow us to alter how the event continues after our callback function
+                        has run.  One particularly useful is the <code>evt.preventDefault()</code> function.
+                    </div>
+
+                    <div class="point">
+                        The <code>preventDefault()</code> function does exactly what it says, it prevents the default behavior
+                        from occuring.  That means is we are working with a submit event, the <code>preventDefault</code> function
+                        would prevent the submit from happening, making our callback function the only way to work with
+                        this form, as it will no longer submit.  Lets try it!
+                    </div>
+
+<pre>
+    <code class="language-javascript">
+//notice the evt argument now being passed to the event listener callback
+var form = document.getElementById("newMovieForm");
+
+form.addEventListener("submit", function (evt) {
+    var movie = document.getElementById("movieTitle").value;
+    alert(movie);
+    evt.preventDefault();
+});
+    </code>
+</pre>
+
+                    <div class="point">
+                        So now we get our movie title alerted, but the form no longer submits. Success!
+                    </div>
+
+                    <h3>
+                        Working with radio buttons
+                    </h3>
+
+                    <div class="point">
+                        Radio buttons let you select one option from a group items.  The name attribute on a group of
+                        radio buttons is always the same.  Lets add a "genre" radio group with a few options.
+                    </div>
+
+
+<pre>
+    <code class="language-javascript">
+&lt;form name="newMovieForm" id="newMovieForm"&gt;
+    &lt;input type="text" name="movieTitle" id="movieTitle" /&gt;
+    &lt;div id="genre"&gt;
+        &lt;input type="radio" name="genre" value="comedy" /&gt; comedy&lt;br /&gt;
+        &lt;input type="radio" name="genre" value="drama" /&gt; drama&lt;br /&gt;
+        &lt;input type="radio" name="genre" value="horror" /&gt; horror
+    &lt;/div&gt;
+    &lt;input type="submit" value="Add Movie" /&gt;
+&lt;/form&gt;
+    </code>
+</pre>
+
+                    <div class="point">
+                        We can't use <code>getElementById</code> to get our radio inputs, but the dom does give us some
+                        other methods we can use to work with them.
+                    </div>
+
+                    <div class="point">
+                        <code>document.getElementsByName(...)</code> can be used in order to select an element by it's
+                        name attribute, which is perfect for radio buttons, since they always have the same name.
+                    </div>
+
+<pre>
+    <code class="language-javascript">
+var genreInputs = document.getElementsByName("genre");
+console.log(genreInputs);
+    </code>
+</pre>
+
+                <div class="point">
+                    What does <code>genreInputs</code> look like in the console?  An array!  Does it have a length? Yes!
+                    We can loop it!
+                </div>
+
+                <div class="point">
+                    In order to find out which option from a radio group was selected, we need to look at the <code>checked</code>
+                    property of each radio.
+                    <div class="excercise">
+                        Try it: Loop the genreInputs and find which element is checked, by looking for for the <code>checked</code>
+                        property on each element.
+                    </div>
+                </div>
+
+<pre>
+    <code class="language-javascript">
+var genre;
+
+for (var i = 0; i < genreInputs.length; i++) {
+    var genreInput = genreInputs[i];
+    if (genreInput.checked) {
+        genre = genreInput.value;
+    }
+}
+
+console.log(genre);
+    </code>
+</pre>
+
+                    <div class="point">
+                        The loop above will interrogate each radio element and see if it's checked.  If it is, it sets
+                        the genre variable equal to the current radio elements value.
+                    </div>
+
+                    <div class="point">
+                        One important thing to remember is that radio elements are only meant to return one value.
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-3">
+                    <h2 class="text-right">Take Home Assignment</h2>
+                </div>
+                <div class="col-md-9">
+                    <div class="point">
+                        Much of this assignment you will be able to reuse for the final project.  To start:
+
+                        <ul class="list">
+                            <li>
+                                Add an empty ul element on your HTML page.
+                            </li>
+                            <li>
+                                Create a form in your HTML page with the following fields:
+
+                                <ul class="list">
+                                    <li>Movie Title (text)</li>
+                                    <li>Running Time (text, number)</li>
+                                    <li>Year Released (text, number)</li>
+                                    <li>Genre (radio)</li>
+                                    <li>Description (textarea)</li>
+                                </ul>
+                            </li>
+                            <li>
+                                Create a <code>Movie</code> constructor function with the following signature
+                                <code>new Movie(title, runningTimeInMinutes, year, genre, desc)</code>.
+                            </li>
+                            <li>Add the following functions to the Movie constructors prototype:
+                                <ul class="list">
+                                    <li>runningTimeHours - Should return the running time in hours</li>
+                                    <li>preview - Should return the first 50 characters of the desc followed by a "..."</li>
+                                </ul>
+                            </li>
+                            <li>
+                                Create a submit event listener on our form that will gather the form values, and create
+                                a new instance of the <code>Movie</code> constructor.
+                            </li>
+                            <li>
+                                Create a new &lt;li&gt; element (remember our <code>e</code> function?  might be handy
+                                here).  Set the text of the li element to be the movie title.
+                            </li>
+                            <li>
+                                Set a click event listener on our &lt;li&gt; elements, so that when we click on each one,
+                                it will alert the preview (remember, our Movie instance should have a preview function
+                                that returns the first 50 characters of the description).
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- closing the main container -->
+        </div>
+        </div>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script type="text/javascript" src="./static/js/prism.js"></script>
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="./static/js/nav.js"></script>
+        <script type="text/javascript">
+            function geekwiseClass() {
+                console.log("Congrats, you found a global function");
+            }
+        </script>
+    </body>
+</html>
+
