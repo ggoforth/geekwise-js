@@ -770,20 +770,30 @@ console.log((d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear());
         <div class="col-md-9">
             <div class="point">
                 Lets continue with development of our day 8 take home and enhance the functionality there.  Modify your
-                submit event handler so that:
+                submit event handler in the following way:
 
-                <ul class="list">
-                    <li>We store all of our Movie instances in an new array.</li>
-                    <li>We sort that array by movie title, ascending</li>
-                    <li>We dump all the content in the ul (use innerHTML = "")</li>
-                    <li>We loop our sorted movie array and build new li tags for each movie</li>
+                <ol class="list">
+                    <li>Add a new button to your UI called "Add New Movie"</li>
+                    <li>Store all of our Movie instances in an new array.</li>
+                    <li>Sort that array by movie title, ascending</li>
+                    <li>Dump all the content in the ul (use innerHTML = "")</li>
+                    <li>Loop our sorted movie array and build new li tags for each movie.</li>
+                    <li>For each li, add an attribute "data-movieIdx" equal to the current index in the loop</li>
                     <li>
-                        HINT: if you're using event delegation for this you won't have to recreate the click handler
-                        from the skill builder.
+                        Modify the click handler for the li so that it retrieves the data-movieIdx attribute value, and
+                        then finds the proper movie object from the array of movie objects (based on that index).
+                    </li>
+                    <li>
+                        When a movie title is clicked on in the list of movie titles, hide the form (get a reference to the
+                        form or something higher up in the dom containing the form and set it's style property to none.)
+                    </li>
+                    <li>
+                        When the "Add new movie" button is clicked on it should show the form.  Same as the previous step
+                        but in the opposite way.
                     </li>
                     <li>Add a <code>checkIn</code> function to the Movie prototype that stores the date of a checkin</li>
                     <li>Add a <code>checkOut</code> function to the Movie prototype that store the date of a checkout</li>
-                </ul>
+                </ol>
             </div>
         </div>
     </div>
