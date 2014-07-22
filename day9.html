@@ -1,0 +1,804 @@
+<!--.row>(.col-md-3>h2.text-right)+.col-md-9-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Geekwise Javascript 1</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,700'
+          rel='stylesheet'
+          type='text/css'>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/css/prism.css" />
+    <link rel="stylesheet" href="./static/css/reset.css">
+    <link rel="stylesheet" href="./static/css/style.css">
+</head>
+<body class="theme day">
+<header id="nav">
+</header>
+
+<div class="container content">
+<h1 class="row text-center hdr">
+    Day 9
+</h1>
+
+<div class="row">
+    <div class="col-md-3">
+        <h2 class="text-right">Concepts</h2>
+    </div>
+    <div class="col-md-9 concepts">
+        <ul>
+            <li>Review Take Home Assignment</li>
+            <li>Skill Builder</li>
+            <li>Array sorting</li>
+            <li>Organizing An application</li>
+            <li>More DOM</li>
+            <li>Date Object</li>
+            <li>TakeHome</li>
+        </ul>
+    </div>
+</div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <h2 class="text-right">Review Take Home</h2>
+        </div>
+        <div class="col-md-9">
+            <div class="point">
+                <a href="day8-takehome.html">Link to Example</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <h2 class="text-right">Skill Builder</h2>
+        </div>
+        <div class="col-md-9">
+            <div class="point">
+                Alter the takehome from day 8 to use event delegation instead of individual click events on each li node
+                that we add to the movie list.  Remember, this means that there should be a click event somewhere higher
+                up in the dom, that will catch the event.
+            </div>
+
+            <div class="point">
+                Some things to remember:
+
+                <ul class="list">
+                    <li>
+                        Since we're not going to be adding click event handlers, we need to find some other way to store
+                        the movie instance reference to the li.
+                    </li>
+                    <li>
+                        Hint: Dom element objects are no different than any other javascript object, how could you create
+                        an arbitrary element in a normal object?
+                    </li>
+                </ul>
+
+                <a href="day9-skillbuilder.html">Link to example</a>
+            </div>
+        </div>
+    </div>
+
+
+<div class="row">
+    <div class="col-md-3">
+        <h2 class="text-right">Array Sorting</h2>
+    </div>
+    <div class="col-md-9">
+        <div class="point">
+            We've done quite a bit with array's to this point, and they've proven to be a useful data structure for
+            holding content when order matters.
+        </div>
+
+        <div class="point">
+            One useful function we've yet to discuss is sorting an array.  Array's come with built in methods that
+            allow for sorting an array in just about any way you want to.  Lets start by taking a look at a numeric
+            sort.
+        </div>
+
+<pre>
+    <code class="language-javascript">
+var nums = [4, 2, 9, 7, 3, 5, 1, 6, 8];
+console.log(nums.sort());
+    </code>
+</pre>
+
+        <div class="point">Awesome, we get the array, sorted by number.  Lets try a different example.</div>
+
+<pre>
+    <code class="language-javascript">
+var nums = [100, 10, 4, 2, 9, 7, 3, 5, 1, 6, 8];
+console.log(nums.sort());
+    </code>
+</pre>
+
+        <div class="point">
+            Notice anything odd about the way that array was sorted?  Here is a good example of why javascript sometimes
+            can leave you scratching your head.  We can see that we got something like 1, 10, 100, 2, ...  Why is that?
+        </div>
+
+        <div class="point">
+            The answer is that by default, js will sort things in Unicode order, which gives you something like the result
+            above.  So...how can we make this act in a more sane way?
+        </div>
+
+        <div class="point">
+            The sort function actually takes an argument, that is a function.  This function can do the job of determining
+            how to sort the array, which means that you can sort in numerous ways.
+        </div>
+
+        <div class="point">
+            The sorting function looks like this:
+        </div>
+
+<pre>
+    <code class="language-javascript">
+var nums = [100, 10, 4, 2, 9, 7, 3, 5, 1, 6, 8];
+nums.sort(function (a, b) {
+    //inspect a and b to determine how things should be sorted
+});
+    </code>
+</pre>
+
+        <div class="point">
+            So the sorting function receives two arguments, usually aliased to <code>a</code> and <code>b</code>.  These
+            are two elements from the array.  The sorting functions job is to compare the two array items and determine
+            which is larger.  The return value of the sorting function will determine if the "a" element is sorting higher
+            or lower than the "b" element.
+        </div>
+
+        <div class="point">
+            It works like this:
+
+            <ul class="list">
+                <li>If the return value of the sorting function is a negative number, sort <code>a</code> lower than <code>b</code>.</li>
+                <li>If the return value of the sorting function is a positive number, sort <code>a</code> higher than <code>b</code>.</li>
+                <li>If the return value is 0, this signifies that the values are equal, so do not change these elements order.</li>
+            </ul>
+        </div>
+
+        <div class="point">
+            So, one quick way of sorting numbers might look like:
+        </div>
+
+<pre>
+    <code class="language-javascript">
+var nums = [100, 10, 4, 2, 9, 7, 3, 5, 1, 6, 8];
+nums.sort(function (a, b) {
+    return a - b;
+});
+    </code>
+</pre>
+
+        <div class="point">
+            Lets hypothetically say a = 100 and b = 10;  100 - 10 === 90, which is a positive number, so <code>a</code>
+            would be sorted higher than <code>b</code>.  If a = 10 and b = 100, then 10 - 100 === -90, so <code>a</code>
+            would be sorted lower than <code>b</code>.
+        </div>
+
+        <h3>Array String Sorting</h3>
+
+        <div class="point">
+            String sorting for array's is a little nicer than numbers.  You can use greater than / less than operators
+            with strings where "a" is the lowest value and "z" is the highest value.
+
+            <div class="excercise">
+                Try it: In your console, run <code>"a" < "z"</code> then run <code>"z" < "a"</code>.  The result should
+                be <code>true</code> then <code>false</code>, because "a" is less than "z" and "z" is not less than "a".
+                This is what the sort function does for strings.
+            </div>
+        </div>
+
+        <div class="point">
+            Lets sort an array of strings.
+        </div>
+
+<pre>
+    <code class="language-javascript">
+var strings = ["cherry", "apple", "berry"];
+strings.sort();
+
+console.log(strings);
+    </code>
+</pre>
+
+        <div class="point">
+            So, without much intervention on our part, an array of strings can be sorted just by calling sort on it.
+        </div>
+
+        <h3>Sorting an Array of objects</h3>
+
+        <div class="point">
+            It's often the case where you will have an array of objects.  How do we sort this then?  An object is neither
+            a number or a string, so there must be some way to sort the objects.
+        </div>
+
+        <div class="point">
+            In the sorting function, a and b will both be one of the objects from the array, which means we can use one
+            of the objects properties to sort the array.  Lets look at an example.
+        </div>
+
+<pre>
+    <code class="language-javascript">
+var movieObjects = [
+    {title: "Rad"},
+    {title: "Avengers"},
+    {title: "Big Lebowski"},
+    {title: "Spiderman 1"},
+    {title: "Spiderman 2"}
+];
+
+movieObjects.sort(function (a, b) {
+    //how can we sort a and b so that the movie titles will be in proper alphabetical order?
+});
+    </code>
+</pre>
+
+        <div class="point">
+            Given that each of those objects shares a similar form, we can use the <code>title</code> property of each
+            object and return a -1, 1, or zero depending on the outcome.
+        </div>
+
+<pre>
+    <code class="language-javascript">
+movieObjects.sort(function (a, b) {
+    var titleA = a.title.toLowerCase();
+    var titleB = b.title.toLowerCase();
+
+    if (titleA < titleB) {
+        return -1;
+    } else if (titleA > titleB) {
+        return 1;
+    }
+
+    return 0;
+});
+    </code>
+</pre>
+
+        <div class="point">
+            So this will compare the title property from each object for sorting purposes.  One thing of note is the
+            first two lines of the sort function, the <code>toLowerCase()</code> function calls.  This is a handy way of
+            making sure we are always dealing with the same letters, since "a" > "A" is true.
+        </div>
+
+        <div class="point">
+            Then it goes on to say if the title of the <code>a</code> object is less than the title of the <code>b</code>
+            object, sort <code>a</code> below <code>b</code>. Else if <code>a</code> is greater than <code>b</code> sort
+            <code>a</code> above <code>b</code> else leave them alone.
+        </div>
+
+    </div>
+</div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <h2 class="text-right">Organizing an application</h2>
+        </div>
+        <div class="col-md-9">
+            <div class="point">
+                As we begin writing more JS to handle our page interactions, it's important to organize our application
+                in a way that will allow for ease of use / maintenance in the future
+            </div>
+
+            <div class="point">
+                Lets talk about some best practices for structuring our application for the final project.
+            </div>
+
+            <div class="point">
+                We've talked a lot about function scope, and how functions create their own scope that is inaccessible
+                from outer scopes.  We've also talked a lot about how anything written in an "outer most" scope (global
+                scope) will become part of the global scope (IE the window object).
+            </div>
+
+            <div class="point">
+                When you begin writing a lot of javascript, it becomes desirable to <strong>NOT</strong> make everything
+                part of the global scope.  We want to avoid cluttering the global scope with every function, variable, and
+                object we create.  This is just good practice.
+            </div>
+
+            <div class="point">
+                So how do we avoid creating EVERYTHING on the global scope?  Lets try something.  Run the code below in
+                your console.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+> window.foo //undefined
+    </code>
+</pre>
+
+            <div class="point">
+                Simply trying to access window.foo returns undefined, because it's not yet been created.  So lets
+                create it.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+function foo() { alert("foo"); }
+    </code>
+</pre>
+
+            <div class="point">
+                Now try accessing window.foo
+            </div>
+
+<pre>
+    <code class="language-javascript">
+window.foo //function () {...}
+    </code>
+</pre>
+
+            <div class="point">
+                So now that we've created the function foo, it's actually part of the global scope, <code>window</code>.
+                This is what we want to try and avoid.  So, how do we do that?
+            </div>
+
+            <div class="point">
+                The most common way is with something called an <code>IIFE</code> or Immediately Invoked Function Expression.
+            </div>
+
+            <div class="point">
+                With an <code>IIFE</code> you essentially create a function that gets called immediately that will enclose
+                all of our functionality within a function, which means <code>NOTHING</code> will be able to clutter our
+                global scope (some exceptions do apply)
+            </div>
+
+            <div class="point">
+                First, let's look at what an <code>IIFE</code> looks like
+            </div>
+
+<pre>
+    <code class="language-javascript">
+(function () {
+    //your code goes here
+}());
+    </code>
+</pre>
+
+            <div class="point">
+                So what is going on here?  Lets pick it apart...
+            </div>
+
+            <div class="point">
+                We have an outermost set of parenthesis that contain a function, followed by an inner set of parenthesis.
+            </div>
+
+            <div class="point">
+                The outermost set of parenthesis followed by the function keyword tells javascript to expect a function
+                expression and not a function declaration.  The innermost parenthesis will immediately call the anon
+                function and execute the function body.
+            </div>
+
+            <div class="point">
+                Ok, so why do we need this?  Well as we discussed previously, functions create a new scope, so functions,
+                variables, etc...that get created in the <code>IIFE</code> belong to that scope, and not the global scope.
+            </div>
+
+            <div class="point">
+                In this way, we can have javascript files that are only concerned with their own purpose, to create a
+                new movie object, or create new elements, etc...This is known as writing <code>modular</code> code.
+            </div>
+
+            <div class="point">
+                One major gotcha here...if our "modules" that we are creating are created inside an <code>IIFE</code>,
+                and and <code>IIFE</code> creates a new scope that the outer scopes can't reach, how can code in another
+                file access our <code>Movie</code> constructor or <code>e</code> function?
+            </div>
+
+            <div class="point">
+                The short answer is that it can't.  You MUST assign something back to the window object so that other
+                code can use it.  We'll look at this in the next excercise.
+            </div>
+
+            <div class="point">
+                Lets do a bit of refactoring to our take home to break this up our code and make it a bit more modular.
+            </div>
+
+            <div class="point">
+                First, lets determine some good places that we can break this up a little bit.  What about something like:
+
+                <ul class="list">
+                    <li>movie.js - Will hold our <code>Movie</code> constructor and it's prototype, nothing else.</li>
+                    <li>element.js - Will hold our e function.</li>
+                    <li>
+                        movieapp.js - Will hold our event listeners other code that will use the movie.js and element.js
+                        files.
+                    </li>
+                </ul>
+
+                <div class="excercise">
+                    Try it: Create two new files, movie.js and element.js and move the code from the take home into
+                    the appropriate files.  Then make sure to include those files on your html page in an order that
+                    makes sense.  Remember, if movieapp.js will need to use code from movie.js and element.js then movie.js
+                    and element.js need to load first.
+                </div>
+            </div>
+
+            <div class="point">
+                Lets start with the movie.js module.  First we start with an <code>IIFE</code>:
+            </div>
+
+<pre>
+    <code class="language-javascript">
+(function () {
+    //Movie constructor goes here
+}());
+    </code>
+</pre>
+
+            <div class="point">
+                Now we can add our movie constructor, and remove it from our main application (inline in your html page
+                or from an external file)
+            </div>
+
+<pre>
+    <code class="language-javascript">
+(function() {
+    /**
+     * Define our Movie constructor function.
+     * @param title
+     * @param runningTimeInMinutes
+     * @param year
+     * @param genre
+     * @param desc
+     * @constructor
+     */
+    function Movie(title, runningTimeInMinutes, year, genre, desc) {
+        this.title = title;
+        this.runningTimeInMinutes = parseInt(runningTimeInMinutes, 10) || 0;
+        this.year = year;
+        this.genre = genre;
+        this.desc = desc || "";
+    }
+
+    /**
+     * The movie prototype, lets you see a running time in hours and
+     * a preview snippet based on the description.
+     * @type {{runningTimeHours: Function, preview: Function}}
+     */
+    Movie.prototype = {
+        runningTimeHours: function runningTimeHours() {
+            if (!isNaN(this.runningTimeInMinutes)) {
+                return (this.runningTimeInMinutes / 60) + " hrs";
+            }
+        },
+        preview: function preview() {
+            return this.desc.slice(0, 50) + "...";
+        }
+    };
+
+    //WE MUST now stick the Movie object somewhere accessible
+    window.Movie = Movie;
+}());
+    </code>
+</pre>
+
+            <div class="point">
+                Now, the <code>Movie</code> constructor is neatly contained in the movie.js file, and exposed to the
+                window at the end of the file so it can be used throughout the application.
+            </div>
+
+            <div class="point">
+                <div class="excercise">
+                    Try it: Create the element.js file and set it up in the same way as movie.js.  Add the relevant code,
+                    expose what you want exposed to the window.
+                </div>
+            </div>
+
+            <div class="point">
+                Don't forget to alter your html file so that the new files are included.  The end result should be
+                that your main block of js only contains the event listener for the form submit event, with all other
+                code living in relevant modules.  Something like:
+            </div>
+
+<pre>
+    <code class="language-markup smallText">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+    &lt;head&gt;
+        &lt;meta charset="utf-8"&gt;
+        &lt;meta http-equiv="X-UA-Compatible" content="IE=edge"&gt;
+        &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+        &lt;title&gt;Geekwise - Movie App&lt;/title&gt;
+
+        &lt;!-- Bootstrap --&gt;
+        &lt;link rel="stylesheet" href="./static/js/bootstrap/css/bootstrap.min.css" /&gt;
+        &lt;link href='http://fonts.googleapis.com/css?family=Raleway:400,100,700' rel='stylesheet' type='text/css'&gt;
+        &lt;link rel="stylesheet" href="./static/css/moviesapp.css" /&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+
+        &lt;div class="container"&gt;
+            &lt;div class="row"&gt;
+                &lt;h1 class="text-center"&gt;
+                    My Movies
+                &lt;/h1&gt;
+            &lt;/div&gt;
+
+            &lt;div class="row"&gt;
+                &lt;div class="col-md-4"&gt;
+                    &lt;ul id="movieList"&gt;&lt;/ul&gt;
+                &lt;/div&gt;
+
+                &lt;div class="col-md-8"&gt;
+                    &lt;form id="newMovie" class="form" role="form"&gt;
+                        &lt;div class="form-group"&gt;
+                            &lt;label for="movieTitle"&gt;Movie Title&lt;/label&gt;
+                            &lt;input class="form-control" type="text" name="movieTitle" id="movieTitle" /&gt;
+                        &lt;/div&gt;
+
+                        &lt;div class="form-group"&gt;
+                            &lt;label for="runningTime"&gt;Running Time&lt;/label&gt;
+                            &lt;input class="form-control" type="number" name="runningTime" id="runningTime" /&gt;
+                        &lt;/div&gt;
+
+                        &lt;div class="form-group"&gt;
+                            &lt;label for="year"&gt;Year Released&lt;/label&gt;
+                            &lt;input class="form-control" type="number" name="year" id="year" /&gt;
+                        &lt;/div&gt;
+
+                        &lt;div class="form-group"&gt;
+                            &lt;label for="genre"&gt;Genre&lt;/label&gt;
+                            &lt;input class="radio-inline" type="radio" name="genre" value="action"  /&gt; Action
+                            &lt;input class="radio-inline" type="radio" name="genre" value="drama" /&gt; Drama
+                            &lt;input class="radio-inline" type="radio" name="genre" value="comedy" /&gt; Comedy
+                        &lt;/div&gt;
+
+                        &lt;div class="form-group"&gt;
+                            &lt;label for="desc"&gt;Desc&lt;/label&gt;
+                            &lt;textarea class="form-control" name="desc" id="desc" cols="30" rows="10"&gt;&lt;/textarea&gt;
+                        &lt;/div&gt;
+
+                        &lt;button class="btn btn-lg btn-primary"&gt;Create New Movie&lt;/button&gt;
+                    &lt;/form&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;script type="text/javascript" src="./static/js/jquery-2.1.1.min.js"&gt;&lt;/script&gt;
+        &lt;script type="text/javascript" src="./static/js/bootstrap/js/bootstrap.min.js"&gt;&lt;/script&gt;
+        &lt;script type="text/javascript" src="./static/js/movie.js"&gt;&lt;/script&gt;
+        &lt;script type="text/javascript" src="./static/js/element.js"&gt;&lt;/script&gt;
+        &lt;script type="text/javascript" src="./static/js/movieapp.js"&gt;&lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+    </code>
+</pre>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <h2 class="text-right">More DOM</h2>
+        </div>
+        <div class="col-md-9">
+            <div class="point">
+                When it comes to the dom, so far we've been creating our dom elements one at a time, and adding them to
+                the DOM.  There are some other methods of creating content that are a little simpler, though not without
+                their drawbacks.
+            </div>
+
+            <div class="point">
+                The first method allows for creating a chunk of DOM from a string.  So rather than creating a div with
+                create element, we can simply inject a string of HTML into the dom using the <code>innerHTML</code> property
+                of an existing node.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var p = document.createElement("p");
+p.innerHTML = "This is a &lt;strong&gt;strong&lt;/strong&gt; string";
+    </code>
+</pre>
+
+            <div class="point">
+                Notice, this creates a p element using the normal <code>createElement</code> method, and then sets the
+                innerHTML property to a string of HTML.  This is automatically parsed into proper HTML by the DOM and
+                is suitable for then appending to the dom.
+            </div>
+
+            <div class="point">
+                This method is not without it's drawbacks however, try creating a invalid string of html.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var p = document.createElement("p");
+p.innerHTML = "This is a &lt;strong&gt;strong&lt;/b&gt; string";
+    </code>
+</pre>
+
+            <div class="point">
+                It's also worth it to note, that the <code>innerHTML</code> property of a node can be really handy for
+                removing a whole bunch of content.
+
+                <div class="excercise">
+                    Lets return to our takehome and add several movies to the movieList ul tag.  Then select the ul
+                    that holds the movies and set the innerHTML property to "".
+                </div>
+            </div>
+
+            <div class="point">
+                If you're careful with the <code>innerHTML</code> property you can get pretty far.  Again, it's not without
+                it's drawbacks, but it's a useful property to be aware of when you need to create a large amount of dom
+                without all the boiler plate required via <code>createElement</code>, etc...
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <h2 class="text-right">Date Object</h2>
+        </div>
+        <div class="col-md-9">
+            <div class="point">
+               The Date object in javascript is a built in way to create, manipulate and display Dates.
+            </div>
+
+            <div class="point">
+                The date will always be relative to the users computer settings that the javascript is running on,
+                since javascript runs in their browser a date object created at the same time in two different time zones
+                will yield two different date objects.
+            </div>
+
+            <div class="point">
+                To create a date object, we'll first need to call the Date constructor function.
+
+                <div class="excercise">
+                    Try it: Create a date object in your console
+                </div>
+            </div>
+
+<pre>
+    <code class="language-javascript">
+new Date();
+    </code>
+</pre>
+
+            <div class="point">
+                The console should output a "stringified" version of a date.  But it is indeed an object, and as we know
+                constructor functions return an object with functions and properties we can use.  To take a closer look
+                lets use another lesser known console function.  It's called <code>dir(...)</code>.  Call <code>dir</code>
+                around your date object and lets see if we can look at the date objects prototype.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+dir(new Date());
+    </code>
+</pre>
+
+            <div class="point">
+                Now we can investigate the Date objects prototype.  Any functions look interesting?
+            </div>
+
+            <div class="point">
+                One thing that javascript lacks is a really good way of formatting dates for output once we have created
+                a date object.
+            </div>
+
+            <div class="point">
+                Essentially, a javascript date object gives you access to all the individual parts of a date, and you must
+                build a string for output.
+            </div>
+
+            <div class="point">
+                One useful function on a Date object is the <code>getTime()</code> function.  This functino returns the
+                number of seconds since the epoch (Jan 1, 1970 UTC).  This can be useful if you want to compare two
+                date objects since the number of seconds will always be relative to the Epoch.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var d = new Date();
+console.log(d.getTime());
+    </code>
+</pre>
+
+            <div class="point">
+                Another useful function is the <code>getMonth()</code> function.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var d = new Date();
+console.log(d.getMonth()); //huh?
+    </code>
+</pre>
+
+            <div class="point">
+                The <code>getMonth</code> function is zero based, for some reason, of which I'm not even sure.  Go home
+                javascript, you're drunk.
+            </div>
+
+            <div class="point">
+                Just remember when working with <code>Date</code> objects that <code>getMonth</code> functions are zero
+                based, and require adding 1 to the value to get the current month.
+            </div>
+
+            <div class="point">
+                Next up is the <code>getDate</code> function.  This returns the numeric value for the current day of the
+                date.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var d = new Date();
+console.log(d.getDate());
+    </code>
+</pre>
+
+            <div class="point">
+                Finally, lets look at the <code>getFullYear()</code> function.  This returns the the full year as a 4 digit
+                number.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var d = new Date();
+console.log(d.getFullYear()); //2014
+    </code>
+</pre>
+
+            <div class="point">
+                So, now you've got the basics to reconstruct a date for display on the screen.
+
+                <div class="excercise">
+                    Create a date object, and output a string in MM/DD/YYYY format using the functions discussed above.
+                </div>
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var d = new Date();
+console.log((d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear());
+    </code>
+</pre>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-3">
+            <h2 class="text-right">Takehome Assignment</h2>
+        </div>
+        <div class="col-md-9">
+            <div class="point">
+                Lets continue with development of our day 8 take home and enhance the functionality there.  Modify your
+                submit event handler so that:
+
+                <ul class="list">
+                    <li>We store all of our Movie instances in an new array.</li>
+                    <li>We sort that array by movie title, ascending</li>
+                    <li>We dump all the content in the ul (use innerHTML = "")</li>
+                    <li>We loop our sorted movie array and build new li tags for each movie</li>
+                    <li>
+                        HINT: if you're using event delegation for this you won't have to recreate the click handler
+                        from the skill builder.
+                    </li>
+                    <li>Add a <code>checkIn</code> function to the Movie prototype that stores the date of a checkin</li>
+                    <li>Add a <code>checkOut</code> function to the Movie prototype that store the date of a checkout</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+<!-- closing the main container -->
+</div>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="./static/js/prism.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./static/js/nav.js"></script>
+<script type="text/javascript">
+    function geekwiseClass() {
+        console.log("Congrats, you found a global function");
+    }
+</script>
+</body>
+</html>

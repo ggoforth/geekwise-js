@@ -127,3 +127,6 @@ body.links .link-list ul li a {
 body.links .link-list ul li a:hover {
   color: #ff0084;
 }
+body pre code.smallText {
+  font-size: .75em;
+}

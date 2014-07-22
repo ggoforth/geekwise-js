@@ -1,0 +1,14 @@
+body {
+  font-family: 'Raleway', sans-serif;
+}
+h1 {
+  margin: 50px 0;
+  font-size: 3em;
+}
+ul#movieList {
+  list-style-type: none;
+}
+ul#movieList li {
+  font-size: 1.3em;
+  color: #0073ea;
+}

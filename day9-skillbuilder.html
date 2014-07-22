@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Geekwise - Movie App</title>
+
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="./static/js/bootstrap/css/bootstrap.min.css" />
+        <link href='http://fonts.googleapis.com/css?family=Raleway:400,100,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="./static/css/moviesapp.css" />
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="row">
+                <h1 class="text-center">
+                    My Movies
+                </h1>
+            </div>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <ul id="movieList"></ul>
+                </div>
+
+                <div class="col-md-8">
+                    <form id="newMovie" class="form" role="form">
+                        <div class="form-group">
+                            <label for="movieTitle">Movie Title</label>
+                            <input class="form-control" type="text" name="movieTitle" id="movieTitle" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="runningTime">Running Time</label>
+                            <input class="form-control" type="number" name="runningTime" id="runningTime" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="year">Year Released</label>
+                            <input class="form-control" type="number" name="year" id="year" />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="genre">Genre</label>
+                            <input class="radio-inline" type="radio" name="genre" value="action"  /> Action
+                            <input class="radio-inline" type="radio" name="genre" value="drama" /> Drama
+                            <input class="radio-inline" type="radio" name="genre" value="comedy" /> Comedy
+                        </div>
+
+                        <div class="form-group">
+                            <label for="desc">Desc</label>
+                            <textarea class="form-control" name="desc" id="desc" cols="30" rows="10"></textarea>
+                        </div>
+
+                        <button class="btn btn-lg btn-primary">Create New Movie</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="./static/js/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="./static/js/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="./static/js/movieapp-delegation.js"></script>
+    </body>
+</html>
