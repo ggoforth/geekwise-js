@@ -1,0 +1,283 @@
+<!--.row>(.col-md-3>h2.text-right)+.col-md-9-->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Geekwise Javascript 1</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,700'
+          rel='stylesheet'
+          type='text/css'>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./static/css/prism.css" />
+    <link rel="stylesheet" href="./static/css/reset.css">
+    <link rel="stylesheet" href="./static/css/style.css">
+</head>
+<body class="theme day">
+<header id="nav">
+</header>
+
+<div class="container content">
+<h1 class="row text-center hdr">
+    Day 10
+</h1>
+
+<div class="row">
+    <div class="col-md-3">
+        <h2 class="text-right">Concepts</h2>
+    </div>
+    <div class="col-md-9 concepts">
+        <ul>
+            <li>Review Take Home Assignment</li>
+            <li>Skill Builder</li>
+            <li>Date Object</li>
+            <li>Intro to jQuery</li>
+        </ul>
+    </div>
+</div>
+
+
+    <div class="row">
+        <div class="col-md-3">
+            <h2 class="text-right">Take Home Assignment</h2>
+        </div>
+        <div class="col-md-9">
+            <div class="point">
+                <a href="day9-takehome.html">Link to example</a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-3">
+            <h2 class="text-right">Skill Builder</h2>
+        </div>
+        <div class="col-md-9">
+            <div class="point">
+                Alter the take home in the following way:
+
+                <ul class="list">
+                    <li>
+                        Add a new div to your markup below your form with an id attribute of "movieDetails".  For now,
+                        just add some random content.
+                    </li>
+                    <li>
+                        Set the new div display to none via css (inline style tag is fine, but external css file is preferred.
+                    </li>
+                    <li>When you click on a movie li, show this div (in addition to hiding the form)</li>
+                    <li>When you click on the "add a new movie button", hide this div.</li>
+                </ul>
+
+                In effect, your simply hiding and showing different things based on a specific "state" of the app.  When
+                we are in "add a movie" state, we see a form, when we have selected a movie by clicking on it, we see the
+                div.  Don't worry about the content of the div just yet.
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <h2 class="text-right">Date Object</h2>
+        </div>
+        <div class="col-md-9">
+            <div class="point">
+                The Date object in javascript is a built in way to create, manipulate and display Dates.
+            </div>
+
+            <div class="point">
+                The date will always be relative to the users computer settings that the javascript is running on,
+                since javascript runs in their browser a date object created at the same time in two different time zones
+                will yield two different date objects.
+            </div>
+
+            <div class="point">
+                To create a date object, we'll first need to call the Date constructor function.
+
+                <div class="excercise">
+                    Try it: Create a date object in your console
+                </div>
+            </div>
+
+<pre>
+    <code class="language-javascript">
+new Date();
+    </code>
+</pre>
+
+            <div class="point">
+                The console should output a "stringified" version of a date.  But it is indeed an object, and as we know
+                constructor functions return an object with functions and properties we can use.  To take a closer look
+                lets use another lesser known console function.  It's called <code>dir(...)</code>.  Call <code>dir</code>
+                around your date object and lets see if we can look at the date objects prototype.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+dir(new Date());
+    </code>
+</pre>
+
+            <div class="point">
+                Now we can investigate the Date objects prototype.  Any functions look interesting?
+            </div>
+
+            <div class="point">
+                One thing that javascript lacks is a really good way of formatting dates for output once we have created
+                a date object.
+            </div>
+
+            <div class="point">
+                Essentially, a javascript date object gives you access to all the individual parts of a date, and you must
+                build a string for output.
+            </div>
+
+            <div class="point">
+                One useful function on a Date object is the <code>getTime()</code> function.  This functino returns the
+                number of seconds since the epoch (Jan 1, 1970 UTC).  This can be useful if you want to compare two
+                date objects since the number of seconds will always be relative to the Epoch.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var d = new Date();
+console.log(d.getTime());
+    </code>
+</pre>
+
+            <div class="point">
+                Another useful function is the <code>getMonth()</code> function.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var d = new Date();
+console.log(d.getMonth()); //huh?
+    </code>
+</pre>
+
+            <div class="point">
+                The <code>getMonth</code> function is zero based, for some reason, of which I'm not even sure.  Go home
+                javascript, you're drunk.
+            </div>
+
+            <div class="point">
+                Just remember when working with <code>Date</code> objects that <code>getMonth</code> functions are zero
+                based, and require adding 1 to the value to get the current month.
+            </div>
+
+            <div class="point">
+                Next up is the <code>getDate</code> function.  This returns the numeric value for the current day of the
+                date.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var d = new Date();
+console.log(d.getDate());
+    </code>
+</pre>
+
+            <div class="point">
+                Finally, lets look at the <code>getFullYear()</code> function.  This returns the the full year as a 4 digit
+                number.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var d = new Date();
+console.log(d.getFullYear()); //2014
+    </code>
+</pre>
+
+            <div class="point">
+                So, now you've got the basics to reconstruct a date for display on the screen.
+
+                <div class="excercise">
+                    Create a date object, and output a string in MM/DD/YYYY format using the functions discussed above.
+                </div>
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var d = new Date();
+console.log((d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear());
+    </code>
+</pre>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <h2 class="text-right">Intro to jQuery</h2>
+        </div>
+        <div class="col-md-9">
+            <div class="point">
+                First, understand that jQuery is nothing more than a toolkit that can help you do things in the dom
+                in a more convenient way.
+            </div>
+
+            <div class="point">
+                It's entirely possible to make full blow web applications without jQuery, under the hood jQuery is just
+                vanilla javascript, like we've been doing since day 1 in this class.
+            </div>
+
+            <div class="point">
+                jQuery is not the answer to all your js problems.  You can write very messy jquery code just like you
+                write very ugly javascript code.  Organization matters.
+            </div>
+
+            <h3>Sizzle...</h3>
+
+            <div class="point">
+                So, jQuery is like the swiss army knives for the dom.  It does other interesting things as well, but a
+                typical first use for jQuery is to simplify and normalize how we select elements on a page.
+            </div>
+
+            <div class="point">
+                Until now, we've used <code>document.getElementById</code> or <code>document.getElementsByName</code> for
+                getting references to dom nodes.
+            </div>
+
+            <div class="point">
+                jQuery simplifies all of this for us, allowing us to use basic css selectors to specify what we want to
+                select.  The engine that powers this is called the Sizzle js.  Sizzle works by taking a string "selector"
+                (like you would specify in css) and finding nodes that match the selector anywhere in the page.
+            </div>
+
+            <div class="point">
+                When sizzle finds some nodes based on a specified selector, it returns an array like object, (looks like
+                an array, but is actually an object.  However, it does have a length property)
+            </div>
+
+            <h3>$ signs EVERYWHERE</h3>
+
+            <div class="point">
+                So, understanding what sizzle is won't get us very far, since it's a baked in part of jQuery.  So how do
+                we interact with jQuery itself?
+            </div>
+
+            <div class="point">
+                When you include jQuery on your page, the js file will expose a function named <code>$</code>.  This is
+                how we can interact with jQuery.
+
+                <div class="excercise">
+                    Try it: execute <code>$</code> in your console.
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+<!-- closing the main container -->
+</div>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="./static/js/prism.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./static/js/nav.js"></script>
+</body>
+</html>
