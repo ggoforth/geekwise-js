@@ -12,6 +12,12 @@
     <link rel="stylesheet" href="./static/css/prism.css" />
     <link rel="stylesheet" href="./static/css/reset.css">
     <link rel="stylesheet" href="./static/css/style.css">
+    <style>
+        .urgent {
+            background-color: red;
+            color: white;
+        }
+    </style>
 </head>
 <body class="theme day">
 <header id="nav">
@@ -251,6 +257,24 @@ console.log((d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear());
                 an array, but is actually an object.  However, it does have a length property)
             </div>
 
+            <h3>Include jQuery</h3>
+
+            <div class="point">
+                Before we go further, it's important that we get jQuery included on your html page.  You can find the
+                jQuery source <a target="_blank" href="./jquery-2.1.1.js">here</a>.  Copy the contents of that file into
+                a file named <code>jquery-2.1.1.js</code> in your project directory.
+            </div>
+
+            <div class="point">
+                Add the script tag to include this new file in your html page.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+&lt;script type="text/javascript" src="./path/to/jquery-2.1.1.js"&gt;&lt;/script&gt;
+    </code>
+</pre>
+
             <h3>$ signs EVERYWHERE</h3>
 
             <div class="point">
@@ -267,7 +291,204 @@ console.log((d.getMonth() + 1) + "/" + d.getDate() + "/" + d.getFullYear());
                 </div>
             </div>
 
+<pre>
+    <code class="language-javascript">
+console.log($);
+    </code>
+</pre>
 
+            <div class="point">
+                So we can see <code>$</code> is just a simple function, nothign to be afriad of here.
+            </div>
+
+            <div class="point">
+                Open the console on the geekwise js day 10 page.  Lets create our first jQuery selector to select
+                some elements on the page.
+            </div>
+
+            <div class="point">
+                This page makes heavy use of a class called <code>point</code>.  It's used to style each point related to
+                a topic.  Since each of these "points" has a class named point, this is a reasonable way to select all
+                of these items.
+            </div>
+
+            <div class="point">
+                When using jQuery to select items on the page, the signature looks like <code>$("selector")</code>.  What
+                would we code if we want to select all elements with a point class?
+            </div>
+
+<pre>
+    <code class="language-javascript">
+console.log($(".point"));
+    </code>
+</pre>
+
+            <div class="point">
+                What does that yield?  As you would have probably guessed, it's an array of all the nodes that have a
+                class "point".
+            </div>
+
+            <div class="point">
+                So the above code runs a selector against the entire dom, looking for any node that has a point class
+                and returns an array.  But it's a special array, it actually behaves much like an object, but for now
+                it's ok to think of it as an array.
+            </div>
+
+            <div class="point">
+                Lets talk best practices for a moment.  Because the <code>$</code> function returns this special array of
+                matched nodes, it's desirable that we name our variables in a way that makes it easy to understand we
+                are dealing with a jQuery array, instead of a normal array.  A typical convention for this is to prefix
+                jQuery collections with a $, since jQuery pretty much owns this symbol.
+
+                <div class="excercise">
+                    Try it: Run the same selector but save your collection to a variable, and then log that variable.
+                </div>
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var $points = $(".point");
+console.log($points);
+    </code>
+</pre>
+
+            <div class="point">
+                The <code>$</code> prefix is just a good practice and it lets other developers know that "hey, this is a
+                jQuery thing and not some normal array"
+            </div>
+
+            <div class="point">
+                Lets try and loop our jQuery array and apply a style to each matched node.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var $points = $(".point");
+for (var i = 0; i < $points.length; i++) {
+    var node = $points[i];
+    node.style.backgroundColor = "red";
+    node.style.color = "white";
+}
+    </code>
+</pre>
+
+            <div class="point">
+                Cool, so we can loop this array just like any other array we've worked with in the past.  That's useful.
+            </div>
+
+            <div class="point">
+                But jQuery doesn't stop there.  It has some other very interesting properties that allow for much nicer
+                working with the matched collection.  Lets look at those now.
+            </div>
+
+            <div class="point">
+                If you inspect the head of this html file you will notice a lone style tag that is holding a ".urgent"
+                class.
+            </div>
+
+            <div class="point">
+                If we apply that class to any node, it becomes a red background with white text.  Just like our previous
+                example.
+            </div>
+
+            <div class="point">
+                With that in mind, wouldn't it be nice if we could just apply a class to each of those nodes, instead of
+                having to loop the nodes, and muck with the style object of each node?
+            </div>
+
+            <div class="point">
+                This is where the <code>addClass</code> function really shines with jQuery.  Lets alter our loop code
+                above to use the addClass function.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var $points = $(".point");
+$points.addClass("urgent");
+    </code>
+</pre>
+
+            <div class="point">
+                What is missing from this code?  Seems like we are missing a loop, right?  Well, actually, we are not.
+                What jQuery is doing in this case is handling that loop for us internally, looping over each matched
+                node, and adding the class <code>urgent</code>.  And due to the style rules for the <code>.urgent</code>
+                css selector, we get our red background and white text.
+            </div>
+
+            <div class="point">
+                Yes, we reduced six lines of loop code down to two lines of very readable code.
+            </div>
+
+            <div class="point">
+                Now lets do the opposite, and remove the urgent classes from all of our .point objects.  If you guessed
+                that there might be a <code>removeClass</code> function, you would be correct.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+$points.removeClass("urgent");
+    </code>
+</pre>
+
+            <div class="point">
+                And we're back to normal.  Attempting to do this in vanilla js would have resulted with many more lines
+                of code.  jQuery handles much of the internal looping on a matched set for us, allowing us to expressively
+                code against a matched set of dom nodes.
+            </div>
+
+            <h3>jQuery, not just for selecting stuff</h3>
+
+            <div class="point">
+                As the title above suggests, jQuery is more than just selecting dom nodes to work with.  It can also
+                create them.
+            </div>
+
+            <div class="point">
+                To create a chunk of dom, you simply pass that in as the "selector".  jQuery will know what you're trying
+                to do, and generate the dom for you, and return it as a jQuery object.
+
+                <div class="excercise">
+                    Try it: create a div with a class called "point"
+                </div>
+            </div>
+
+<pre>
+    <code class="language-javascript">
+var $div = $("<div class='point'></div>");
+console.log($div);
+    </code>
+</pre>
+
+            <div class="point">
+                That is really useful when you want to inject some content into your page dynamically.
+            </div>
+
+            <div class="point">
+                Now lets add some content to this div.  Before we would have used the <code>textContent</code> property
+                of the node object, right?  Well jQuery has you covered here too...It provides the <code>text(...)</code>
+                function for setting the text inside the node.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+$div.text("this is some text inserted by jQuery");
+    </code>
+</pre>
+
+            <div class="point">
+                But what if you wanted to inject some html into that div, and not just plain text?  jQuery provides the
+                <code>html</code> function.
+            </div>
+
+<pre>
+    <code class="language-javascript">
+$div.html("this was <strong>injected</strong> by jQuery");
+    </code>
+</pre>
+
+            <div class="point">
+                Are we starting to see why jQuery is considered a swiss army knife of the javascript world???
+            </div>
 
         </div>
     </div>
