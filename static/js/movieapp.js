@@ -9,75 +9,15 @@
      */
     var form = document.getElementById("newMovie");
     var movieList = document.getElementById("movieList");
+    var newMovie = document.getElementById("newMovieButton");
+    var movies = [];
 
     /**
-     * Define our Movie constructor function.
-     * @param title
-     * @param runningTimeInMinutes
-     * @param year
-     * @param genre
-     * @param desc
-     * @constructor
+     * Ensure the form is shown when we click "add new movie"
      */
-    function Movie(title, runningTimeInMinutes, year, genre, desc) {
-        this.title = title;
-        this.runningTimeInMinutes = parseInt(runningTimeInMinutes, 10) || 0;
-        this.year = year;
-        this.genre = genre;
-        this.desc = desc || "";
-    }
-
-    /**
-     * The movie prototype, lets you see a running time in hours and
-     * a preview snippet based on the description.
-     * @type {{runningTimeHours: Function, preview: Function}}
-     */
-    Movie.prototype = {
-        runningTimeHours: function runningTimeHours() {
-            if (!isNaN(this.runningTimeInMinutes)) {
-                return (this.runningTimeInMinutes / 60) + " hrs";
-            }
-        },
-        preview: function preview() {
-            return this.desc.slice(0, 50) + "...";
-        }
-    };
-
-    /**
-     * Our element factory function, useful for creating new dom
-     * elements on the fly.
-     * @param elementType
-     * @param text
-     * @param attributes
-     * @param styles
-     * @returns {HTMLElement}
-     */
-    function e(elementType, text, attributes, styles) {
-        attributes = attributes || {};
-        styles = styles || {};
-
-        var newElement = document.createElement(elementType);
-
-        if (text) {
-            newElement.textContent = text;
-        }
-
-        //set the attributes on the tag
-        for (var attr in attributes) {
-            if (attributes.hasOwnProperty(attr)) {
-                newElement.setAttribute(attr, attributes[attr]);
-            }
-        }
-
-        //set the styles
-        for (var style in styles) {
-            if (styles.hasOwnProperty(style)) {
-                newElement.style[style] = styles[style];
-            }
-        }
-
-        return newElement;
-    }
+    newMovie.addEventListener("click", function () {
+        form.style.display = "block";
+    });
 
     /**
      * Our form submit event handler.  Gathers up the form fields, creates a new
@@ -127,25 +67,44 @@
          * @type {Movie}
          */
         var movie = new Movie(title, runningTimeInMinutes, year, genre, desc);
+        movies.push(movie);
+
+        /**
+         * Sort the movie array at this point
+         */
+        movies.sort(function (a, b) {
+            var aTitle = a.title.toLowerCase();
+            var bTitle = b.title.toLowerCase();
+
+            return aTitle > bTitle ? 1 : aTitle < bTitle ? -1 : 0;
+        });
+
+        movieList.innerHTML = "";
 
         /**
          * Create the li element that we'll stick in the dom.
          * @type {HTMLElement}
          */
-        var movieLi = e("li", movie.title, {}, {cursor: "pointer"});
+        for (var i = 0; i < movies.length; i++) {
+            var movieLi = e("li", movies[i].title, {"data-movieIdx": i}, {cursor: "pointer"});
 
-        /**
-         * The event listener for our li's that will alert the movie preview found
-         * on the movie instance.
-         */
-        movieLi.addEventListener("click", function () {
-            alert(movie.preview());
-        });
+            /**
+             * The event listener for our li's that will alert the movie preview found
+             * on the movie instance.
+             */
+            movieLi.addEventListener("click", function () {
+                var idx = this.getAttribute("data-movieIdx");
+                var movie = movies[idx];
+                form.style.display = "none";
 
-        /**
-         * Actually stick the li in the dom.
-         */
-        movieList.appendChild(movieLi);
+                alert(movie.preview());
+            });
+
+            /**
+             * Actually stick the li in the dom.
+             */
+            movieList.appendChild(movieLi);
+        }
 
         /**
          * Reset all the fields.

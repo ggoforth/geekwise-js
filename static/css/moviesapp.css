@@ -12,3 +12,6 @@ ul#movieList li {
   font-size: 1.3em;
   color: #0073ea;
 }
+#newMovieButton {
+  margin-top: 60px;
+}
