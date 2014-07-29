@@ -10,6 +10,7 @@
     var $form = $("#newMovie");
     var $movieList = $("#movieList");
     var $newMovie = $("#newMovieButton");
+    var $movieDetails = $("#movieDetails");
     var movies = [];
 
     /**
@@ -17,7 +18,8 @@
      */
 
     $newMovie.on("click", function () {
-        $form.css({display: "block"});
+        $form.show();
+        $movieDetails.hide();
     });
 
     /**
@@ -94,6 +96,7 @@
             $movieLi.data("movieIdx", idx);
             $movieLi.click(function () {
                 $form.hide();
+                $movieDetails.show();
                 alert(movie.preview());
             });
 
