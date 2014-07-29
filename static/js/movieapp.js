@@ -7,16 +7,17 @@
      * Get a reference to our new movie form and movie list for use later
      * @type {HTMLElement}
      */
-    var form = document.getElementById("newMovie");
-    var movieList = document.getElementById("movieList");
-    var newMovie = document.getElementById("newMovieButton");
+    var $form = $("#newMovie");
+    var $movieList = $("#movieList");
+    var $newMovie = $("#newMovieButton");
     var movies = [];
 
     /**
      * Ensure the form is shown when we click "add new movie"
      */
-    newMovie.addEventListener("click", function () {
-        form.style.display = "block";
+
+    $newMovie.on("click", function () {
+        $form.css({display: "block"});
     });
 
     /**
@@ -34,32 +35,31 @@
          * @type {{title: HTMLElement, runningTimeInMinutes: HTMLElement, year: HTMLElement, desc: HTMLElement, genreInputs: NodeList}}
          */
         var fields = {
-            title: document.getElementById("movieTitle"),
-            runningTimeInMinutes: document.getElementById("runningTime"),
-            year: document.getElementById("year"),
-            desc: document.getElementById("desc"),
-            genreInputs: document.getElementsByName("genre")
+            title: $("#movieTitle"),
+            runningTimeInMinutes: $("#runningTime"),
+            year: $("#year"),
+            desc: $("#desc"),
+            genreInputs: $("[name=genre]")
         };
 
         /**
          * Set the values of each movie field
          */
-        var title = fields.title.value;
-        var runningTimeInMinutes = fields.runningTimeInMinutes.value;
-        var year = fields.year.value;
-        var desc = fields.desc.value;
+        var title = fields.title.val();
+        var runningTimeInMinutes = fields.runningTimeInMinutes.val();
+        var year = fields.year.val();
+        var desc = fields.desc.val();
         var genre;
 
         /**
          * Loop over the genreInputs to determine which was checked, and set the
          * genre value.
          */
-        for (var i = 0; i < fields.genreInputs.length; i++) {
-            var genreInput = fields.genreInputs[i];
-            if (genreInput.checked) {
-                genre = genreInput.value;
-            }
-        }
+        fields.genreInputs.each(function () {
+           if (this.checked) {
+               genre = this.value;
+           }
+        });
 
         /**
          * This creates our actual movie instance.  This is what makes our preview
@@ -85,40 +85,32 @@
          * Create the li element that we'll stick in the dom.
          * @type {HTMLElement}
          */
-        for (var i = 0; i < movies.length; i++) {
-            var movieLi = e("li", movies[i].title, {"data-movieIdx": i}, {cursor: "pointer"});
+        $.each(movies, function (idx, movie){
+            var $movieLi = $("<li />", {
+                text: movie.title
+            });
 
-            /**
-             * The event listener for our li's that will alert the movie preview found
-             * on the movie instance.
-             */
-            movieLi.addEventListener("click", function () {
-                var idx = this.getAttribute("data-movieIdx");
-                var movie = movies[idx];
-                form.style.display = "none";
-
+            $movieLi.css({cursor: "pointer"});
+            $movieLi.data("movieIdx", idx);
+            $movieLi.click(function () {
+                $form.hide();
                 alert(movie.preview());
             });
 
-            /**
-             * Actually stick the li in the dom.
-             */
-            movieList.appendChild(movieLi);
-        }
+            $movieList.append($movieLi);
+        });
 
         /**
          * Reset all the fields.
          */
-        for (var field in fields) {
-            if (fields.hasOwnProperty(field)) {
-                fields[field].value = "";
-            }
-        }
+        $.each(fields, function (key, $field) {
+            $field.val("");
+        });
     }
 
     /**
      * When the new movie form is submitted, call the handleNewMovie function
      */
-    form.addEventListener("submit", handleNewMovie);
+    $form.on("submit", handleNewMovie);
 
 }());
