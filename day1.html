@@ -25,9 +25,14 @@
                 <div class="col-md-9 concepts">
                     <ul>
                         <li>Class Goals</li>
+                        <li>Introductions</li>
                         <li>What is Javascript?</li>
-                        <li>ECMA What???</li>
-                        <li>Building Blocks of a web page</li>
+                        <li>Web Page Refresher</li>
+                        <li>Tools of the trade</li>
+                        <li>Where do my codez go?</li>
+                        <li>Variables and datatypes</li>
+                        <li>Truthy / Falsy</li>
+                        <li>alert / confirm / prompt</li>
                     </ul>
                 </div>
             </div>
@@ -50,12 +55,17 @@
                     <div class="point">Created around '95 by Brendan Eich.</div>
                     <div class="point">Mocha -> Livescript -> Javascript -> ECMAScript</div>
                     <div class="point">Programming language that powers the web</div>
-                    <div class="point">Comes with a toolkit for not only running "programs" but also manipulating the
-                                       document object model.
+                    <div class="point">
+                        Allows for "handling" user behavior.  IE Do "this" if a user does "that".
                     </div>
-                    <div class="point">Ecma International is a non profit with the goal of developing standards for the
-                                       web. It's because of these guys that you can write (mostly) the same javascript
-                                       and every browser will understand what you want it to do.
+                    <div class="point">
+                        Comes with a toolkit for not only running "programs" but also manipulating and interacting  with
+                        the document object model.
+                    </div>
+                    <div class="point">
+                        Ecma International is a non profit with the goal of developing standards for the web. It's
+                        because of these guys that you can write (mostly) the same javascript and every browser will
+                        understand what you want it to do.
                     </div>
                 </div>
             </div>
@@ -79,22 +89,155 @@
                         Remember, classes can be reused in our markup, id's can not!
                     </div>
                     <h3>HTML & CSS Refresher</h3>
-                    <div class="point">HTML, Tag Soup</div>
+                    <div class="point">HTML, Tag Soup or Tree?</div>
                     <div class="point">HTML, Attriutes (class, id, style, data)</div>
                     <div class="point">CSS, Selectors</div>
 
                     <h3>Tools of the Trade</h3>
-                    <div class="point">Browser, Chrome, Firefox</div>
+                    <div class="point">Browser, Chrome, Firefox, IE (only if I have to...)</div>
                     <div class="point">Developer console, Firebug</div>
+                    <div class="point">Chrome Snippets Panel</div>
                     <div class="point"><code>console.log(something)</code></div>
-                    <div class="point">Editor, Sublime, Webstorm</div>
+                    <div class="point">Editor - Sublime, Webstorm</div>
                     <div class="point"><a target="_blank"
                                           href="http://jsfiddle.net">jsfiddle</a></div>
 
                     <h3>Great, so where do I put my code already...</h3>
-                    <div class="point">Script tags vs inline</div>
+
+                    <div class="point">Inline vs Inline Script Tag vs Script Tag src</div>
+
+
+                    <h3>Inline</h3>
+                    <div class="point">
+                        Lets start with a basic example of inline javascript.
+                        <div class="excercise">
+                            Create a blank html file with an h1 tag using the <code>onclick</code> attribute like the
+                            example <a target="_blank" href="day1-examples.html">below</a>.
+                        </div>
+                    </div>
+
+ <pre class="language-markup">
+     <code class="language-markup">
+ &lt;html&gt;
+     &lt;head&gt;
+         &lt;title&gt;My page&lt;/title&gt;
+     &lt;/head&gt;
+     &lt;body&gt;
+         &lt;h1 onclick="alert('hello world');"&gt;click me!&lt;/h1&gt;
+     &lt;/body&gt;
+ &lt;/html&gt;
+     </code>
+ </pre>
+
+                    <div class="point">
+                        The <code>onclick</code> attribute can be used to attach some functionality to a dom node.  NOTE:
+                        This is not the recommended way of attaching functionality to your dom elements, for now at least...
+                    </div>
+
+                    <h3>Inline Script Tag</h3>
+                    <div class="point">
+                        The next way is another type of inline javascript, in that it's javascript that is executed in the
+                        context of the html page.
+
+                        <div class="excercise">
+                            Remove the <code>onclick</code> attribute from your <code>h1</code> tag, and alter your page
+                            markup to match the example below.
+                        </div>
+                    </div>
+
+<pre class="language-markup">
+    <code class="language-markup">
+&lt;html&gt;
+    &lt;head&gt;
+         &lt;title&gt;My page&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;I'm an h1 tag&lt;/h1&gt;
+        &lt;script type="text/javascript"&gt;
+            alert("I run inline too!");
+        &lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+     </code>
+ </pre>
+
+                    <h3>Script Tag with Src</h3>
+                    <div class="point">
+                        One of the last ways of including scripts in your page is similar to the previous way, except
+                        instead of putting your javascript inline you specify an external javascript file that the
+                        browser will include in your page and execute.
+
+                        <div class="excercise">
+                            Create a new javascript file in the same folder as your html file you've been using for
+                            the above examples.  Include that file into your html file using the method below.
+                        </div>
+                    </div>
+
+<pre class="language-markup">
+    <code class="language-markup">
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;My page&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;I'm an h1 tag&lt;/h1&gt;
+        &lt;script type="text/javascript" src="myjsfile.js"&gt;&lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+    </code>
+</pre>
+
+<div class="point">
+    And then create the <code>myjsfile.js</code> in the same folder as your html file.
+</div>
+
+<pre class="language-javascript">
+    <code class="language-javascript">
+alert("i'm external");
+    </code>
+</pre>
+
+                    <div class="point">
+                        So when the browser encounters a <code>script</code> tag with a <code>src</code> attribute it
+                        will include the file, and execute it.
+                    </div>
+
+                    <div class="point">
+                        Note: This is usually the best way of including javascript on your page.  There are always
+                        exceptions but generally speaking, when you start writing your own javascript, you'll add your
+                        scripts this way.
+                    </div>
+
+                    <h3>Execution of a js file</h3>
+
+                    <div class="point">
+                        Javascript always executes from top to bottom.  So if you include two javascript files...
+                    </div>
+
+ <pre>
+     <code class="language-markup">
+&lt;script type="text/javascript" src="foo.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="bar.js"&gt;&lt;/script&gt;
+     </code>
+ </pre>
+
+                    <div class="point">
+                        The browser will first download <code>foo.js</code>, execute it, line by line, then download
+                        <code>bar.js</code> and execute that, etc...
+                    </div>
+
+                    <div class="point">
+                        Often, you may want to use something defined in <code>foo.js</code> inside <code>bar.js</code>.
+                        In order to do this, you must load <code>foo.js</code> first, so it is executed, then load
+                        <code>bar.js</code>.
+                    </div>
+
+                    <div class="point">
+                        Key takeaway: order of loading matters.  More on this in following classes.
+                    </div>
 
                     <h3>Variables & Datatypes & Comments</h3>
+
                     <div class="point">Comments, notes to your future self</div>
                     <div class="point">Variables, storage for your data (var)</div>
                     <div class="point">Strings</div>
@@ -102,6 +245,7 @@
                     <div class="point">Boolean, Bool, true, false vs truthy, falsy</div>
                     <div class="point">
                         <div class="exampleLeadin">Some Examples</div>
+                    </div>
  <pre>
      <code class="language-javascript">
 //this is a comment
@@ -124,7 +268,15 @@ var isBoy = true;
 var isGirl = false;
      </code>
  </pre>
+
+                    <div class="point">
+                        <div class="excercise">
+                            Try it: Create some variables for storing some strings, numbers and booleans in your
+                            snippets console.  Use console.log to log the values so you can see how a variable corresponds
+                            to a value.
+                        </div>
                     </div>
+
                     <div class="point">
                         Certain values in javascript, when evaluated, are considered "falsy" or "truthy"
                     </div>
@@ -170,26 +322,27 @@ prompt("What is your name?");
      </code>
  </pre>
                     </div>
-                    <div class="point">
-                        <h3>Practice</h3>
-                        <div>
-                            Now that we've gotten acquainted with our console, why don't we practice a bit of what we
-                            learned today.  Create a fiddle that will:
 
-                            <ul class="list">
-                                <li>create a name variable</li>
-                                <li>create a number variable</li>
-                                <li>log the name to the console</li>
-                                <li>alert the number</li>
-                                <li>show a confirm box with the message, "Are you sure?"</li>
-                            </ul>
 
-                            Bonus points for:
+                     <div class="point">
+                        <h3>Take Home</h3>
 
-                            <ul class="list">
-                                <li>ask the user for their age, and then alert that value</li>
-                            </ul>
-                        </div>
+                        Now that we've gotten acquainted with our console, why don't we practice a bit of what we
+                        learned today.  Create a snippet that will:
+
+                        <ul class="list">
+                            <li>create a name variable</li>
+                            <li>create a number variable</li>
+                            <li>log the name to the console</li>
+                            <li>alert the number</li>
+                            <li>show a confirm box with the message, "Are you sure?"</li>
+                        </ul>
+
+                        Bonus points:
+
+                        <ul class="list">
+                            <li>ask the user for their age, and then alert that value</li>
+                        </ul>
                     </div>
                 </div>
             </div>
