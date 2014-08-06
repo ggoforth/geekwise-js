@@ -104,12 +104,10 @@
 
                     <h3>Great, so where do I put my code already...</h3>
 
-                    <div class="point">Inline vs Inline Script Tag vs Script Tag src</div>
-
-
                     <h3>Inline</h3>
                     <div class="point">
                         Lets start with a basic example of inline javascript.
+
                         <div class="excercise">
                             Create a blank html file with an h1 tag using the <code>onclick</code> attribute like the
                             example <a target="_blank" href="day1-examples.html">below</a>.
@@ -134,10 +132,17 @@
                         This is not the recommended way of attaching functionality to your dom elements, for now at least...
                     </div>
 
+                    <div class="point">
+                        This is considered <code>inline</code> since the code that javascript will execute is inside the
+                        node itself.  It lives in the page, thus it's considered inline.
+                    </div>
+
                     <h3>Inline Script Tag</h3>
+
                     <div class="point">
                         The next way is another type of inline javascript, in that it's javascript that is executed in the
-                        context of the html page.
+                        context of the html page.  IE the code itself still lives inside the html page, but in it's own
+                        script tag.
 
                         <div class="excercise">
                             Remove the <code>onclick</code> attribute from your <code>h1</code> tag, and alter your page
@@ -162,6 +167,7 @@
  </pre>
 
                     <h3>Script Tag with Src</h3>
+
                     <div class="point">
                         One of the last ways of including scripts in your page is similar to the previous way, except
                         instead of putting your javascript inline you specify an external javascript file that the
