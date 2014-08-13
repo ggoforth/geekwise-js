@@ -27,7 +27,6 @@
                 <ul>
                     <li>Review Take Home Assignment</li>
                     <li>Skill Builder</li>
-                    <li>Opening files locally file://</li>
                     <li>String Concatenation</li>
                     <li>Arrays</li>
                     <li>Array Functions</li>
@@ -53,48 +52,6 @@
                         <li>Otherwise, log to the console if the value is even or odd (% modulus will help here)</li>
                     </ul>
                 </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3">
-                <h2 class="text-right">Opening files locally</h2>
-            </div>
-            <div class="col-md-9">
-                <div class="point">
-                    A few of us have had issues opening files that include external scripts in our browser.  We have a few
-                    options.  Several involve the command line.
-                </div>
-                <div class="point">
-                    Open Chrome with the <code>--allow-file-access-from-files</code> flag.  First, Change directory into
-                    the folder that contains the chrome executable.  <code>cd C:\Program Files (x86)\Google\Chrome\Application</code>.
-                    Then launch Chrome with the following command:
-                </div>
-
-<pre><code class="language-css">
-chrome --allow-file-access-from-files
-</code></pre>
-
-                <div class="point">
-                    The <code>--allow-file-access-from-files</code> *should* allow access to include the external scripts
-                    in your html file.
-                </div>
-
-                <div class="point">Second option, run a local webserver.  We can discuss options here, but you can use:
-                    <ul class="list">
-                        <li>WAMP</li>
-                        <li>MAMP</li>
-                        <li>XAMPP</li>
-                        <li>Python SimpleHTTPServer</li>
-                    </ul>
-                </div>
-
-                <div class="point">
-                    Third option, just include your scripts at the bottom of your html file, instead of an external script.
-                    This limitation is a product of the browser not including the file due to limitations of the file://
-                    protocol, so if the scripts are inline in the bottom of the page, this should work for now.
-                </div>
-
             </div>
         </div>
 
@@ -661,24 +618,6 @@ for (var i = 0; i < 10; i++) {
                 </div>
             </div>
         </div>
-
-
-        <div class="row">
-            <div class="col-md-3">
-                <h2 class="text-right">Files</h2>
-            </div>
-            <div class="col-md-9">
-
-
-                <div class="point">
-                    The following files are available for day 3.
-                    <ul class="list">
-                        <li><a href="./examples/takehome/day3.js">Day 3 Takehome</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
