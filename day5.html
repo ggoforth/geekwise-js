@@ -45,7 +45,45 @@
         <h2 class="text-right">Review Take Home</h2>
     </div>
     <div class="col-md-9">
+<pre>
+    <code class="language-javascript">
+var movies = [
+    "army of darkness",
+    "peter pan",
+    "the jungle story",
+    "red planet",
+    "deep impact",
+    "the long kiss goodnight",
+    "juno",
+    "(500) days of summer",
+    "the dark knight",
+    "bringing down the house"
+];
 
+function capitalize(str) {
+    if (!str || typeof str !== "string") {
+        return str;
+    }
+
+    return str[0].toUpperCase() + str.slice(1);
+}
+
+for (var i = 0; i < movies.length; i++) {
+    var movie = movies[i];
+
+    //capitalize each word
+    //var movieWords = movie.split(" ");
+    //for (var j = 0; j < movieWords.length; j++) {
+    //    var movieWord = movieWords[j];
+    //    movieWords[j] = capitalize(movieWord);
+    //}
+
+    //movies[i] = movieWords.join(" ");
+
+    movies[i] = capitalize(movie);
+}
+    </code>
+</pre>
     </div>
 </div>
 
