@@ -1,119 +1,56 @@
-/*global */
-(function() {
 
-    "use strict";
+var form = document.getElementById("newMovie");
+var ul = document.getElementById("movieList");
 
-    /**
-     * Get a reference to our new movie form and movie list for use later
-     * @type {HTMLElement}
-     */
-    var $form = $("#newMovie");
-    var $movieList = $("#movieList");
-    var $newMovie = $("#newMovieButton");
-    var $movieDetails = $("#movieDetails");
-    var movies = [];
+form.addEventListener("submit", function (event) {
 
-    /**
-     * Ensure the form is shown when we click "add new movie"
-     */
+    var title = document.getElementById("movieTitle");
+    var runningTimeInMinutes = document.getElementById("runningTime");
+    var year = document.getElementById("year");
+    var desc = document.getElementById("desc");
+    var genre;
 
-    $newMovie.on("click", function () {
-        $form.show();
-        $movieDetails.hide();
-    });
+    var genreInputs = document.getElementsByName("genre");
+    for (var i = 0; i < genreInputs.length; i++) {
+        var genreInput = genreInputs[i];
 
-    /**
-     * Our form submit event handler.  Gathers up the form fields, creates a new
-     * Movie instance, creates an li based on that movie instance and adds it to
-     * the dom.
-     * @param evt
-     */
-    function handleNewMovie(evt) {
-        evt.preventDefault();
-
-        /**
-         * Store our fields in an object we can loop over later when we want to
-         * reset all the fields.
-         * @type {{title: HTMLElement, runningTimeInMinutes: HTMLElement, year: HTMLElement, desc: HTMLElement, genreInputs: NodeList}}
-         */
-        var fields = {
-            title: $("#movieTitle"),
-            runningTimeInMinutes: $("#runningTime"),
-            year: $("#year"),
-            desc: $("#desc"),
-            genreInputs: $("[name=genre]")
-        };
-
-        /**
-         * Set the values of each movie field
-         */
-        var title = fields.title.val();
-        var runningTimeInMinutes = fields.runningTimeInMinutes.val();
-        var year = fields.year.val();
-        var desc = fields.desc.val();
-        var genre;
-
-        /**
-         * Loop over the genreInputs to determine which was checked, and set the
-         * genre value.
-         */
-        fields.genreInputs.each(function () {
-           if (this.checked) {
-               genre = this.value;
-           }
-        });
-
-        /**
-         * This creates our actual movie instance.  This is what makes our preview
-         * function available for alerting as per the spec.
-         * @type {Movie}
-         */
-        var movie = new Movie(title, runningTimeInMinutes, year, genre, desc);
-        movies.push(movie);
-
-        /**
-         * Sort the movie array at this point
-         */
-        movies.sort(function (a, b) {
-            var aTitle = a.title.toLowerCase();
-            var bTitle = b.title.toLowerCase();
-
-            return aTitle > bTitle ? 1 : aTitle < bTitle ? -1 : 0;
-        });
-
-        movieList.innerHTML = "";
-
-        /**
-         * Create the li element that we'll stick in the dom.
-         * @type {HTMLElement}
-         */
-        $.each(movies, function (idx, movie){
-            var $movieLi = $("<li />", {
-                text: movie.title
-            });
-
-            $movieLi.css({cursor: "pointer"});
-            $movieLi.data("movieIdx", idx);
-            $movieLi.click(function () {
-                $form.hide();
-                $movieDetails.show();
-                alert(movie.preview());
-            });
-
-            $movieList.append($movieLi);
-        });
-
-        /**
-         * Reset all the fields.
-         */
-        $.each(fields, function (key, $field) {
-            $field.val("");
-        });
+        if (genreInput.checked) {
+            genre = genreInput;
+        }
     }
 
-    /**
-     * When the new movie form is submitted, call the handleNewMovie function
-     */
-    $form.on("submit", handleNewMovie);
+    var movie = new Movie(title.value, runningTimeInMinutes.value, year.value, genre.value, desc.value);
+    var li = e("li", movie.title);
+    li.addEventListener("click", function () {
+        alert(movie.preview());
+    });
 
-}());
+    ul.appendChild(li);
+
+    title.value = "";
+    runningTimeInMinutes.value = "";
+    year.value = "";
+    desc.value = "";
+    genre.checked = false;
+
+    event.preventDefault();
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

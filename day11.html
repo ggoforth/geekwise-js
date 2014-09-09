@@ -35,7 +35,7 @@
     <div class="col-md-9 concepts">
         <ul>
             <li>Review Take Home Assignment</li>
-            <li>How do I...</li>
+            <li>Intro to jQuery</li>
             <li>Final Project</li>
         </ul>
     </div>
@@ -47,333 +47,532 @@
         </div>
         <div class="col-md-9">
             <div class="point">
-                <a href="day10-takehome.html">Link to example</a>
+                To be coded up in class
             </div>
-        </div>
-    </div>
-
-
-    <div class="row">
-        <div class="col-md-3">
-            <h2 class="text-right">How Do I...</h2>
-        </div>
-        <div class="col-md-9">
-            <div class="point">
-                This section will aim to answer the rest of the questions you'll need to finish the final exam.  My files
-                for review up to this point are available <a href="app.zip">here</a>.  You can use these as a starting
-                point to add the rest of the functionality that we'll discuss later in class.
-            </div>
-
-            <h3>Generate a random number</h3>
-
-            <div class="point">
-                Random numbers are really useful for a lot of things.  Picking a random item from an array comes to mind
-                but there are many other uses.
-            </div>
-
-            <div class="point">
-                To genreate a random number, first, we need to do a bit of math.  The <code>Math</code> object in javascript
-                holds many math functions, look at it in the console, which function seems appropriate for generating a
-                random number?
-            </div>
-
-<pre>
-    <code class="language-javascript">
-console.log(Math);
-    </code>
-</pre>
-            <div class="point">
-                You probably notices the <code>Math.random</code> function.  Lets try and call that.
-            </div>
-
-<pre>
-    <code class="language-javascript">
-console.log(Math.random());
-    </code>
-</pre>
-
-            <div class="point">
-                Great, so this will generate a random floating point number (notice the decimal).  So in order to get
-                an integer between 1 - N we need to do some more work.
-            </div>
-
-            <div class="point">
-                To start off, we need to define the <code>N</code> mentioned above.  That calculateion simply looks like:
-            </div>
-
-<pre>
-    <code class="language-javascript">
-var n = 5;
-Math.random() * n;
-    </code>
-</pre>
-
-            <div class="point">
-                So, the random number times the thing we want to be the top level bound will yield a random number.  Lets
-                try that.  Try changing up the <code>n</code> in the code above, and the result should always be a random
-                number below <code>n</code>.
-            </div>
-
-            <div class="point">
-                This gets us closer to what we want (a random integer), but we need to do some rounding.  In this case,
-                we'll just go ahead and round up, and we can do this using the <code>Math.ceil</code> function.
-            </div>
-
-            <div class="point">
-                <code>Math.ceil</code> will return the smallest integer that's larger than the given float. ie
-                <code>Math.ceil(1.1) === 2</code>, <code>Math.ceil(99.0000001) === 100</code>.
-            </div>
-
-<pre>
-    <code class="language-javascript">
-var n = 10;
-var randFloat = Math.random() * n;
-var randInt = Math.ceil(randFloat);
-console.log(randInt);
-    </code>
-</pre>
-
-            <div class="point">
-                So now we've got a nice little random number script.
-
-                <div class="excercise">
-                    Rename <code>elements.js</code> to <code>helpers.js</code> and update your html page to include
-                    <code>helpers.js</code>.  In <code>helpers.js</code> create a function called <code>randomNum</code>
-                    that takes as an agrument a "top bound" and returns a random number between 1 and that value.
-                </div>
-            </div>
-
-            <h3>Create a random string</h3>
-
-            <div class="point">
-                We'll continue with some randomness by learning how to generate a random string.  (think generated password)
-            </div>
-
-            <div class="point">
-                First, lets define the things that we want to include in our random string.  We'll create a variable called
-                <code>lang</code> that will hold all the characters we'll allow in the string.
-            </div>
-
-<pre>
-    <code class="language-javascript">
-var lang = "abcdefghijklmnopqrstuvwxyz";
-    </code>
-</pre>
-
-            <div class="point">
-                Would probably be nice to include upper case letters too.
-            </div>
-
-<pre>
-    <code class="language-javascript">
-var lang = "abcdefghijklmnopqrstuvwxyz";
-lang = lang + lang.toUpperCase();
-    </code>
-</pre>
-
-            <div class="point">
-                Great, now we have upper and lower case, lets also include numbers.
-            </div>
-
-<pre>
-    <code class="language-javascript">
-var lang = "abcdefghijklmnopqrstuvwxyz";
-lang += lang.toUpperCase();
-lang += "0123456789";
-    </code>
-</pre>
-
-            <div class="point">
-                Ok, so this lang string now defines the allowable chacters that we'll use in our generated strings.
-            </div>
-
-            <div class="point">
-                Next we need to know how long we want our generated string.
-            </div>
-
-<pre>
-    <code class="language-javascript">
-var lang = "abcdefghijklmnopqrstuvwxyz";
-lang += lang.toUpperCase();
-lang += "0123456789";
-var len = 10;
-    </code>
-</pre>
-
-            <div class="point">
-                Finally we'll loop the number of times specified in length, and generate a random number each time.
-                The random number will be used to select a single character, and that character will be added to the
-                generated string.
-            </div>
-
-<pre>
-    <code class="language-javascript">
-var lang = "abcdefghijklmnopqrstuvwxyz";
-lang += lang.toUpperCase();
-lang += "0123456789";
-var len = 10;
-var str = "";
-
-for (var i = 0; i < len; i++) {
-    var num = randomNum(lang.length);
-    var letter = lang[num];
-    str += letter;
-}
-
-console.log(str);
-    </code>
-</pre>
-
-            <div class="point">
-                So, to walk through the workflow, we are:
-
-                <ul class="list">
-                    <li>creating a lang string that we can use for selecting letters</li>
-                    <li>createing a variable <code>str</code> for storing our generated string</li>
-                    <li>Looping <code>len</code> number of times to create a string <code>len</code> characters long</li>
-                    <li>Inside each loop, genreating a random number that is no larger than the length of our lang str</li>
-                    <li>Using the random number to find a character in the string using bracket syntax</li>
-                    <li>Appending the letter to the base <code>str</code> variable</li>
-                    <li>logging the final product.</li>
-                </ul>
-            </div>
-
-            <h3>Add days to a date object</h3>
-
-            <div class="point">
-                Date objects in javascript are cool, in that you can easily add days to a date object and it will internally
-                calculate the proper date for you.  In order to set the date of a date object, you first need to be able
-                to get the date.
-            </div>
-
-<pre>
-    <code class="language-javascript">
-var d = new Date();
-console.log(d.getDate());
-    </code>
-</pre>
-
-            <div class="point">
-                This will get you the date part of the date object.  This is a good place to start.  Now we need to be
-                able to set the date to that number plus the number of days you want to add.
-            </div>
-
-<pre>
-    <code class="language-javascript">
-var d = new Date();
-d.setDate(d.getDate() + 10);
-console.log(d);
-    </code>
-</pre>
-
-            <div class="point">
-                Pretty much all there is too adding days to a date.  We'll be using this in our movie checkout app to
-                simulate a long checkout period.
-            </div>
-
-            <h3>Determine the amount of time between two dates?</h3>
-
-            <div class="point">
-                The final piece to the movie checkout puzzle is knowing how long a movie was checked out for.  To do this,
-                we need to examine two date objects.  Lets set up two date objects, one for today, and one for two days
-                from now.
-            </div>
-
-<pre>
-    <code class="language-javascript">
-var checkOut = new Date();
-var checkIn = new Date();
-checkIn.setDate(checkIn.getDate() + 2);
-
-var checkOutTime = checkOut.getTime();
-var checkInTime = checkIn.getTime();
-console.log(checkOutTime);
-console.log(checkInTime);
-    </code>
-</pre>
-
-            <div class="point">
-                Great, now we need to get the milliseconds from the epoch from those date objects.  This is where
-                <code>getTime()</code> comes in handy.
-            </div>
-
-<pre>
-    <code class="language-javascript">
-var checkOut = new Date();
-var checkIn = new Date();
-checkIn.setDate(checkIn.getDate() + 2);
-
-var checkOutTime = checkOut.getTime();
-var checkInTime = checkIn.getTime();
-console.log(checkOutTime);
-console.log(checkInTime);
-    </code>
-</pre>
-
-        <div class="point">
-            So now we have the milliseconds for each one, subtracking the check in from the check out will give us the
-            number of milliseconds between the two dates, and then we can convert todays.
-        </div>
-
-<pre>
-    <code class="language-javascript">
-var checkOut = new Date();
-var checkIn = new Date();
-checkIn.setDate(checkIn.getDate() + 2);
-
-var checkOutTime = checkOut.getTime();
-var checkInTime = checkIn.getTime();
-var days = Math.abs(checkInTime - checkOutTime) / 1000 / 60 / 60 / 24;
-    </code>
-</pre>
-
         </div>
     </div>
 
 
 <div class="row">
-    <div class="col-md-3">
-        <h2 class="text-right">Final Project</h2>
-    </div>
-    <div class="col-md-9">
-        <div class="point">
-            Using the files in the <a href="app.zip">zip file</a>, add the following functionality:
+<div class="col-md-3">
+    <h2 class="text-right">Intro to jQuery</h2>
+</div>
+<div class="col-md-9">
+<div class="point">
+    First, understand that jQuery is nothing more than a toolkit that can help you do things in the dom
+    in a more convenient way.
+</div>
 
-            <ol class="list">
-                <li>When selecting a movie, show the #moveDetails div</li>
-                <li>Create markup for your movie fields inside the #movieDetails div</li>
-                <li>When clicking on a movie, populate all the fields in the dom with the movie details</li>
-                <li>
-                    Set a variable in your movieapp.js script that will represent a fee per day for a checkout.  Something
-                    like <code>var dailyRate = 3; //three dollars a day</code>.
-                </li>
-                <li>Add a check in / check out function to the Movie prototype</li>
-                <li>The check out function should set a Date object with the current time on the movie instance.</li>
-                <li>
-                    The check in function should create a Date object on the movie instance.  It should then add a random
-                    number of days to this date (to simulate a real checkout).  Then it should calculate the difference
-                    in the number of days since checkout (Math.ceil using the milliseconds to days calc).  Finally, once you
-                    know how many days the movie was checked out (based on the random adding of days to the check in date)
-                    alert something like <strong>Fee for this movie checkout: $6.00</strong>.
-                </li>
-                <li>
-                    Add a button for check in visible when a movies details are displayed.  Only show this button if the
-                    movie is currently checked out.
-                </li>
-                <li>
-                    Add a button for check out visible when a movies details are displayed.  Only show this button if the
-                    movie is currently checked in.
-                </li>
-                <li>Add an event listener for check in that will run the <code>movie.checkIn</code> function</li>
-                <li>Add an event listener for check out that will run the <code>movie.checkOut</code> function</li>
-            </ol>
-        </div>
+<div class="point">
+    It's entirely possible to make full blow web applications without jQuery, under the hood jQuery is just
+    vanilla javascript, like we've been doing since day 1 in this class.
+</div>
+
+<div class="point">
+    jQuery is not the answer to all your js problems.  You can write very messy jquery code just like you
+    write very ugly javascript code.  Organization matters.
+</div>
+
+<h3>Sizzle...</h3>
+
+<div class="point">
+    So, jQuery is like the swiss army knives for the dom.  It does other interesting things as well, but a
+    typical first use for jQuery is to simplify and normalize how we select elements on a page.
+</div>
+
+<div class="point">
+    Until now, we've used <code>document.getElementById</code> or <code>document.getElementsByName</code> for
+    getting references to dom nodes.
+</div>
+
+<div class="point">
+    jQuery simplifies all of this for us, allowing us to use basic css selectors to specify what we want to
+    select.  The engine that powers this is called the Sizzle js.  Sizzle works by taking a string "selector"
+    (like you would specify in css) and finding nodes that match the selector anywhere in the page.
+</div>
+
+<div class="point">
+    When sizzle finds some nodes based on a specified selector, it returns an array like object, (looks like
+    an array, but is actually an object.  However, it does have a length property)
+</div>
+
+<h3>Include jQuery</h3>
+
+<div class="point">
+    Before we go further, it's important that we get jQuery included on your html page.  You can find the
+    jQuery source <a target="_blank" href="./jquery-2.1.1.js">here</a>.  Copy the contents of that file into
+    a file named <code>jquery-2.1.1.js</code> in your project directory.
+</div>
+
+<div class="point">
+    Add the script tag to include this new file in your html page.
+</div>
+
+<pre>
+    <code class="language-javascript">
+        &lt;script type="text/javascript" src="./path/to/jquery-2.1.1.js"&gt;&lt;/script&gt;
+    </code>
+</pre>
+
+<h3>$ signs EVERYWHERE</h3>
+
+<div class="point">
+    So, understanding what sizzle is won't get us very far, since it's a baked in part of jQuery.  So how do
+    we interact with jQuery itself?
+</div>
+
+<div class="point">
+    When you include jQuery on your page, the js file will expose a function named <code>$</code>.  This is
+    how we can interact with jQuery.
+
+    <div class="excercise">
+        Try it: execute <code>$</code> in your console.
     </div>
 </div>
 
+<pre>
+    <code class="language-javascript">
+        console.log($);
+    </code>
+</pre>
+
+<div class="point">
+    So we can see <code>$</code> is just a simple function, nothing to be afraid of here.
+</div>
+
+<div class="point">
+    Open the console on the geekwise js day 10 page.  Lets create our first jQuery selector to select
+    some elements on the page.
+</div>
+
+<div class="point">
+    This page makes heavy use of a class called <code>point</code>.  It's used to style each point related to
+    a topic.  Since each of these "points" has a class named point, this is a reasonable way to select all
+    of these items.
+</div>
+
+<div class="point">
+    When using jQuery to select items on the page, the signature looks like <code>$("selector")</code>.  What
+    would we code if we want to select all elements with a point class?
+</div>
+
+<pre>
+    <code class="language-javascript">
+        console.log($(".point"));
+    </code>
+</pre>
+
+<div class="point">
+    What does that yield?  As you would have probably guessed, it's an array of all the nodes that have a
+    class "point".
+</div>
+
+<div class="point">
+    So the above code runs a selector against the entire dom, looking for any node that has a point class
+    and returns an array.  But it's a special array, it actually behaves much like an object, but for now
+    it's ok to think of it as an array.
+</div>
+
+<div class="point">
+    Lets talk best practices for a moment.  Because the <code>$</code> function returns this special array of
+    matched nodes, it's desirable that we name our variables in a way that makes it easy to understand we
+    are dealing with a jQuery array, instead of a normal array.  A typical convention for this is to prefix
+    jQuery collections with a $, since jQuery pretty much owns this symbol.
+
+    <div class="excercise">
+        Try it: Run the same selector but save your collection to a variable, and then log that variable.
+    </div>
+</div>
+
+<pre>
+    <code class="language-javascript">
+        var $points = $(".point");
+        console.log($points);
+    </code>
+</pre>
+
+<div class="point">
+    The <code>$</code> prefix is just a good practice and it lets other developers know that "hey, this is a
+    jQuery thing and not some normal array"
+</div>
+
+<div class="point">
+    Lets try and loop our jQuery array and apply a style to each matched node.
+</div>
+
+<pre>
+    <code class="language-javascript">
+        var $points = $(".point");
+        for (var i = 0; i < $points.length; i++) {
+        var node = $points[i];
+        node.style.backgroundColor = "red";
+        node.style.color = "white";
+        }
+    </code>
+</pre>
+
+<div class="point">
+    Cool, so we can loop this array just like any other array we've worked with in the past.  That's useful.
+</div>
+
+<div class="point">
+    But jQuery doesn't stop there.  It has some other very interesting properties that allow for much nicer
+    working with the matched collection.  Lets look at those now.
+</div>
+
+<div class="point">
+    If you inspect the head of this html file you will notice a lone style tag that is holding a ".urgent"
+    class.
+</div>
+
+<div class="point">
+    If we apply that class to any node, it becomes a red background with white text.  Just like our previous
+    example.
+</div>
+
+<div class="point">
+    With that in mind, wouldn't it be nice if we could just apply a class to each of those nodes, instead of
+    having to loop the nodes, and muck with the style object of each node?
+</div>
+
+<div class="point">
+    This is where the <code>addClass</code> function really shines with jQuery.  Lets alter our loop code
+    above to use the addClass function.
+</div>
+
+<pre>
+    <code class="language-javascript">
+        var $points = $(".point");
+        $points.addClass("urgent");
+    </code>
+</pre>
+
+<div class="point">
+    What is missing from this code?  Seems like we are missing a loop, right?  Well, actually, we are not.
+    What jQuery is doing in this case is handling that loop for us internally, looping over each matched
+    node, and adding the class <code>urgent</code>.  And due to the style rules for the <code>.urgent</code>
+    css selector, we get our red background and white text.
+</div>
+
+<div class="point">
+    Yes, we reduced six lines of loop code down to two lines of very readable code.
+</div>
+
+<div class="point">
+    Now lets do the opposite, and remove the urgent classes from all of our .point objects.  If you guessed
+    that there might be a <code>removeClass</code> function, you would be correct.
+</div>
+
+<pre>
+    <code class="language-javascript">
+        $points.removeClass("urgent");
+    </code>
+</pre>
+
+<div class="point">
+    And we're back to normal.  Attempting to do this in vanilla js would have resulted with many more lines
+    of code.  jQuery handles much of the internal looping on a matched set for us, allowing us to expressively
+    code against a matched set of dom nodes.
+</div>
+
+<h3>jQuery, not just for selecting stuff</h3>
+
+<div class="point">
+    As the title above suggests, jQuery is more than just selecting dom nodes to work with.  It can also
+    create them.
+</div>
+
+<div class="point">
+    To create a chunk of dom, you simply pass that in as the "selector".  jQuery will know what you're trying
+    to do, and generate the dom for you, and return it as a jQuery object.
+
+    <div class="excercise">
+        Try it: create a div with a class called "point"
+    </div>
+</div>
+
+<pre>
+    <code class="language-javascript">
+        var $div = $("&lt;div class='point'&gt;&lt;/div&gt;");
+        console.log($div);
+    </code>
+</pre>
+
+<div class="point">
+    That is really useful when you want to inject some content into your page dynamically.
+</div>
+
+<div class="point">
+    Now lets add some content to this div.  Before we would have used the <code>textContent</code> property
+    of the node object, right?  Well jQuery has you covered here too...It provides the <code>text(...)</code>
+    function for setting the text inside the node.
+</div>
+
+<pre>
+    <code class="language-javascript">
+        $div.text("this is some text inserted by jQuery");
+    </code>
+</pre>
+
+<div class="point">
+    But what if you wanted to inject some html into that div, and not just plain text?  jQuery provides the
+    <code>html</code> function.
+</div>
+
+<pre>
+    <code class="language-javascript">
+        $div.html("this was &lt;strong&gt;injected&lt;/strong&gt; by jQuery");
+    </code>
+</pre>
+
+<div class="point">
+    Are we starting to see why jQuery is considered a swiss army knife of the javascript world???
+</div>
+
+<div class="point">
+    Lets now look at how we can get that <code>$div</code> we just created into the dom.
+</div>
+
+<div class="point">
+    The <code>append</code> function does just this.  The way this works is to select another element that we
+    want to append to, and then call the append function on that.
+</div>
+
+<pre>
+    <code class="language-javascript">
+        $("body").append($div);
+    </code>
+</pre>
+
+<div class="point">
+    This will select the body node with jQuery, and then append to it the <code>$div</code> we created in
+    memory.
+</div>
+
+<div class="point">
+    What if we wanted to add an click handler to that div element we just added to the dom?  jQuery can
+    handle this too!
+</div>
+
+<pre>
+    <code class="language-javascript">
+        $div.click(function () {
+        alert("hello world");
+        });
+    </code>
+</pre>
+
+<div class="point">
+    So this is pretty straight forward, we created a <code>$div</code>, appended it to the <code>body</code>
+    tag, and called the <code>click</code> function that jQuery provides and wrote a callback function that
+    will be called when the <code>$div</code> is clicked.
+</div>
+
+<div class="point">
+    So, click the div we appended to the dom and make sure it does what we expect.  But our new <code>$div</code>
+    could use some styling, yes?
+</div>
+
+<div class="point">
+    All jQuery objects provide a function called <code>css</code> that allows to to apply, well, you can probably
+    guess.
+</div>
+
+<div class="point">
+    Lets add some css to our div so that it will have a pointer when we hover over it.  The css function takes
+    as an argument an object where the keys are camelCase css properties with the values being the css value
+    you want to apply.
+</div>
+
+<pre>
+    <code class="language-javascript">
+        $div.css({
+        cursor: "pointer"
+        });
+    </code>
+</pre>
+
+<div class="point">
+    The key names for your css objects are the exact same as we used for the when working with the style
+    objects on dom nodes.  That is to say:
+</div>
+
+<pre>
+    <code class="language-javascript">
+        //this
+        $div[0].style.backgroundColor = "red"
+
+        //is the same as
+        $div.css({
+        backgroundColor: "red"
+        });
+    </code>
+</pre>
+
+<div class="point">
+    Lets take this a little further.  Add a ul with three li's to your page.
+</div>
+
+<pre>
+    <code class="language-markup">
+        &lt;ul&gt;
+        &lt;li&gt;foo&lt;/li&gt;
+        &lt;li&gt;bar&lt;/li&gt;
+        &lt;li&gt;baz&lt;/li&gt;
+        &lt;/ul&gt;
+    </code>
+</pre>
+
+<div class="point">
+    Lets discuss a few ways we can add click event handlers to all of the li's to alert the text of the li tag.
+</div>
+
+<pre>
+    <code class="language-javascript">
+        $("ul li").click(function () {
+        var $li = $(this);
+        var text;
+
+        //this
+        text = $li.text();
+
+        //is the same as this
+        text = this.textContent;
+        });
+    </code>
+</pre>
+
+<div class="point">
+    This is the typical way to accomplish this.  This will target all li's inside a ul and apply a click event
+    to each one.  Doing it this way, we create 3 callback handlers that are stored in memory and called when
+    the li tag is clicked on.
+</div>
+
+<div class="point">
+    Another interesting thing here, is the <code>context</code> of the callback function.  Notice that we are
+    doing <code>$(this)</code> inside the callback?  The <code>this</code> (or <code>context</code>) inside the
+    click event callback is the node itself.  So if we want to use jQuery in the context of a callback function
+    we simply wrap the node in jQuery again so we can use the <code>text()</code> function to get the text
+    of the node.
+</div>
+
+<div class="point">
+    What about event delegation?  jQuery makes it pretty easy to manage event delegation with a function called
+    <code>on(...)</code>.
+</div>
+
+<div class="point">
+    The <code>on</code> function has the following signature: <code>$("ul").on(event, selector, callback)</code>
+</div>
+
+<div class="point">
+    What jQuery will do in this scenario is it will attach the <code>event</code> to the selected node, then it
+    will match every <code>event.target</code> against the specified selector, and if it matches, it calls the
+    callback.
+</div>
+
+<pre>
+    <code class="language-javascript">
+        $("ul").on("click", "li", function () {
+        alert($(this).text());
+        });
+    </code>
+</pre>
+
+<div class="point">
+    So the above code will register a click event on the ul, and when an li inside the ul is clicked, it will
+    call the callback.  To further demonstrate the event delegation functionality, lets add a class to the
+    second li in the list.
+</div>
+
+<pre>
+    <code class="language-javascript">
+        &lt;ul&gt;
+        &lt;li&gt;foo&lt;/li&gt;
+        &lt;li class="foo"&gt;bar&lt;/li&gt;
+        &lt;li&gt;baz&lt;/li&gt;
+        &lt;/ul&gt;
+    </code>
+</pre>
+
+<div class="point">
+    Now, alter your <code>on</code> function to listen for clicks on <code>li.foo</code>.
+</div>
+
+<pre>
+    <code class="language-javascript">
+        $("ul").on("click", "li.foo", function () {
+        alert($(this).text());
+        });
+    </code>
+</pre>
+
+<h3>Looping with jQuery</h3>
+
+<div class="point">
+    In many cases jQuery will manage an internal loop over a matched set of elements, but it also provides
+    some nice helper methods for looping that are a lot less verbose than a typical for loop.  The main one
+    is the <code>$.each</code> method.  As the name suggests, it loops over "each" element in an array and
+    runs a callback function on each one.  Lets use the <code>ul</code> we added to the page previously and
+    add several more li's based on the contents of an array.
+</div>
+
+<div class="point">
+    First, in your console, lets create an array of strings.
+</div>
+
+<pre>
+    <code class="language-javascript">
+        var strings = ["bleep", "bloop", "zip", "zoop"];
+    </code>
+</pre>
+
+<div class="point">
+    Now, lets use the <code>$.each</code> function to loop over each item in the <code>strings</code> array,
+    and create a new li (using jQuery) that we'll append to the ul.
+</div>
+
+<pre>
+    <code class="language-javascript">
+        $.each(strings, function (idx, str) {
+        var $li = $("<li></li>").text(str);
+        $("ul").append($li);
+        });
+    </code>
+</pre>
+
+<div class="point">
+    So it's very similar to a for loop, except that you no longer need to manage a counter, or indexing into
+    the array, since the callback function is passed both of those things via jQuery.
+</div>
+
+<h3>Hide / Show</h3>
+
+<div class="point">
+    One final jQuery method I'll mention is that jQuery provides a really nice way of hiding or showing
+    something on the page.  The <code>hide</code> and <code>show</code> methods respectively.
+</div>
+
+<pre>
+    <code class="language-javascript">
+        $("ul li").hide();
+    </code>
+</pre>
+
+<div class="point">
+    The <code>hide</code> function will hide all of the matched elements using <code>display: none</code> on
+    the element nodes.  <code>show</code> will do the opposite, showing the element using <code>display: block</code>
+</div>
+
+<pre>
+    <code class="language-javascript">
+        $("ul li").show();
+    </code>
+</pre>
+</div>
+</div>
 
 <!-- closing the main container -->
-</div>
 </div>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript" src="./static/js/prism.js"></script>
